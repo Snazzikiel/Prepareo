@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">CSCI321 - Prepareo</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="logo_description">Prepareo Logo</string>
+
+
+    <!-- Strings related to LoginPage -->
+    <string name="login_button_login">Continue</string>
+    <string name="login_prompt_email">Email</string>
+    <string name="login_prompt_password">Password</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_error_invalid_email">This email address is invalid</string>
+    <string name="login_error_invalid_password">This password is too short</string>
+    <string name="login_error_incorrect_password">This password is incorrect</string>
+    <string name="login_error_field_required">This field is required</string>
+    <string name="login_button_facebook">LOGIN WITH FACEBOOK</string>
+    <string name="login_button_register">Register Now</string>
+
+    <!-- Strings related to Create Account -->
+    <string name="create_fullname_hint">Full Name</string>
+    <string name="create_email_hint">Email</string>
+    <string name="create_birthday_hint">Birthday</string>
+    <string name="create_address_hint">Address</string>
+    <string name="create_password_hint1">Password</string>
+    <string name="create_password_hint2">Re-Enter Password</string>
+    <string name="title_activity_main">MainActivity</string>
+
+
+</resources>

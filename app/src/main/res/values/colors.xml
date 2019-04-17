@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--colours of standard theme -->
+    <color name="colorPrimary">#FF0202</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!-- standard colour codes -->
+    <color name="colorLightBlue">#41C8F5</color>
+    <color name="colorDarkBlue">#0083CB</color>
+    <color name="colorYellow">#FDB812</color>
+    <color name="colorOrange">#F36523</color>
+    <color name="colorGreen">#009247</color>
+    <color name="colorBrown">#92402B</color>
+    <color name="colorRed">#FF0202</color>
+    <color name="colorGray">#D3D3D3</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+</resources>
