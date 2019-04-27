@@ -24,6 +24,7 @@
     <string name="create_password_hint1">Password</string>
     <string name="create_password_hint2">Re-Enter Password</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_notifications">Notifications</string>
 
 
 </resources>

@@ -27,7 +27,7 @@
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:background="@color/colorRed"
-        android:drawableTop="@drawable/icon_subjects"
+        android:drawableTop="@drawable/notifications"
         android:text="Notifications"
         android:textColor="@color/colorWhite"
         android:textSize="18sp" />
@@ -47,7 +47,7 @@
         android:layout_marginEnd="203dp"
         android:layout_marginRight="203dp"
         android:background="@color/colorRed"
-        android:drawableTop="@drawable/icon_subjects"
+        android:drawableTop="@drawable/icon_statistics"
         android:text="Statistics"
         android:textColor="@color/colorWhite"
         android:textSize="18sp" />
