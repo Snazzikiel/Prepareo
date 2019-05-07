@@ -17,7 +17,7 @@ public class notifications extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
 
-        //b1 = (Button)findViewById(R.id.button);
+        b1 = (Button)findViewById(R.id.button_profile);
         /*b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,11 +26,11 @@ public class notifications extends AppCompatActivity {
         });*/
     }
 
-    /*
+
     private void addNotification() {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
-                        //.setSmallIcon(R.drawable.abc)
+                        .setSmallIcon(R.drawable.logo)
                         .setContentTitle("Notifications Example")
                         .setContentText("This is a test notification");
 
@@ -43,5 +43,5 @@ public class notifications extends AppCompatActivity {
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
     }
-    */
+
 }

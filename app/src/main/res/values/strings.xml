@@ -23,6 +23,10 @@
     <string name="create_address_hint">Address</string>
     <string name="create_password_hint1">Password</string>
     <string name="create_password_hint2">Re-Enter Password</string>
+    <string name="create_button_continue">Continue</string>
+    <string name="create_disclaimer">By creating an account you agree to our Terms of Service and Privacy Policy</string>
+
+    <!-- Strings related to Dashboard -->
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_notifications">Notifications</string>
     <string name="dashboard_heading">Dashboard</string>
@@ -31,6 +35,7 @@
     <string name="dashboard_button_subjects">Subjects</string>
     <string name="dashboard_button_statistics">Statistics</string>
     <string name="dashboard_button_notifications">Notifications</string>
+
 
 
 </resources>

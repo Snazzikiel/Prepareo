@@ -13,7 +13,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/dashboard_logo"
         android:layout_width="129dp"
         android:layout_height="130dp"
         android:layout_alignParentEnd="true"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_profile"
         android:layout_width="300dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dashboard_Title" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_subjects"
         android:layout_width="300dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
@@ -85,10 +85,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button_profile" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_statistics"
         android:layout_width="140dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
@@ -106,12 +106,12 @@
         android:text="@string/dashboard_button_statistics"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintEnd_toStartOf="@+id/button_notifications"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/button_subjects" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/button_notifications"
         android:layout_width="140dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
@@ -130,7 +130,7 @@
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintStart_toEndOf="@+id/button_statistics"
+        app:layout_constraintTop_toBottomOf="@+id/button_subjects" />
 
 </android.support.constraint.ConstraintLayout>

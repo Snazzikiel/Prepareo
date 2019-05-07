@@ -15,12 +15,6 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,29 +24,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:minHeight="700dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
                 android:id="@+id/create_btn_Register"
-                android:layout_width="178dp"
-                android:layout_height="55dp"
+                android:layout_width="331dp"
+                android:layout_height="60dp"
                 android:layout_below="@+id/create_Password"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginStart="75dp"
-                android:layout_marginLeft="75dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginStart="16dp"
 
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@color/colorRed"
-                android:text="@string/login_button_register"
+                android:text="@string/create_button_continue"
                 android:textColor="@color/colorWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/create_Password" />
+                app:layout_constraintTop_toBottomOf="@+id/create_disclaimer"
+                app:layout_constraintVertical_bias="0.0" />
 
             <EditText
                 android:id="@+id/create_acc_fullName"
@@ -88,8 +84,7 @@
                 android:inputType="date"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/create_acc_ADDRESS"
-                tools:text="Birthday" />
+                app:layout_constraintTop_toBottomOf="@+id/create_acc_ADDRESS" />
 
             <EditText
                 android:id="@+id/create_acc_Email"
@@ -107,8 +102,7 @@
                 android:inputType="textEmailAddress"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/create_acc_fullName"
-                tools:text="Email" />
+                app:layout_constraintTop_toBottomOf="@+id/create_acc_fullName" />
 
             <EditText
                 android:id="@+id/create_acc_ADDRESS"
@@ -126,8 +120,7 @@
                 android:inputType="textPostalAddress"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/create_acc_Email"
-                tools:text="Address" />
+                app:layout_constraintTop_toBottomOf="@+id/create_acc_Email" />
 
             <EditText
                 android:id="@+id/create_Password"
@@ -145,8 +138,22 @@
                 android:inputType="textPassword"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/create_acc_Birthday"
-                tools:text="Password" />
+                app:layout_constraintTop_toBottomOf="@+id/create_acc_Birthday" />
+
+            <TextView
+                android:id="@+id/create_disclaimer"
+                android:layout_width="272dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="@string/create_disclaimer"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/create_Password" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
