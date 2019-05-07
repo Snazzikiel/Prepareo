@@ -25,6 +25,12 @@
     <string name="create_password_hint2">Re-Enter Password</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_notifications">Notifications</string>
+    <string name="dashboard_heading">Dashboard</string>
+    <string name="dashboard_logo">Dashboard logo</string>
+    <string name="dashboard_button_profile">Profile</string>
+    <string name="dashboard_button_subjects">Subjects</string>
+    <string name="dashboard_button_statistics">Statistics</string>
+    <string name="dashboard_button_notifications">Notifications</string>
 
 
 </resources>
