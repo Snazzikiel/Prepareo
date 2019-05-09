@@ -36,6 +36,17 @@
     <string name="dashboard_button_statistics">Statistics</string>
     <string name="dashboard_button_notifications">Notifications</string>
 
+    <!-- Strings related to Notification -->
+    <string name="notification_name">Notification Name</string>
+    <string name="notification_frequency">Notification Frequency</string>
+    <string name="notification_startDate">Start Date</string>
+    <string name="notification_endDate">End Date</string>
+    <string name="notification_msg">Notification Message</string>
+    <string name="notification_btn_close">Close</string>
+    <string name="notification_btn_save">Save</string>
+    <string name="notification_heading">Create Notification</string>
+
+
 
 
 </resources>

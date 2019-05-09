@@ -18,9 +18,9 @@
         android:layout_height="130dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/dashboard_logo"
         app:layout_constraintStart_toEndOf="@+id/dashboard_Title"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,7 +42,7 @@
 
     <Button
         android:id="@+id/button_profile"
-        android:layout_width="300dp"
+        android:layout_width="315dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
         android:layout_alignParentStart="true"
@@ -54,7 +54,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="45dp"
         android:layout_marginRight="45dp"
-        android:background="@color/colorRed"
+        android:background="@drawable/button_redbackground_blackstroke"
         android:drawableStart="@drawable/heart"
         android:drawableLeft="@drawable/heart"
         android:text="@string/dashboard_button_profile"
@@ -66,7 +66,7 @@
 
     <Button
         android:id="@+id/button_subjects"
-        android:layout_width="300dp"
+        android:layout_width="315dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
         android:layout_alignParentStart="true"
@@ -78,7 +78,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="45dp"
         android:layout_marginRight="45dp"
-        android:background="@color/colorRed"
+        android:background="@drawable/button_redbackground_blackstroke"
         android:drawableLeft="@drawable/icon_subjects"
         android:text="@string/dashboard_button_subjects"
         android:textColor="@color/colorWhite"
@@ -89,7 +89,7 @@
 
     <Button
         android:id="@+id/button_statistics"
-        android:layout_width="140dp"
+        android:layout_width="150dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
         android:layout_alignParentStart="true"
@@ -101,18 +101,18 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
-        android:background="@color/colorRed"
+        android:background="@drawable/button_redbackground_blackstroke"
         android:drawableTop="@drawable/icon_statistics"
         android:text="@string/dashboard_button_statistics"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/button_notifications"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_subjects" />
 
     <Button
         android:id="@+id/button_notifications"
-        android:layout_width="140dp"
+        android:layout_width="150dp"
         android:layout_height="105dp"
         android:layout_below="@+id/dashboard_Title"
         android:layout_alignParentStart="true"
@@ -124,7 +124,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="45dp"
         android:layout_marginRight="45dp"
-        android:background="@color/colorRed"
+        android:background="@drawable/button_redbackground_blackstroke"
         android:drawableTop="@drawable/notifications"
         android:text="@string/dashboard_button_notifications"
         android:textColor="@color/colorWhite"
