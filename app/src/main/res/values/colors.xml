@@ -4,6 +4,7 @@
     <color name="colorPrimary">#FF0202</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <drawable name="colorTransparent">#00000000</drawable>
 
     <!-- standard colour codes -->
     <color name="colorLightBlue">#41C8F5</color>
