@@ -46,7 +46,8 @@
     <string name="notification_btn_save">Save</string>
     <string name="notification_heading">Create Notification</string>
 
-
+    <!-- Strings related to Profile -->
+    <string name="profile_heading">Ontology Category Information</string>
 
 
 </resources>

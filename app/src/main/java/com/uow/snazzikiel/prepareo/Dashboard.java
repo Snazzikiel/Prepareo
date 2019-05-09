@@ -45,13 +45,13 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        /*goProfile.setOnClickListener(new View.OnClickListener() {
+        goProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
                 startActivity(new Intent(Dashboard.this, Profile.class));
             }
         });
-        */
+
 
         /*goSubject.setOnClickListener(new View.OnClickListener() {
             @Override

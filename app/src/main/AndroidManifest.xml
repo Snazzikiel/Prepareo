@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".notifications"></activity>
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".notifications" />
         <activity
             android:name=".Dashboard"
             android:theme="@style/AppTheme.NoActionbar" />
@@ -25,8 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".notification_popUp"
+        <activity
+            android:name=".notification_popUp"
             android:theme="@style/AppTheme.notificationPopup" />
+
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".LoginPage" />
