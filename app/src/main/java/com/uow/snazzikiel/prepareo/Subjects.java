@@ -67,8 +67,8 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     // Get the selected item text from ListView
-                    subjectsData subjItem = (subjectsData) parent.getItemAtPosition(position);
-                    popupMethod(subjItem);
+                    Intent myIntent = new Intent(getApplicationContext(), subjectsOptions.class);
+                    startActivityForResult(myIntent, 0);
 
                 }
             });

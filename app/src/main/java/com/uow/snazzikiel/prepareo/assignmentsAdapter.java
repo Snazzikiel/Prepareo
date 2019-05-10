@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class subjectsAdapter extends BaseAdapter {
+public class assignmentsAdapter extends BaseAdapter {
 
     Context context;
-    List<subjectsData> rowItems;
+    List<assignmentsData> rowItems;
 
-    subjectsAdapter(Context context, List<subjectsData> rowItems) {
+    assignmentsAdapter(Context context, List<assignmentsData> rowItems) {
         this.context = context;
         this.rowItems = rowItems;
     }
@@ -32,10 +32,10 @@ public class subjectsAdapter extends BaseAdapter {
 
     /* private view holder class */
     private class ViewHolder {
-        ImageView subjLogo;
+        ImageView assignLogo;
         TextView name;
-        TextView code;
-        ImageView subjArrow;
+        TextView weight;
+        ImageView assignArrow;
     }
 
     @Override
@@ -44,20 +44,20 @@ public class subjectsAdapter extends BaseAdapter {
 
         LayoutInflater mInFlater = (LayoutInflater) context .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            convertView = mInFlater.inflate(R.layout.subjects_item, null);
+            convertView = mInFlater.inflate(R.layout.assignments_item, null);
             holder = new ViewHolder();
 
-            holder.code = (TextView) convertView.findViewById(R.id.subjectsCode);
-            holder.name = (TextView) convertView.findViewById(R.id.subjectsName);
-            holder.subjLogo = (ImageView) convertView.findViewById(R.id.subjects_img);
-            holder.subjArrow = (ImageView) convertView.findViewById(R.id.subjects_arrow);
+            holder.weight = (TextView) convertView.findViewById(R.id.assignmentsWeight);
+            holder.name = (TextView) convertView.findViewById(R.id.assignmentsName);
+            holder.assignLogo = (ImageView) convertView.findViewById(R.id.assignments_img);
+            holder.assignArrow = (ImageView) convertView.findViewById(R.id.assignments_arrow);
 
-            subjectsData row_pos = rowItems.get(position);
+            assignmentsData row_pos = rowItems.get(position);
 
-            holder.subjLogo.setImageResource(android.R.drawable.star_big_on);
-            holder.subjArrow.setImageResource(android.R.drawable.ic_menu_sort_by_size);
-            holder.name.setText(row_pos.getCourseName());
-            holder.code.setText(row_pos.getCourseCode());
+            holder.assignLogo.setImageResource(android.R.drawable.star_big_on);
+            holder.assignArrow.setImageResource(android.R.drawable.ic_menu_sort_by_size);
+            holder.name.setText(row_pos.getAssignmentName());
+            holder.weight.setText(row_pos.getAssignmentWeight());
 
             convertView.setTag(holder);
         } else {

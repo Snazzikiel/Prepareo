@@ -54,5 +54,9 @@
     <string name="subjects_name">Subject Name</string>
     <string name="subjects_code">Subject Code</string>
 
+    <!-- Strings Related to Assignments -->
+    <string name="assignments_str_Name">Assignment Name</string>
+    <string name="assignments_str_Weight">Assignment Weight</string>
+
 
 </resources>

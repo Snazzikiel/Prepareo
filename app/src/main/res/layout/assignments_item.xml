@@ -5,19 +5,19 @@
     android:padding="2dp" >
 
     <TextView
-        android:id="@+id/subjectsCode"
+        android:id="@+id/assignmentsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/subjectsName"
+        android:layout_below="@+id/assignmentsWeight"
         android:layout_marginLeft="9dp"
         android:layout_marginTop="-6dp"
-        android:layout_toRightOf="@id/subjects_img"
+        android:layout_toRightOf="@id/assignments_img"
         android:paddingBottom="10dp"
         android:text="Example Text"
         android:textSize="14dp" />
 
     <ImageView
-        android:id="@+id/subjects_img"
+        android:id="@+id/assignments_img"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="desc"
@@ -26,27 +26,27 @@
         />
 
     <TextView
-        android:id="@+id/subjectsName"
+        android:id="@+id/assignmentsWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="9dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/subjects_img"
+        android:layout_toRightOf="@id/assignments_img"
         android:paddingBottom="10dp"
         android:text="Example Text"
         android:textSize="14dp" />
 
     <ImageView
-        android:id="@+id/subjects_arrow"
+        android:id="@+id/assignments_arrow"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_marginStart="187dp"
         android:layout_marginLeft="187dp"
         android:layout_marginTop="11dp"
-        android:layout_toEndOf="@+id/subjects_img"
-        android:layout_toRightOf="@+id/subjects_img"
+        android:layout_toEndOf="@+id/assignments_img"
+        android:layout_toRightOf="@+id/assignments_img"
         android:contentDescription="desc"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />

@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Subjects"></activity>
+        <activity android:name=".Assignments"></activity>
+        <activity android:name=".subjectsOptions" />
+        <activity android:name=".Subjects" />
         <activity android:name=".Profile" />
         <activity android:name=".notifications" />
         <activity
