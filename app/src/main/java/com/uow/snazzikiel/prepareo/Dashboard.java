@@ -8,6 +8,8 @@ package com.uow.snazzikiel.prepareo;
         import android.widget.ImageView;
         import android.widget.Toast;
 
+        import java.util.Locale;
+
 public class Dashboard extends AppCompatActivity {
 
     Button goNotification;
@@ -61,13 +63,15 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        /*goStat.setOnClickListener(new View.OnClickListener() {
+        goStat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                startActivity(new Intent(Dashboard.this, Statistics.class));
+                //startActivity(new Intent(Dashboard.this, Statistics.class));
+                Toast.makeText(getApplicationContext(),
+                        "Invalid Click!",Toast.LENGTH_SHORT).show();
             }
         });
-        */
+
 
 
     }

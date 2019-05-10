@@ -1,5 +1,6 @@
 package com.uow.snazzikiel.prepareo;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,6 +202,11 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         myList.setOnItemClickListener(this);
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
 
 
 

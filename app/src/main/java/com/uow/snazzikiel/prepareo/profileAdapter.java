@@ -106,7 +106,7 @@ public class profileAdapter extends MultiLevelAdapter {
                     } else {
                         mCheckBox.setChecked(false);
                     }
-                    Toast.makeText(mContext, String.format(Locale.ENGLISH, "Item at position %d was clicked!", getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, String.format(Locale.ENGLISH, "Item at position %d was clicked!", getAdapterPosition()), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -125,7 +125,7 @@ public class profileAdapter extends MultiLevelAdapter {
                     } else {
                         mCheckBox.setChecked(false);
                     }
-                    Toast.makeText(mContext, String.format(Locale.ENGLISH, "Item at position %d is expanded: %s", getAdapterPosition(), mItem.isExpanded()), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, String.format(Locale.ENGLISH, "Item at position %d is expanded: %s", getAdapterPosition(), mItem.isExpanded()), Toast.LENGTH_SHORT).show();
                 }
             });
         }
