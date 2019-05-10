@@ -53,13 +53,13 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        /*goSubject.setOnClickListener(new View.OnClickListener() {
+        goSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                startActivity(new Intent(Dashboard.this, Subject.class));
+                startActivity(new Intent(Dashboard.this, Subjects.class));
             }
         });
-        */
+
 
         /*goStat.setOnClickListener(new View.OnClickListener() {
             @Override

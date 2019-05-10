@@ -49,5 +49,10 @@
     <!-- Strings related to Profile -->
     <string name="profile_heading">Ontology Category Information</string>
 
+    <!-- Strings related to Subjects -->
+    <string name="subjects_heading">Add Subject</string>
+    <string name="subjects_name">Subject Name</string>
+    <string name="subjects_code">Subject Code</string>
+
 
 </resources>

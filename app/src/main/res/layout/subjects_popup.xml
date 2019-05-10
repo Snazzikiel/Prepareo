@@ -7,11 +7,11 @@
     android:fadingEdge="horizontal|vertical"
     android:scrollbars="vertical"
     android:background="@drawable/textview_border"
-    android:id="@+id/notification_popUp_layout"
+    android:id="@+id/subjects_popUp_layout"
     >
 
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/subjects_scrollView3"
         android:layout_width="358dp"
         android:layout_height="688dp"
         android:scrollbarStyle="insideOverlay"
@@ -25,10 +25,10 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="700dp">
+            android:minHeight="350dp">
 
             <EditText
-                android:id="@+id/notification_Name"
+                android:id="@+id/subjects_Name"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -41,96 +41,36 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/textview_border"
                 android:ems="10"
-                android:hint="@string/notification_name"
+                android:hint="@string/subjects_name"
                 android:inputType="text"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subjects_Code" />
+
+            <EditText
+                android:id="@+id/subjects_Code"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:hint="@string/subjects_code"
+                android:inputType="text"
+                android:textSize="@dimen/form_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subjects_heading" />
 
-            <EditText
-                android:id="@+id/notification_frequency"
-                android:layout_width="260dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/textview_border"
-                android:ems="10"
-                android:hint="@string/notification_frequency"
-                android:inputType="text"
-                android:textSize="@dimen/form_font_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notification_Name" />
-
-            <EditText
-                android:id="@+id/notification_endDate"
-                android:layout_width="260dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/textview_border"
-                android:ems="10"
-                android:hint="@string/notification_endDate"
-                android:inputType="date"
-                android:textSize="@dimen/form_font_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notification_startDate" />
-
-            <EditText
-                android:id="@+id/notification_startDate"
-                android:layout_width="260dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/textview_border"
-                android:ems="10"
-                android:hint="@string/notification_startDate"
-                android:inputType="date"
-                android:textSize="@dimen/form_font_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notification_frequency" />
-
-            <EditText
-                android:id="@+id/notification_msg"
-                android:layout_width="260dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/textview_border"
-                android:ems="10"
-                android:hint="@string/notification_msg"
-                android:inputType="text"
-                android:textSize="@dimen/form_font_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notification_endDate" />
 
             <Button
                 android:id="@+id/subjects_btn_save"
@@ -138,12 +78,12 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="60dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/textview_green_noborder"
                 android:text="@string/notification_btn_save"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintStart_toEndOf="@+id/subjects_btn_close"
-                app:layout_constraintTop_toBottomOf="@+id/notification_msg" />
+                app:layout_constraintTop_toBottomOf="@+id/subjects_Name" />
 
             <Button
                 android:id="@+id/subjects_btn_close"
@@ -151,7 +91,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="48dp"
                 android:layout_marginLeft="48dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginRight="60dp"
                 android:background="@drawable/textview_red_noborder"
@@ -159,7 +99,7 @@
                 android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toStartOf="@+id/subjects_btn_save"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notification_msg" />
+                app:layout_constraintTop_toBottomOf="@+id/subjects_Name" />
 
             <EditText
                 android:id="@+id/subjects_heading"
@@ -167,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@android:color/transparent"
@@ -177,7 +117,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:inputType="none"
-                android:text="@string/notification_heading"
+                android:text="@string/subjects_heading"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

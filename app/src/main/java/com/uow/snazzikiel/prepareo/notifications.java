@@ -1,29 +1,19 @@
 package com.uow.snazzikiel.prepareo;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.TypedArray;
-import android.database.DataSetObserver;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -155,8 +145,8 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
             etMsg.setText(noteItem.getPersonalMsg());
         }
 
-        btnClose = (Button) container.findViewById(R.id.notification_btn_close);
-        btnSave = (Button) container.findViewById(R.id.notification_btn_save);
+        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
+        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
