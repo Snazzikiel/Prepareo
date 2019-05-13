@@ -72,6 +72,11 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
                     startActivityForResult(myIntent, 0);
                 }
 
+                if (subjItem.getCourseName() == "Goals"){
+                    Intent myIntent = new Intent(getApplicationContext(), Goals.class);
+                    startActivityForResult(myIntent, 0);
+                }
+
             }
         });
     }
