@@ -57,6 +57,11 @@
     <!-- Strings Related to Assignments -->
     <string name="assignments_str_Name">Assignment Name</string>
     <string name="assignments_str_Weight">Assignment Weight</string>
+    <string name="title_activity_statistics">statistics</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="statistics_heading">WEEKLY TASKS</string>
+    <string name="statistics_descriptionOne">You are going well to meet your weekly targets. Do the hard work now so you can relax later.</string>
 
 
 </resources>

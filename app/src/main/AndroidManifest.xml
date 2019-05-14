@@ -11,6 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".statistics"
+            android:label="@string/title_activity_statistics"
+            android:parentActivityName=".Dashboard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.uow.snazzikiel.prepareo.Dashboard" />
+        </activity>
         <activity android:name=".Goals" />
         <activity android:name=".Assignments" />
         <activity android:name=".subjectsOptions" />
