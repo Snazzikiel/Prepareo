@@ -14,7 +14,42 @@
         android:background="@drawable/background_fill_off_white"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_redBg" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_redBg" >
+
+        <lecho.lib.hellocharts.view.PieChartView
+            android:id="@+id/chart2"
+            android:layout_width="127dp"
+            android:layout_height="80dp"
+
+            android:layout_marginEnd="260dp"
+            android:layout_marginRight="260dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/statistics_whitebg_Heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:text="@string/statistics_whiteHeading"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/statistics_whitebg_Text2"
+            android:layout_width="198dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:gravity="end"
+            android:text="On track to meet your goals!"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_whitebg_Heading2" />
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
         android:id="@+id/stat_tab1_tasksHeading"
@@ -51,35 +86,45 @@
         android:id="@+id/cl_redBg"
         android:layout_width="420dp"
         android:layout_height="80dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="180dp"
         android:background="@drawable/background_fill_red"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stat_tab1_taskDescription">
 
-        <Button
-            android:id="@+id/btnTEST"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="28dp"
-            android:text="TESTBTN 1"
-            app:layout_constraintStart_toEndOf="@+id/textTab2"
+        <lecho.lib.hellocharts.view.PieChartView
+            android:id="@+id/chart1"
+            android:layout_width="127dp"
+            android:layout_height="80dp"
+
+            android:layout_marginEnd="29dp"
+            android:layout_marginRight="29dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textTab2"
+            android:id="@+id/statistics_redbg_Heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="45dp"
-            android:layout_marginLeft="45dp"
-            android:layout_marginTop="42dp"
-            android:text="Tab1"
-            android:textSize="25sp"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/statistics_redHeading"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/statistics_redbg_Text"
+            android:layout_width="198dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="8dp"
+            android:text="You have completed 7/10 tasks for this"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_redbg_Heading" />
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

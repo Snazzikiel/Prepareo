@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,18 +10,128 @@
     >
 
     <TextView
+        android:id="@+id/statistics_tab2_goalTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="25sp"
-        android:text="Tab2"
-        android:layout_marginTop="40dp"
-        android:id="@+id/textTab2"/>
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/statistics_tab2_goalActive"
+        app:layout_constraintStart_toEndOf="@+id/statistics_tab2_goalOne"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <Button
+    <TextView
+        android:id="@+id/statistics_tab2_goalOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnTEST2"
-        android:text="TESTBTN 2"/>
+        android:layout_marginStart="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="11dp"
+        android:text="@string/statistics_tab2_goalComplete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="96dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_green_noborder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_dailyGoalsHeading"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
+
+    <TextView
+        android:id="@+id/statistics_tab2_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="33dp"
+        android:text="@string/statistics_tab2_heading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <lecho.lib.hellocharts.view.ComboLineColumnChartView
+        android:id="@+id/statistics_tab2_mainChart"
+        android:layout_width="379dp"
+        android:layout_height="149dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_heading" />
+
+    <TextView
+        android:id="@+id/statistics_tab2_noticeHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/statistics_tab2_notingHeading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_mainChart" />
+
+    <TextView
+        android:id="@+id/statistics_tab2_noticeQuote"
+        android:layout_width="374dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/statistics_tab2_noticeQuote"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_noticeHeading" />
+
+    <TextView
+        android:id="@+id/statistics_tab2_dailyGoalsHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/statistics_tab2_dailyGoalsHeading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_noticeQuote" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="96dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_dailyGoalsHeading"
+        app:srcCompat="@android:drawable/checkbox_off_background" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="96dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_fill_red"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_dailyGoalsHeading"
+        app:srcCompat="@android:drawable/checkbox_off_background" />
+
+    <TextView
+        android:id="@+id/statistics_tab2_goalThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="97dp"
+        android:layout_marginLeft="97dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/statistics_tab2_goalActive"
+        app:layout_constraintStart_toEndOf="@+id/statistics_tab2_goalTwo"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+</android.support.constraint.ConstraintLayout>

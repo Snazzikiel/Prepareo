@@ -57,11 +57,21 @@
     <!-- Strings Related to Assignments -->
     <string name="assignments_str_Name">Assignment Name</string>
     <string name="assignments_str_Weight">Assignment Weight</string>
-    <string name="title_activity_statistics">statistics</string>
+
+    <!-- Strings RElated to Statistics -->
+    <string name="title_activity_statistics">Statistics</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="statistics_heading">WEEKLY TASKS</string>
     <string name="statistics_descriptionOne">You are going well to meet your weekly targets. Do the hard work now so you can relax later.</string>
+    <string name="statistics_redHeading">TASKS COMPLETE</string>
+    <string name="statistics_whiteHeading">OVERALL PROGRESS</string>
+    <string name="statistics_tab2_heading">DAILY TASKS</string>
+    <string name="statistics_tab2_notingHeading">DAILY NOTICE</string>
+    <string name="statistics_tab2_noticeQuote">You are falling behind today. Make sure you complete tasks A, Assignment 3 - CSCI203 as the due is fast approaching.</string>
+    <string name="statistics_tab2_dailyGoalsHeading">DAILY GOALS</string>
+    <string name="statistics_tab2_goalComplete">Complete</string>
+    <string name="statistics_tab2_goalActive">Active</string>
 
 
 </resources>
