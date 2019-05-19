@@ -1,71 +1,16 @@
 package com.uow.snazzikiel.prepareo;
 
-import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-import android.widget.TextView;
-
-public class Goals extends AppCompatActivity {
-
-    private static final String TAG = "Goals";
-
-    private statisticsTabAdapter mGoals;
-
-    private ViewPager mViewPager;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setTitle("Goals");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_goals);
-
-
-        Log.d(TAG, "goalsCreate.");
-
-        mGoals = new statisticsTabAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.goals_container);
-        setupViewPager(mViewPager);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.goals_tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        statisticsTabAdapter adapter = new statisticsTabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new goalsTabOne(), "TODAY");
-        adapter.addFragment(new goalsTabTwo(), "WEEK");
-        viewPager.setAdapter(adapter);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivityForResult(myIntent, 0);
-        return true;
-    }
-
-
-}
-
-/*
+import java.util.ArrayList;
+import java.util.List;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -89,10 +34,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Goals extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class goalsTabOne extends Fragment implements AdapterView.OnItemClickListener {
+    private static final String TAG = "Goals-Tab1Fragment";
 
 
-    private static final String TAG = "stateCheck";
     List<goalsData> rowItems = new ArrayList<goalsData>();
 
     //popup Window
@@ -105,14 +50,21 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
     ViewGroup container;
     ListView myList;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setTitle("Goals");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_goals);
+    @Nullable
+    //@Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.goals_tab1,container,false);
 
-        myList = (ListView) findViewById(R.id.goals_main_list);
+        myList = (ListView) view.findViewById(R.id.goals_main_list);
+        /*btnTEST = (Button) view.findViewById(R.id.btnTEST);
+
+        btnTEST.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "TESTING BUTTON CLICK 1",Toast.LENGTH_SHORT).show();
+            }
+        });
+        */
 
         //Add two test Subjects
         goalsData goal = new goalsData("Goal 1", "10-01-2019");
@@ -124,11 +76,11 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         goal = new goalsData("Goal 3", "12-01-2019");
         createGoal(goal);
 
-        addGoals = (FloatingActionButton) findViewById(R.id.float_addGoals);
+        addGoals = (FloatingActionButton) view.findViewById(R.id.float_addGoals);
         addGoals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupMethod(null);
+                //popupMethod(null);
             }
         });
 
@@ -141,6 +93,8 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
 
             }
         });
+
+        return view;
     }
 
     @Override
@@ -148,10 +102,10 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                             long id) {
 
         String goalsTitle = rowItems.get(position).getGoalTitle();
-        Toast.makeText(getApplicationContext(), "" + goalsTitle,
-                Toast.LENGTH_SHORT).show();
+        //Toast.makeText(view.getApplicationContext(), "" + goalsTitle,
+        //        Toast.LENGTH_SHORT).show();
     }
-
+/*
     public void popupMethod(assignmentsData assignItem) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -208,7 +162,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                 popUp.dismiss();
             }
         });
-    }
+    }*/
 
     public void createGoal(goalsData goal1) {
 
@@ -216,7 +170,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         rowItems.add(goal1);
 
 
-        goalsAdapter adapter = new goalsAdapter(this, rowItems) {
+        goalsAdapter adapter = new goalsAdapter(getContext(), rowItems) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 // Get the current item from ListView
@@ -233,12 +187,9 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivityForResult(myIntent, 0);
+        //Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
+        //startActivityForResult(myIntent, 0);
         return true;
     }
 
 }
-
-
-*/

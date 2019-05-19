@@ -4,6 +4,9 @@ class goalsData {
 
     String goalTitle;
     String goalDueDate;
+    int goalProgres;
+    boolean goalCompleted = false;
+
 
 
     public goalsData(String goalTitle, String goalDueDate ){

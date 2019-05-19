@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class goalsAdapter extends BaseAdapter {
         TextView title;
         //TextView date;
         ImageView assignArrow;
+        CheckBox goalsChkBox;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class goalsAdapter extends BaseAdapter {
             holder.title = (TextView) convertView.findViewById(R.id.goalsTitle);
             holder.assignLogo = (ImageView) convertView.findViewById(R.id.goals_img);
             holder.assignArrow = (ImageView) convertView.findViewById(R.id.goals_arrow);
+            holder.goalsChkBox = (CheckBox) convertView.findViewById((R.id.goals_checkbox));
 
             goalsData row_pos = rowItems.get(position);
 
@@ -58,6 +61,19 @@ public class goalsAdapter extends BaseAdapter {
             holder.assignArrow.setImageResource(android.R.drawable.ic_menu_sort_by_size);
             holder.title.setText(row_pos.getGoalTitle());
             //holder.date.setText(row_pos.getAssignmentWeight());
+            holder.goalsChkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //set click event on item here
+                    CheckBox x = (CheckBox) v.findViewById(R.id.goals_checkbox);
+
+                    if (x.isChecked()){
+                        x.setChecked(true);
+                    } else {
+                        x.setChecked(false);
+                    }
+                }
+            });
 
             convertView.setTag(holder);
         } else {

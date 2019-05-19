@@ -13,9 +13,11 @@ package com.uow.snazzikiel.prepareo;
 public class Dashboard extends AppCompatActivity {
 
     Button goNotification;
-    Button goProfile;
+    Button goGoals;
     Button goSubject;
     Button goStat;
+    Button goOWL;
+    Button goCalendar;
     ImageView imgExit;
 
 
@@ -25,10 +27,12 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         //button definition
-        goNotification = (Button)findViewById(R.id.button_notifications);
-        goProfile = (Button)findViewById(R.id.button_profile);
-        goSubject = (Button)findViewById(R.id.button_subjects);
-        goStat = (Button)findViewById(R.id.button_statistics);
+        goNotification = (Button)findViewById(R.id.dashboard_button_notifications);
+        goGoals = (Button)findViewById(R.id.dashboard_button_goals);
+        goSubject = (Button)findViewById(R.id.dashboard_button_subject);
+        goStat = (Button)findViewById(R.id.dashboard_button_statistics);
+        goCalendar= (Button)findViewById(R.id.dashboard_button_calendar);
+        goOWL = (Button)findViewById(R.id.dashboard_button_ontology);
 
         imgExit = (ImageView)findViewById(R.id.dashboard_logo);
 
@@ -47,10 +51,10 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        goProfile.setOnClickListener(new View.OnClickListener() {
+        goGoals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                startActivity(new Intent(Dashboard.this, Profile.class));
+                startActivity(new Intent(Dashboard.this, Goals.class));
             }
         });
 
