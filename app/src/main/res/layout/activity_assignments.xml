@@ -14,7 +14,7 @@
     tools:context = ".Assignments">
 
     <ScrollView
-        android:id="@+id/subjects_scrollView2"
+        android:id="@+id/calendar_scrollView"
         android:layout_width="406dp"
         android:layout_height="724dp"
         android:layout_marginTop="8dp"

@@ -50,7 +50,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/button_redbackground_blackstroke"
-        android:drawableTop="@drawable/heart"
+        android:drawableTop="@drawable/icon_subjects"
         android:text="@string/dashboard_button_subjects"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"

@@ -75,5 +75,12 @@
     <string name="statistics_tab2_goalComplete">Complete</string>
     <string name="statistics_tab2_goalActive">Active</string>
 
+    <!-- Strings Related to Calendar -->
+    <string name="calendar_heading">Select Date</string>
+
+    <!-- Strings Related to Enrolment Record -->
+    <string name="enrolment_boxTextOne">Credit Average</string>
+    <string name="enrolment_avg">Distinction</string>
+
 
 </resources>
