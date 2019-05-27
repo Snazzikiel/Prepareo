@@ -71,7 +71,7 @@ public class Dashboard extends AppCompatActivity {
         goStat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                startActivity(new Intent(Dashboard.this, statistics.class));
+                startActivity(new Intent(Dashboard.this, Subjects.class));
                 //Toast.makeText(getApplicationContext(), "Invalid Click!",Toast.LENGTH_SHORT).show();
             }
         });
