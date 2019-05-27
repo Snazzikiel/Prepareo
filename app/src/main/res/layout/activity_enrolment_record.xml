@@ -5,7 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EnrolmentRecord">
+    tools:context=".EnrolmentRecord"
+    android:id="@+id/enrolment_main_layout"
+    android:background="@drawable/background_nobar"
+    >
 
 
     <ImageView
@@ -89,5 +92,19 @@
             </ListView>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_enrolment_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:clickable="true"
+        android:focusable="auto"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" /> />
 
 </android.support.constraint.ConstraintLayout>

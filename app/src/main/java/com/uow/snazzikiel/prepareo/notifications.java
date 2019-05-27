@@ -1,8 +1,17 @@
 package com.uow.snazzikiel.prepareo;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Person;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -20,12 +29,20 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+
 public class notifications extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private static final String TAG = "stateCheck";
-    List<notificationData> rowItems = new ArrayList<notificationData>();
+    private static final String TAG = "notifications-";
+    //List<notificationData> rowItems = new ArrayList<notificationData>();
+    ArrayList<notificationData> rowItems;// = new ArrayList<notificationData>();
+    notificationData p;
 
     //popup Window
     PopupWindow popUp;
@@ -37,6 +54,9 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
     ViewGroup container;
     ListView myList;
 
+    private MenuItem menuItemSearch;
+    private MenuItem menuItemDelete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,60 +66,45 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
         myList = (ListView) findViewById(R.id.main_list);
 
-        //Add two test Notifications
-        notificationData userNotifications = new notificationData("Example 1", "Daily",
-                "19-08-18", "23-09-19", "TestMessage");
-        addNotification(userNotifications);
 
-        userNotifications = new notificationData("Example 2", "Daily",
-                "19-08-18", "23-09-19", "TestMessage");
-        addNotification(userNotifications);
+        loadData();
+        p = new notificationData(null, null, null, null, null);
+        //addNotificationItem(p);
+        //trigger memory load
+        //addNotificationItem(null);
 
-        /*
-        addNote = (FloatingActionButton) findViewById(R.id.addNotification);
-        addNote.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(notifications.this, notification_popUp.class));
-            }
-        });*/
 
         addNote = (FloatingActionButton) findViewById(R.id.addNotification);
         addNote.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
+                //testFunc(p);
                 popupMethod(null);
+
             }
         });
+
 
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the selected item text from ListView
                 notificationData noteItem = (notificationData) parent.getItemAtPosition(position);
                 popupMethod(noteItem);
 
             }
         });
 
-        /*
-        mylistview = (ListView) findViewById(R.id.main_list);
-        notificationAdapter adapter = new notificationAdapter(this, rowItems){
+        myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-                // Get the current item from ListView
-                View view = super.getView(position,convertView,parent);
-                // Set a background color for ListView regular row/item
-                view.setBackgroundColor(getResources().getColor(android.R.color.white));
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-                return view;
+                deleteNotificationItem(position);
+                Toast.makeText(getApplicationContext(), "" + "Long Click",
+                        Toast.LENGTH_SHORT).show();
+                return true;
             }
-        };
-        mylistview.setAdapter(adapter);
-
-        mylistview.setOnItemClickListener(this);
-        */
-
+        });
     }
 
     @Override
@@ -109,6 +114,11 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         String noteName = rowItems.get(position).getName();
         Toast.makeText(getApplicationContext(), "" + noteName,
                 Toast.LENGTH_SHORT).show();
+    }
+
+    private void showDeleteMenu(boolean show){
+        menuItemDelete.setVisible(show);
+        menuItemSearch.setVisible(!show);
     }
 
     public void popupMethod(notificationData noteItem){
@@ -174,17 +184,37 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
                 notificationData newNote = new notificationData(name, freq, dateStart, dateEnd, msg);
 
-                addNotification(newNote);
+                addNotificationItem(newNote);
+                saveData();
                 popUp.dismiss();
             }
         });
     }
 
-    public void addNotification(notificationData note1){
+    public void deleteNotificationItem(int iPosition){
+        Log.i(TAG, "deleteNotification");
+        rowItems.remove(iPosition);
+        notificationAdapter adapter = new notificationAdapter(this, rowItems){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the current item from ListView
+                View view = super.getView(position,convertView,parent);
+                // Set a background color for ListView regular row/item
+                view.setBackgroundColor(getResources().getColor(android.R.color.white));
+
+                return view;
+            }
+        };
+        saveData();
+        myList.setAdapter(adapter);
+        myList.setOnItemClickListener(this);
+    }
+    public void addNotificationItem(notificationData note1){
 
         Log.i(TAG, "addNotification");
-        rowItems.add(note1);
-
+        if (note1 != null){
+            rowItems.add(note1);
+        }
 
         notificationAdapter adapter = new notificationAdapter(this, rowItems){
             @Override
@@ -208,23 +238,53 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         return true;
     }
 
-
-
-    /*private void addNotification() {
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("Notifications Example")
-                        .setContentText("This is a test notification");
-
-        Intent notificationIntent = new Intent(this, notifications.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(contentIntent);
-
-        // Add as notification
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "name";
+            String description = "desc";
+            int importance = NotificationManager.IMPORTANCE_HIGH ;
+            NotificationChannel channel = new NotificationChannel("1234", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
-    */
+
+    public void notifyUser(String title, String message) {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "1234")
+                .setSmallIcon(R.drawable.heart)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(0, mBuilder.build());
+    }
+
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("notificationData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(rowItems);
+        editor.putString(getString(R.string.notification_savedata), json);
+        editor.apply();
+    }
+
+    public void loadData( ) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("notificationData", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(getString(R.string.notification_savedata), null);
+        Type type = new TypeToken<ArrayList<notificationData>>() {}.getType();
+        rowItems = gson.fromJson(json, type);
+
+        if (rowItems == null) {
+            rowItems = new ArrayList<>();
+        }
+    }
+
+
+
 }

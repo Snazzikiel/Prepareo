@@ -5,7 +5,7 @@
     android:padding="2dp" >
 
     <ImageView
-        android:id="@+id/enrolment_img"
+        android:id="@+id/iv_enrolment_img"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="desc"
@@ -13,23 +13,37 @@
         android:paddingRight="10dp" />
 
     <TextView
-        android:id="@+id/enrolment_name"
+        android:id="@+id/tv_enrolmentBachelor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="23dp"
-        android:layout_marginTop="21dp"
-        android:layout_toRightOf="@id/enrolment_img"
+        android:layout_marginTop="7dp"
+        android:layout_toRightOf="@id/iv_enrolment_img"
         android:paddingBottom="10dp"
         android:text="Example Text"
         android:textSize="20dp" />
 
+    <TextView
+        android:id="@+id/tv_enrolmentMajor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="44dp"
+        android:layout_toRightOf="@id/iv_enrolment_img"
+        android:paddingBottom="10dp"
+        android:text="Example Text"
+        android:textSize="12dp" />
+
     <ImageView
-        android:id="@+id/enrolment_arrow"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginLeft="66dp"
-        android:layout_toRightOf="@id/enrolment_name"
+        android:id="@+id/iv_enrolment_arrow"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="59dp"
+        android:layout_marginRight="59dp"
         android:contentDescription="desc"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />

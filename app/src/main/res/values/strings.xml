@@ -32,7 +32,7 @@
     <string name="dashboard_heading">Dashboard</string>
     <string name="dashboard_logo">Dashboard logo</string>
     <string name="dashboard_button_calendar">Calendar</string>
-    <string name="dashboard_button_subjects">Subjects</string>
+    <string name="dashboard_button_subjects">Enrolment Record</string>
     <string name="dashboard_button_statistics">Statistics</string>
     <string name="dashboard_button_notifications">Notifications</string>
     <string name="dashboard_button_ontology">Ontology (OWL)</string>
@@ -81,6 +81,12 @@
     <!-- Strings Related to Enrolment Record -->
     <string name="enrolment_boxTextOne">Credit Average</string>
     <string name="enrolment_avg">Distinction</string>
+    <string name="enrolment_str_bachelor">Bachelor</string>
+    <string name="enrolment_str_major">Major</string>
 
+    <!-- Strings to call saved data for each page -->
+    <string name="notification_savedata">notificationsMain</string>
+    <string name="account_savedata">accountMain</string>
+    <string name="enrolmentrecord_savedata">enrolmentMain</string>
 
 </resources>

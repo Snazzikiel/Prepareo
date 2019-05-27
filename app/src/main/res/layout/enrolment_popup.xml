@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadingEdge="horizontal|vertical"
+    android:scrollbars="vertical"
+    android:background="@drawable/textview_border"
+    android:id="@+id/enrolment_popUp_layout"
+    >
+
+    <ScrollView
+        android:id="@+id/enrolment_scrollView3"
+        android:layout_width="358dp"
+        android:layout_height="688dp"
+        android:scrollbarStyle="insideOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.221">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="350dp">
+
+            <EditText
+                android:id="@+id/ed_enrolment_Major"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:hint="@string/enrolment_str_major"
+                android:inputType="text"
+                android:textSize="@dimen/form_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_enrolment_Bachelor" />
+
+            <EditText
+                android:id="@+id/ed_enrolment_Bachelor"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:hint="@string/enrolment_str_bachelor"
+                android:inputType="text"
+                android:textSize="@dimen/form_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enrolment_heading" />
+
+
+            <Button
+                android:id="@+id/enrolment_btn_save"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/textview_green_noborder"
+                android:text="@string/notification_btn_save"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintStart_toEndOf="@+id/enrolment_btn_close"
+                app:layout_constraintTop_toBottomOf="@+id/ed_enrolment_Major" />
+
+            <Button
+                android:id="@+id/enrolment_btn_close"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginRight="60dp"
+                android:background="@drawable/textview_red_noborder"
+                android:text="@string/notification_btn_close"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintEnd_toStartOf="@+id/enrolment_btn_save"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_enrolment_Major" />
+
+            <EditText
+                android:id="@+id/enrolment_heading"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:editable="false"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:text="Add Enrolment Record"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

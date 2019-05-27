@@ -4,11 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 class notificationData {
-    String name;
-    String frequency;
-    String startDate;
-    String endDate;
-    String personalMsg;
+    private String name;
+    private String frequency;
+    private String startDate;
+    private String endDate;
+    private String personalMsg;
 
     public notificationData(String Name, String Frequency, String StartDate,
                             String EndDate, String PersonalMsg){
@@ -32,6 +32,6 @@ class notificationData {
     public void setPersonalMsg(String personalMsg) { this.personalMsg = personalMsg; }
 
 
-};
+}
 
 
