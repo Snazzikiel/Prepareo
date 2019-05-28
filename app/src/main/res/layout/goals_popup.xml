@@ -7,7 +7,7 @@
     android:fadingEdge="horizontal|vertical"
     android:scrollbars="vertical"
     android:background="@drawable/colorTransparent"
-    android:id="@+id/subjects_popUp_layout"
+    android:id="@+id/goals_popUp_layout"
     >
 
     <FrameLayout
@@ -31,7 +31,7 @@
             android:minHeight="350dp">
 
             <EditText
-                android:id="@+id/subjects_Name"
+                android:id="@+id/et_goals_title"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -44,16 +44,16 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/textview_border"
                 android:ems="10"
-                android:hint="@string/subjects_name"
+                android:hint="@string/goals_title"
                 android:inputType="text"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.484"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/subjects_Code" />
+                app:layout_constraintTop_toBottomOf="@+id/et_goals_dueDate" />
 
             <EditText
-                android:id="@+id/subjects_Code"
+                android:id="@+id/et_goals_dueDate"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -66,17 +66,17 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/textview_border"
                 android:ems="10"
-                android:hint="@string/subjects_code"
+                android:hint="@string/goals_dueDate"
                 android:inputType="text"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.484"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/subjects_heading" />
+                app:layout_constraintTop_toBottomOf="@+id/goals_heading" />
 
 
             <Button
-                android:id="@+id/subjects_btn_save"
+                android:id="@+id/goals_btn_save"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="60dp"
@@ -85,11 +85,11 @@
                 android:background="@drawable/textview_green_noborder"
                 android:text="@string/notification_btn_save"
                 android:textColor="@color/colorWhite"
-                app:layout_constraintStart_toEndOf="@+id/subjects_btn_close"
-                app:layout_constraintTop_toBottomOf="@+id/subjects_Name" />
+                app:layout_constraintStart_toEndOf="@+id/goals_btn_close"
+                app:layout_constraintTop_toBottomOf="@+id/et_goals_title" />
 
             <Button
-                android:id="@+id/subjects_btn_close"
+                android:id="@+id/goals_btn_close"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
@@ -100,12 +100,12 @@
                 android:background="@drawable/textview_red_noborder"
                 android:text="@string/notification_btn_close"
                 android:textColor="@color/colorWhite"
-                app:layout_constraintEnd_toStartOf="@+id/subjects_btn_save"
+                app:layout_constraintEnd_toStartOf="@+id/goals_btn_save"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/subjects_Name" />
+                app:layout_constraintTop_toBottomOf="@+id/et_goals_title" />
 
             <EditText
-                android:id="@+id/subjects_heading"
+                android:id="@+id/goals_heading"
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -120,7 +120,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:inputType="none"
-                android:text="@string/subjects_heading"
+                android:text="@string/goals_heading"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

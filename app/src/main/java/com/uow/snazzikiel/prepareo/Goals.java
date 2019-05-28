@@ -1,32 +1,55 @@
 package com.uow.snazzikiel.prepareo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
+import android.support.constraint.ConstraintLayout;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.Toast;
 
-public class Goals extends AppCompatActivity {
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-    private static final String TAG = "Goals";
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Goals extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private static final String TAG = "stateCheck";
+    List<goalsData> rowItems = new ArrayList<goalsData>();
+    String subjectCode = "";
+
+    //popup Window
+    PopupWindow popUp;
+    FloatingActionButton addGoals;
+    LayoutInflater layoutInf;
+    ConstraintLayout conLayout;
+    Button btnClose;
+    Button btnSave;
+    ViewGroup container;
+    ListView myList;
 
     private statisticsTabAdapter mGoals;
-
     private ViewPager mViewPager;
 
     @Override
@@ -35,7 +58,6 @@ public class Goals extends AppCompatActivity {
         setTitle("Goals");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_goals);
-
 
         Log.d(TAG, "goalsCreate.");
 
@@ -49,99 +71,6 @@ public class Goals extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        statisticsTabAdapter adapter = new statisticsTabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new goalsTabOne(), "TODAY");
-        adapter.addFragment(new goalsTabTwo(), "WEEK");
-        viewPager.setAdapter(adapter);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivityForResult(myIntent, 0);
-        return true;
-    }
-
-
-}
-
-/*
-import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Goals extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
-
-    private static final String TAG = "stateCheck";
-    List<goalsData> rowItems = new ArrayList<goalsData>();
-
-    //popup Window
-    PopupWindow popUp;
-    FloatingActionButton addGoals;
-    LayoutInflater layoutInf;
-    ConstraintLayout conLayout;
-    Button btnClose;
-    Button btnSave;
-    ViewGroup container;
-    ListView myList;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setTitle("Goals");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_goals);
-
-        myList = (ListView) findViewById(R.id.goals_main_list);
-
-        //Add two test Subjects
-        goalsData goal = new goalsData("Goal 1", "10-01-2019");
-        createGoal(goal);
-
-        goal = new goalsData("Goal 2", "11-01-2019");
-        createGoal(goal);
-
-        goal = new goalsData("Goal 3", "12-01-2019");
-        createGoal(goal);
-
-        addGoals = (FloatingActionButton) findViewById(R.id.float_addGoals);
-        addGoals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupMethod(null);
-            }
-        });
-
-        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the selected item text from ListView
-                //Intent myIntent = new Intent(getApplicationContext(), subjectsOptions.class);
-                //startActivityForResult(myIntent, 0);
-
-            }
-        });
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -152,16 +81,23 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void popupMethod(assignmentsData assignItem) {
+    private void setupViewPager(ViewPager viewPager) {
+        statisticsTabAdapter adapter = new statisticsTabAdapter(getSupportFragmentManager());
+        adapter.addFragment(new goalsTabOne(), getString(R.string.goals_tab1));
+        adapter.addFragment(new goalsTabTwo(), getString(R.string.goals_tab2));
+        viewPager.setAdapter(adapter);
+    }
+
+    public void popupMethod(goalsData assignItem) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        conLayout = (ConstraintLayout) findViewById(R.id.goals_main_layout);
+        conLayout = (ConstraintLayout) findViewById(R.id.subject_main_layout);
 
         layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.assignments_popup, null);
+        container = (ViewGroup) layoutInf.inflate(R.layout.subjectgoals_popup, null);
 
         popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
         popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.10));
@@ -175,15 +111,15 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         });
 
         if (assignItem != null) {
-            EditText etName = (EditText) container.findViewById(R.id.assignments_Name);
-            EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight);
+            EditText etName = (EditText) container.findViewById(R.id.ed_subjectgoals_Name);
+            EditText etDate = (EditText) container.findViewById(R.id.ed_subjectgoals_dueDate);
 
-            etName.setText(assignItem.getAssignmentName());
-            etWeight.setText(assignItem.getAssignmentWeight());
+            etName.setText(assignItem.getGoalTitle());
+            etDate.setText(assignItem.getGoalDueDate());
         }
 
-        btnClose = (Button) container.findViewById(R.id.assignments_btn_close);
-        btnSave = (Button) container.findViewById(R.id.assignments_btn_save);
+        btnClose = (Button) container.findViewById(R.id.subjectgoals_btn_close);
+        btnSave = (Button) container.findViewById(R.id.subjectgoals_btn_save);
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,26 +131,40 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText etTitle = (EditText) container.findViewById(R.id.assignments_Name);
-                EditText etDate = (EditText) container.findViewById(R.id.ed_assignments_Weight);
+                EditText etName = (EditText) container.findViewById(R.id.ed_subjectgoals_Name);
+                EditText etDate = (EditText) container.findViewById(R.id.ed_subjectgoals_dueDate);
 
-                String title = etTitle.getText().toString();
-                String date = etDate.getText().toString();
+                String name = etName.getText().toString();
+                String weight = etDate.getText().toString();
+                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(weight)){
+                    weight += "%";
+                    goalsData newGoal = new goalsData(name, weight);
+                    createItem(newGoal);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                }
 
-
-                goalsData newGoal = new goalsData(title, date);
-
-                createGoal(newGoal);
                 popUp.dismiss();
             }
         });
     }
 
-    public void createGoal(goalsData goal1) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
+
+    public void createItem(goalsData goals1) {
 
         Log.i(TAG, "addGoals");
-        rowItems.add(goal1);
+        if (goals1.getGoalDueDate() == null || goals1.getGoalDueDate() == "" ||
+                goals1.getGoalTitle() == null || goals1.getGoalTitle() == "" ){
+            return;
+        }
 
+        rowItems.add(goals1);
 
         goalsAdapter adapter = new goalsAdapter(this, rowItems) {
             @Override
@@ -227,18 +177,53 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                 return view;
             }
         };
+        saveData();
         myList.setAdapter(adapter);
 
         myList.setOnItemClickListener(this);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivityForResult(myIntent, 0);
-        return true;
+    public void deleteItem(int iPosition){
+        Log.i(TAG, "deleteGoal");
+        rowItems.remove(iPosition);
+        goalsAdapter adapter = new goalsAdapter(this, rowItems){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the current item from ListView
+                View view = super.getView(position,convertView,parent);
+                // Set a background color for ListView regular row/item
+                view.setBackgroundColor(getResources().getColor(android.R.color.white));
+
+                return view;
+            }
+        };
+
+        myList.setAdapter(adapter);
+        myList.setOnItemClickListener(this);
+        saveData();
+    }
+
+    public void saveData() {
+        Log.i(TAG, "saveGoal");
+        SharedPreferences sharedPreferences = getSharedPreferences("goalData"+ subjectCode, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(rowItems);
+        editor.putString((getString(R.string.goals_savedata) + subjectCode), json);
+        editor.apply();
+    }
+
+    public void loadData() {
+        Log.i(TAG, "loadGoal");
+        SharedPreferences sharedPreferences = getSharedPreferences("goalData"+ subjectCode, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString((getString(R.string.goals_savedata) + subjectCode), null);
+        Type type = new TypeToken<ArrayList<goalsData>>() {}.getType();
+        rowItems = gson.fromJson(json, type);
+
+        if (rowItems == null) {
+            rowItems = new ArrayList<>();
+        }
     }
 
 }
-
-
-*/

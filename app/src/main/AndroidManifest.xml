@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AssignmentInfo"></activity>
+
+        <activity android:name=".AssignmentInfo" />
         <activity android:name=".EnrolmentRecord" />
         <activity android:name=".Calendar" />
         <activity
@@ -29,6 +30,7 @@
         <activity
             android:name=".Assignments"
             android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".subjectGoals" />
         <activity android:name=".subjectsOptions" />
         <activity
             android:name=".Subjects"
@@ -36,6 +38,9 @@
         <activity android:name=".Profile" />
         <activity
             android:name=".notifications"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".subjectNotifications"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Dashboard"

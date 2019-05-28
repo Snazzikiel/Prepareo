@@ -44,6 +44,7 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
     //List<notificationData> rowItems = new ArrayList<notificationData>();
     ArrayList<notificationData> rowItems;// = new ArrayList<notificationData>();
     notificationData p;
+    String subjectCode;
 
     //popup Window
     PopupWindow popUp;

@@ -1,14 +1,20 @@
 package com.uow.snazzikiel.prepareo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.Intent;
@@ -31,14 +37,23 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static android.content.Context.MODE_PRIVATE;
 
 public class goalsTabOne extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = "Goals-Tab1Fragment";
 
 
     List<goalsData> rowItems = new ArrayList<goalsData>();
+
+    View popupView;
+
 
     //popup Window
     PopupWindow popUp;
@@ -56,31 +71,18 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         View view = inflater.inflate(R.layout.goals_tab1,container,false);
 
         myList = (ListView) view.findViewById(R.id.goals_main_list);
-        /*btnTEST = (Button) view.findViewById(R.id.btnTEST);
-
-        btnTEST.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "TESTING BUTTON CLICK 1",Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
 
         //Add two test Subjects
+        loadData();
         goalsData goal = new goalsData("Goal 1", "10-01-2019");
-        createGoal(goal);
-
-        goal = new goalsData("Goal 2", "11-01-2019");
-        createGoal(goal);
-
-        goal = new goalsData("Goal 3", "12-01-2019");
-        createGoal(goal);
+        createItem(goal);
+        deleteItem(rowItems.size()-1);
 
         addGoals = (FloatingActionButton) view.findViewById(R.id.float_addGoals);
         addGoals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //popupMethod(null);
+                popupMethod(null, v);
             }
         });
 
@@ -90,7 +92,6 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
                 // Get the selected item text from ListView
                 //Intent myIntent = new Intent(getApplicationContext(), subjectsOptions.class);
                 //startActivityForResult(myIntent, 0);
-
             }
         });
 
@@ -102,25 +103,29 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
                             long id) {
 
         String goalsTitle = rowItems.get(position).getGoalTitle();
-        //Toast.makeText(view.getApplicationContext(), "" + goalsTitle,
-        //        Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + goalsTitle,
+                Toast.LENGTH_SHORT).show();
     }
-/*
-    public void popupMethod(assignmentsData assignItem) {
+
+    public void popupMethod(goalsData assignItem, View v) {
+        Log.i(TAG, "goalsPopup");
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        conLayout = (ConstraintLayout) findViewById(R.id.goals_main_layout);
 
-        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.assignments_popup, null);
+        popupView = getLayoutInflater().inflate(R.layout.goals_popup, null);
+        popUp = new PopupWindow(popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 
-        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
-        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.10));
+        int location[] = new int[2];
+        v.getLocationOnScreen(location);
+        popUp.showAtLocation(v, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.45));
 
-        container.setOnTouchListener(new View.OnTouchListener() {
+        popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 popUp.dismiss();
@@ -129,46 +134,63 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         });
 
         if (assignItem != null) {
-            EditText etName = (EditText) container.findViewById(R.id.assignments_Name);
-            EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight);
+            EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
+            EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
 
-            etName.setText(assignItem.getAssignmentName());
-            etWeight.setText(assignItem.getAssignmentWeight());
+            etTitle.setText(assignItem.getGoalTitle());
+            etDate.setText(assignItem.getGoalDueDate());
         }
 
-        btnClose = (Button) container.findViewById(R.id.assignments_btn_close);
-        btnSave = (Button) container.findViewById(R.id.assignments_btn_save);
+        btnSave = (Button) popupView.findViewById(R.id.goals_btn_save);
+        btnClose = (Button) popupView.findViewById(R.id.goals_btn_close);
 
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i(TAG, "goalsDismiss");
                 popUp.dismiss();
+
             }
         });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText etTitle = (EditText) container.findViewById(R.id.assignments_Name);
-                EditText etDate = (EditText) container.findViewById(R.id.ed_assignments_Weight);
+                Log.i(TAG, "goalsAdd");
+                EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
+                EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
 
-                String title = etTitle.getText().toString();
-                String date = etDate.getText().toString();
-
-
-                goalsData newGoal = new goalsData(title, date);
-
-                createGoal(newGoal);
+                String title = etTitle.getText().toString().trim();
+                String date = etDate.getText().toString().trim();
+                if (!TextUtils.isEmpty(title) || !TextUtils.isEmpty(date)){
+                    date += "%";
+                    goalsData newGoal = new goalsData(title, date);
+                    createItem(newGoal);
+                } else {
+                    Toast.makeText(getContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                }
+                Log.i(TAG, "goalsAdd");
                 popUp.dismiss();
             }
         });
-    }*/
+    }
 
-    public void createGoal(goalsData goal1) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent myIntent = new Intent(getContext(), Dashboard.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
+
+    public void createItem(goalsData goals1) {
 
         Log.i(TAG, "addGoals");
-        rowItems.add(goal1);
+        if (goals1.getGoalDueDate() == null || goals1.getGoalDueDate() == "" ||
+                goals1.getGoalTitle() == null || goals1.getGoalTitle() == "" ){
+            return;
+        }
 
+        rowItems.add(goals1);
 
         goalsAdapter adapter = new goalsAdapter(getContext(), rowItems) {
             @Override
@@ -181,15 +203,52 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
                 return view;
             }
         };
+        saveData();
         myList.setAdapter(adapter);
 
         myList.setOnItemClickListener(this);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
-        //startActivityForResult(myIntent, 0);
-        return true;
+    public void deleteItem(int iPosition){
+        Log.i(TAG, "deleteGoal");
+        rowItems.remove(iPosition);
+        goalsAdapter adapter = new goalsAdapter(getContext(), rowItems){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the current item from ListView
+                View view = super.getView(position,convertView,parent);
+                // Set a background color for ListView regular row/item
+                view.setBackgroundColor(getResources().getColor(android.R.color.white));
+
+                return view;
+            }
+        };
+
+        myList.setAdapter(adapter);
+        myList.setOnItemClickListener(this);
+        saveData();
     }
 
+    public void saveData() {
+        Log.i(TAG, "saveGoal");
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("goalData" + "TabOne", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(rowItems);
+        editor.putString((getString(R.string.goals_savedata) + "TabOne"), json);
+        editor.apply();
+    }
+
+    public void loadData() {
+        Log.i(TAG, "loadGoal");
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("goalData"+ "TabOne", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString((getString(R.string.goals_savedata) + "TabOne"), null);
+        Type type = new TypeToken<ArrayList<goalsData>>() {}.getType();
+        rowItems = gson.fromJson(json, type);
+
+        if (rowItems == null) {
+            rowItems = new ArrayList<>();
+        }
+    }
 }

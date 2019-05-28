@@ -74,7 +74,7 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
         // Get the selected item text from ListView
         subjectsData subjItem = (subjectsData) parent.getItemAtPosition(position);
         if (subjItem.getCourseName() == "Notifications") {
-            Intent myIntent = new Intent(getApplicationContext(), notifications.class);
+            Intent myIntent = new Intent(getApplicationContext(), subjectNotifications.class);
             myIntent.putExtra("subjectCode", subjectName);
             myIntent.putExtra( "subjectPosition", itemPosition);
             startActivityForResult(myIntent, 0);
@@ -88,7 +88,7 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
         }
 
         if (subjItem.getCourseName() == "Goals"){
-            Intent myIntent = new Intent(getApplicationContext(), Goals.class);
+            Intent myIntent = new Intent(getApplicationContext(), subjectGoals.class);
             myIntent.putExtra("subjectCode", subjectName);
             myIntent.putExtra( "subjectPosition", itemPosition);
             startActivityForResult(myIntent, 0);

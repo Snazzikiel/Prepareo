@@ -196,7 +196,7 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
     }
 
     public void deleteItem(int iPosition){
-        Log.i(TAG, "deleteSubject");
+        Log.i(TAG, "deleteAssignment");
         rowItems.remove(iPosition);
         assignmentsAdapter adapter = new assignmentsAdapter(this, rowItems){
             @Override
@@ -217,7 +217,7 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
 
     public void saveData() {
         Log.i(TAG, "saveSubject");
-        SharedPreferences sharedPreferences = getSharedPreferences("assignmentData", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("assignmentData" + subjectCode, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(rowItems);
@@ -227,9 +227,9 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
 
     public void loadData( ) {
         Log.i(TAG, "loadSubjects");
-        SharedPreferences sharedPreferences = getSharedPreferences("assignmentData", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("assignmentData" + subjectCode, MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString(getString(R.string.assignments_savedata), null);
+        String json = sharedPreferences.getString((getString(R.string.assignments_savedata) + subjectCode), null);
         Type type = new TypeToken<ArrayList<assignmentsData>>() {}.getType();
         rowItems = gson.fromJson(json, type);
 

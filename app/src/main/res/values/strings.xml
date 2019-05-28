@@ -92,6 +92,17 @@
     <string name="enrolmentrecord_savedata">enrolmentMain</string>
     <string name="subjects_savedata">subjectsMain</string>
     <string name="assignments_savedata">assignments-</string>
+    <string name="goals_savedata">goals-</string>
+    <string name="subjects_notifications_savedata">notification-</string>
+
+    <!-- Goals -->
+    <string name="goals_tab1">PERSONAL</string>
+    <string name="goals_tab2">ACADEMIC</string>
+    <string name="goals_heading">Add Goal</string>
+    <string name="goals_title">Goal Title</string>
+    <string name="goals_dueDate">Goal Due Date</string>
+    <string name="goals_boxTextOne">Credit Points</string>
+    <string name="goals_boxTextOneAnswer">80%</string>
 
 </resources>
 

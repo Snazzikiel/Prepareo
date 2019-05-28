@@ -13,12 +13,12 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class goalsAdapter extends BaseAdapter {
+public class subjectGoalsAdapter extends BaseAdapter {
 
     Context context;
     List<goalsData> rowItems;
 
-    goalsAdapter(Context context, List<goalsData> rowItems) {
+    subjectGoalsAdapter(Context context, List<goalsData> rowItems) {
         this.context = context;
         this.rowItems = rowItems;
     }
@@ -54,30 +54,12 @@ public class goalsAdapter extends BaseAdapter {
             holder.title = (TextView) convertView.findViewById(R.id.goalsTitle);
             holder.assignLogo = (ImageView) convertView.findViewById(R.id.goals_img);
             holder.assignArrow = (ImageView) convertView.findViewById(R.id.goals_arrow);
-            //holder.goalsChkBox = (CheckBox) convertView.findViewById((R.id.goals_checkbox));
 
             goalsData row_pos = rowItems.get(position);
 
             holder.assignLogo.setImageResource(android.R.drawable.star_big_on);
             holder.assignArrow.setImageResource(android.R.drawable.ic_menu_sort_by_size);
             holder.title.setText(row_pos.getGoalTitle());
-            //holder.date.setText(row_pos.getAssignmentWeight());
-            /*holder.goalsChkBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //set click event on item here
-                    CheckBox x = (CheckBox) v.findViewById(R.id.goals_checkbox);
-
-                    if (x.isChecked()){
-                        x.setChecked(true);
-                        Toast.makeText(context, "Item Deleted",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        x.setChecked(false);
-                    }
-                }
-            });*/
-
 
             convertView.setTag(holder);
         } else {
