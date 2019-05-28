@@ -55,6 +55,8 @@
     <string name="subjects_heading">Add Subject</string>
     <string name="subjects_name">Subject Name</string>
     <string name="subjects_code">Subject Code</string>
+    <string name="subjects_boxTextOne">Credit Points</string>
+    <string name="subjects_boxTextOneAnswer">80%</string>
 
     <!-- Strings Related to Assignments -->
     <string name="assignments_str_Name">Assignment Name</string>
@@ -88,5 +90,8 @@
     <string name="notification_savedata">notificationsMain</string>
     <string name="account_savedata">accountMain</string>
     <string name="enrolmentrecord_savedata">enrolmentMain</string>
+    <string name="subjects_savedata">subjectsMain</string>
+    <string name="assignments_savedata">assignments-</string>
 
 </resources>
+

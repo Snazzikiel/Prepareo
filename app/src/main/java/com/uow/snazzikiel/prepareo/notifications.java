@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,41 +67,27 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
         myList = (ListView) findViewById(R.id.main_list);
 
-
         loadData();
         p = new notificationData(null, null, null, null, null);
-        //addNotificationItem(p);
-        //trigger memory load
-        //addNotificationItem(null);
-
+        addNotificationItem(p);
+        deleteNotificationItem(rowItems.size()-1);
 
         addNote = (FloatingActionButton) findViewById(R.id.addNotification);
         addNote.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
-                //testFunc(p);
                 popupMethod(null);
 
             }
         });
 
 
-        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                notificationData noteItem = (notificationData) parent.getItemAtPosition(position);
-                popupMethod(noteItem);
-
-            }
-        });
-
         myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
                 deleteNotificationItem(position);
-                Toast.makeText(getApplicationContext(), "" + "Long Click",
+                Toast.makeText(getApplicationContext(), "Item Deleted",
                         Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -110,10 +97,8 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-
-        String noteName = rowItems.get(position).getName();
-        Toast.makeText(getApplicationContext(), "" + noteName,
-                Toast.LENGTH_SHORT).show();
+        notificationData noteItem = (notificationData) parent.getItemAtPosition(position);
+        popupMethod(noteItem);
     }
 
     private void showDeleteMenu(boolean show){
@@ -176,16 +161,19 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
                 EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
                 EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
 
-                String name = etName.getText().toString();
-                String freq = etFreq.getText().toString();
-                String dateStart = etStart.getText().toString();
-                String dateEnd = etEnd.getText().toString();
-                String msg = etMsg.getText().toString();
+                String name = etName.getText().toString().trim();
+                String freq = etFreq.getText().toString().trim();
+                String dateStart = etStart.getText().toString().trim();
+                String dateEnd = etEnd.getText().toString().trim();
+                String msg = etMsg.getText().toString().trim();
 
-                notificationData newNote = new notificationData(name, freq, dateStart, dateEnd, msg);
-
-                addNotificationItem(newNote);
-                saveData();
+                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(freq)){
+                    notificationData newNote = new notificationData(name, freq, dateStart, dateEnd, msg);
+                    addNotificationItem(newNote);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                }
                 popUp.dismiss();
             }
         });
@@ -209,6 +197,7 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         myList.setAdapter(adapter);
         myList.setOnItemClickListener(this);
     }
+
     public void addNotificationItem(notificationData note1){
 
         Log.i(TAG, "addNotification");
@@ -227,6 +216,7 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
                 return view;
             }
         };
+        saveData();
         myList.setAdapter(adapter);
 
         myList.setOnItemClickListener(this);

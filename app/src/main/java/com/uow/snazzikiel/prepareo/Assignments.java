@@ -1,10 +1,12 @@
 package com.uow.snazzikiel.prepareo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +22,10 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +34,8 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
 
     private static final String TAG = "stateCheck";
     List<assignmentsData> rowItems = new ArrayList<assignmentsData>();
+    String subjectCode;
+    int itemPosition;
 
     //popup Window
     PopupWindow popUp;
@@ -42,24 +50,24 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Subjects");
+
+        //Set title with items passed
+        Intent thisIntent = getIntent();
+        subjectCode = thisIntent.getStringExtra("subjectCode");
+        String sItemPosition = thisIntent.getStringExtra("subjectPosition");
+        //itemPosition = Integer.parseInt(sItemPosition);
+        setTitle(subjectCode + " - Assignments");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_assignments);
 
         myList = (ListView) findViewById(R.id.assignments_main_list);
 
         //Add two test Subjects
-        assignmentsData assignment = new assignmentsData("Assignment 1", "10%");
-        createAssignment(assignment);
-
-        assignment = new assignmentsData("Assignment 2", "10%");
-        createAssignment(assignment);
-
-        assignment = new assignmentsData("Assignment 3", "10%");
-        createAssignment(assignment);
-
-        assignment = new assignmentsData("Assignment 4", "10%");
-        createAssignment(assignment);
+        loadData();
+        assignmentsData test = new assignmentsData("Assignment 1", "10%");
+        createAssignment(test);
+        deleteItem(rowItems.size()-1);
 
         addAssign = (FloatingActionButton) findViewById(R.id.float_addAssignments);
         addAssign.setOnClickListener(new View.OnClickListener() {
@@ -69,13 +77,14 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the selected item text from ListView
-                //Intent myIntent = new Intent(getApplicationContext(), subjectsOptions.class);
-                //startActivityForResult(myIntent, 0);
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
+                deleteItem(position);
+                Toast.makeText(getApplicationContext(), "Item Deleted",
+                        Toast.LENGTH_SHORT).show();
+                return true;
             }
         });
     }
@@ -84,9 +93,10 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
 
-        String assignName = rowItems.get(position).getAssignmentName();
-        Toast.makeText(getApplicationContext(), "" + assignName,
-                Toast.LENGTH_SHORT).show();
+        Intent myIntent = new Intent(getApplicationContext(), AssignmentInfo.class);
+        myIntent.putExtra("subjectCode", subjectCode);
+        myIntent.putExtra( "assignmentName", rowItems.get(position).getAssignmentName());
+        startActivityForResult(myIntent, 0);
     }
 
     public void popupMethod(assignmentsData assignItem) {
@@ -112,7 +122,7 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         });
 
         if (assignItem != null) {
-            EditText etName = (EditText) container.findViewById(R.id.assignments_Name);
+            EditText etName = (EditText) container.findViewById(R.id.ed_assignments_Name);
             EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight);
 
             etName.setText(assignItem.getAssignmentName());
@@ -132,26 +142,41 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText etName = (EditText) container.findViewById(R.id.assignments_Name);
+                EditText etName = (EditText) container.findViewById(R.id.ed_assignments_Name);
                 EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight);
 
                 String name = etName.getText().toString();
                 String weight = etWeight.getText().toString();
+                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(weight)){
+                    weight += "%";
+                    assignmentsData newAssign = new assignmentsData(name, weight);
+                    createAssignment(newAssign);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                }
 
-
-                assignmentsData newAssign = new assignmentsData(name, weight);
-
-                createAssignment(newAssign);
                 popUp.dismiss();
             }
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
+        //startActivityForResult(myIntent, 0);
+        finish();
+        return true;
+    }
+
     public void createAssignment(assignmentsData assignment1) {
 
         Log.i(TAG, "addAssignment");
-        rowItems.add(assignment1);
+        if (assignment1.getAssignmentName() == null || assignment1.getAssignmentName() == "" ||
+                assignment1.getAssignmentWeight() == null || assignment1.getAssignmentWeight() == "" ){
+            return;
+        }
 
+        rowItems.add(assignment1);
 
         assignmentsAdapter adapter = new assignmentsAdapter(this, rowItems) {
             @Override
@@ -164,17 +189,54 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
                 return view;
             }
         };
+        saveData();
         myList.setAdapter(adapter);
 
         myList.setOnItemClickListener(this);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivityForResult(myIntent, 0);
-        return true;
+    public void deleteItem(int iPosition){
+        Log.i(TAG, "deleteSubject");
+        rowItems.remove(iPosition);
+        assignmentsAdapter adapter = new assignmentsAdapter(this, rowItems){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Get the current item from ListView
+                View view = super.getView(position,convertView,parent);
+                // Set a background color for ListView regular row/item
+                view.setBackgroundColor(getResources().getColor(android.R.color.white));
+
+                return view;
+            }
+        };
+
+        myList.setAdapter(adapter);
+        myList.setOnItemClickListener(this);
+        saveData();
     }
 
+    public void saveData() {
+        Log.i(TAG, "saveSubject");
+        SharedPreferences sharedPreferences = getSharedPreferences("assignmentData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(rowItems);
+        editor.putString(getString(R.string.assignments_savedata), json);
+        editor.apply();
+    }
+
+    public void loadData( ) {
+        Log.i(TAG, "loadSubjects");
+        SharedPreferences sharedPreferences = getSharedPreferences("assignmentData", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(getString(R.string.assignments_savedata), null);
+        Type type = new TypeToken<ArrayList<assignmentsData>>() {}.getType();
+        rowItems = gson.fromJson(json, type);
+
+        if (rowItems == null) {
+            rowItems = new ArrayList<>();
+        }
+    }
 }
 
 

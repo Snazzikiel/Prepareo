@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EnrolmentRecord"></activity>
+        <activity android:name=".AssignmentInfo"></activity>
+        <activity android:name=".EnrolmentRecord" />
         <activity android:name=".Calendar" />
         <activity
             android:name=".statistics"
@@ -22,12 +23,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.uow.snazzikiel.prepareo.Dashboard" />
         </activity>
-        <activity android:name=".Goals" />
-        <activity android:name=".Assignments" />
+        <activity
+            android:name=".Goals"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".Assignments"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".subjectsOptions" />
-        <activity android:name=".Subjects" />
+        <activity
+            android:name=".Subjects"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".Profile" />
-        <activity android:name=".notifications" />
+        <activity
+            android:name=".notifications"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Dashboard"
             android:theme="@style/AppTheme.NoActionbar" />

@@ -24,6 +24,8 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
 
     private static final String TAG = "stateCheck";
     List<subjectsData> rowItems = new ArrayList<subjectsData>();
+    String subjectName;
+    int itemPosition;
 
     //popup Window
     PopupWindow popUp;
@@ -38,7 +40,14 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Subjects");
+
+        //Set title with items passed
+        Intent thisIntent = getIntent();
+        subjectName = thisIntent.getStringExtra("subjectCode");
+        String sItemPosition = thisIntent.getStringExtra("subjectPosition");
+        itemPosition = Integer.parseInt(sItemPosition);
+        setTitle(subjectName);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_subjects_options);
 
@@ -57,37 +66,41 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
         subject = new subjectsData("Notifications", null);
         createSubject(subject);
 
-        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the selected item text from ListView
-                subjectsData subjItem = (subjectsData) parent.getItemAtPosition(position);
-                if (subjItem.getCourseName() == "Notifications") {
-                    Intent myIntent = new Intent(getApplicationContext(), notifications.class);
-                    startActivityForResult(myIntent, 0);
-                }
 
-                if (subjItem.getCourseName() == "Assignments"){
-                    Intent myIntent = new Intent(getApplicationContext(), Assignments.class);
-                    startActivityForResult(myIntent, 0);
-                }
-
-                if (subjItem.getCourseName() == "Goals"){
-                    Intent myIntent = new Intent(getApplicationContext(), Goals.class);
-                    startActivityForResult(myIntent, 0);
-                }
-
-            }
-        });
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // Get the selected item text from ListView
+        subjectsData subjItem = (subjectsData) parent.getItemAtPosition(position);
+        if (subjItem.getCourseName() == "Notifications") {
+            Intent myIntent = new Intent(getApplicationContext(), notifications.class);
+            myIntent.putExtra("subjectCode", subjectName);
+            myIntent.putExtra( "subjectPosition", itemPosition);
+            startActivityForResult(myIntent, 0);
+        }
 
-        String subjName = rowItems.get(position).getCourseName();
-        Toast.makeText(getApplicationContext(), "" + subjName,
-                Toast.LENGTH_SHORT).show();
+        if (subjItem.getCourseName() == "Assignments"){
+            Intent myIntent = new Intent(getApplicationContext(), Assignments.class);
+            myIntent.putExtra("subjectCode", subjectName);
+            myIntent.putExtra( "subjectPosition", itemPosition);
+            startActivityForResult(myIntent, 0);
+        }
+
+        if (subjItem.getCourseName() == "Goals"){
+            Intent myIntent = new Intent(getApplicationContext(), Goals.class);
+            myIntent.putExtra("subjectCode", subjectName);
+            myIntent.putExtra( "subjectPosition", itemPosition);
+            startActivityForResult(myIntent, 0);
+        }
+
+        if (subjItem.getCourseName() == "Statistics"){
+            Intent myIntent = new Intent(getApplicationContext(), statistics.class);
+            myIntent.putExtra("subjectCode", subjectName);
+            myIntent.putExtra( "subjectPosition", itemPosition);
+            startActivityForResult(myIntent, 0);
+        }
+
     }
 
     public void createSubject(subjectsData subject1) {

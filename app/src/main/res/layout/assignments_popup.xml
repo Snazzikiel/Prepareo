@@ -28,7 +28,7 @@
             android:minHeight="350dp">
 
             <EditText
-                android:id="@+id/assignments_Name"
+                android:id="@+id/ed_assignments_Weight"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -41,16 +41,16 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/textview_border"
                 android:ems="10"
-                android:hint="@string/assignments_str_Name"
+                android:hint="@string/assignments_str_Weight"
                 android:inputType="text"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.484"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_Weight" />
+                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_Name" />
 
             <EditText
-                android:id="@+id/ed_assignments_Weight"
+                android:id="@+id/ed_assignments_Name"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -63,7 +63,7 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/textview_border"
                 android:ems="10"
-                android:hint="@string/assignments_str_Weight"
+                android:hint="@string/assignments_str_Name"
                 android:inputType="text"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +83,7 @@
                 android:text="@string/notification_btn_save"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintStart_toEndOf="@+id/assignments_btn_close"
-                app:layout_constraintTop_toBottomOf="@+id/assignments_Name" />
+                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_Weight" />
 
             <Button
                 android:id="@+id/assignments_btn_close"
@@ -99,7 +99,7 @@
                 android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toStartOf="@+id/assignments_btn_save"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/assignments_Name" />
+                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_Weight" />
 
             <EditText
                 android:id="@+id/assignments_heading"

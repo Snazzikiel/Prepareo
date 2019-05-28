@@ -62,8 +62,8 @@ public class Dashboard extends AppCompatActivity {
         goSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                //startActivity(new Intent(Dashboard.this, Subjects.class));
-                startActivity(new Intent(Dashboard.this, EnrolmentRecord.class));
+                startActivity(new Intent(Dashboard.this, Subjects.class));
+                //startActivity(new Intent(Dashboard.this, EnrolmentRecord.class));
             }
         });
 
@@ -71,7 +71,7 @@ public class Dashboard extends AppCompatActivity {
         goStat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                startActivity(new Intent(Dashboard.this, Subjects.class));
+                startActivity(new Intent(Dashboard.this, statistics.class));
                 //Toast.makeText(getApplicationContext(), "Invalid Click!",Toast.LENGTH_SHORT).show();
             }
         });

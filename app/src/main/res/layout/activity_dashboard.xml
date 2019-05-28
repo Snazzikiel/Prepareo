@@ -60,13 +60,13 @@
 
     <ImageView
         android:id="@+id/dashboard_logo"
-        android:layout_width="129dp"
-        android:layout_height="130dp"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="@string/dashboard_logo"
         app:layout_constraintStart_toEndOf="@+id/dashboard_Title"
         app:layout_constraintTop_toTopOf="parent"
