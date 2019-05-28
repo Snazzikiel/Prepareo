@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,7 +25,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -82,6 +82,8 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
             }
         });
 
+        registerForContextMenu(myList);
+
         return view;
     }
 
@@ -122,7 +124,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
 
         if (assignItem != null) {
             EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
-            EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
+            EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_desc);
 
             etTitle.setText(assignItem.getGoalTitle());
             etDate.setText(assignItem.getGoalDueDate());
@@ -145,7 +147,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
             public void onClick(View v) {
                 Log.i(TAG, "goalsAdd");
                 EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
-                EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
+                EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_desc);
 
                 String title = etTitle.getText().toString().trim();
                 String date = etDate.getText().toString().trim();
@@ -236,6 +238,30 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
 
         if (rowItems == null) {
             rowItems = new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Choose your option");
+        getActivity().getMenuInflater().inflate(R.menu.subjects_menu, menu);
+    }
+
+    public boolean onContextItemSelected(MenuItem item, View v) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.subjects_changeDetails:
+                popupMethod(rowItems.get(index), v);
+                return true;
+            case R.id.subjects_deleteSubject:
+                deleteItem(index);
+                Toast.makeText(getContext(), "Item Deleted.", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 }

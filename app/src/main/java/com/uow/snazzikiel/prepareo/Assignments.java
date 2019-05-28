@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -46,6 +47,7 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
     Button btnSave;
     ViewGroup container;
     ListView myList;
+    Boolean exist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
 
         //Add two test Subjects
         loadData();
-        assignmentsData test = new assignmentsData("Assignment 1", "10%");
+        assignmentsData test = new assignmentsData("Assignment 1", "10%", "100","29-09-1990");
         createAssignment(test);
         deleteItem(rowItems.size()-1);
 
@@ -77,31 +79,26 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                deleteItem(position);
-                Toast.makeText(getApplicationContext(), "Item Deleted",
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+        registerForContextMenu(myList);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-
-        Intent myIntent = new Intent(getApplicationContext(), AssignmentInfo.class);
+        Log.i(TAG, "Pos: " + String.valueOf(position));
+        Intent myIntent = new Intent(Assignments.this, AssignmentInfo.class);
         myIntent.putExtra("subjectCode", subjectCode);
         myIntent.putExtra( "assignmentName", rowItems.get(position).getAssignmentName());
-        startActivityForResult(myIntent, 0);
+        myIntent.putExtra( "assignmentPosition", position);
+        //startActivityForResult(myIntent, 0);
+        startActivity(myIntent);
     }
 
     public void popupMethod(assignmentsData assignItem) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        exist = false;
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
@@ -110,7 +107,7 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         container = (ViewGroup) layoutInf.inflate(R.layout.assignments_popup, null);
 
-        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
+        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.80), true);
         popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.10));
 
         container.setOnTouchListener(new View.OnTouchListener() {
@@ -120,14 +117,6 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
                 return true;
             }
         });
-
-        if (assignItem != null) {
-            EditText etName = (EditText) container.findViewById(R.id.ed_assignments_Name);
-            EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight);
-
-            etName.setText(assignItem.getAssignmentName());
-            etWeight.setText(assignItem.getAssignmentWeight());
-        }
 
         btnClose = (Button) container.findViewById(R.id.assignments_btn_close);
         btnSave = (Button) container.findViewById(R.id.assignments_btn_save);
@@ -143,14 +132,100 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 EditText etName = (EditText) container.findViewById(R.id.ed_assignments_Name);
-                EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight);
+                EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight2);
+                EditText etDueDate = (EditText) container.findViewById(R.id.ed_assignments_dueDate);
+                EditText etMark = (EditText) container.findViewById(R.id.ed_assignments_TotalMark);
 
-                String name = etName.getText().toString();
-                String weight = etWeight.getText().toString();
+                String name = etName.getText().toString().trim();
+                String weight = etWeight.getText().toString().trim();
+                String dueDate = etDueDate.getText().toString().trim();
+                String mark = etMark.getText().toString().trim();
+
                 if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(weight)){
                     weight += "%";
-                    assignmentsData newAssign = new assignmentsData(name, weight);
+                    assignmentsData newAssign = new assignmentsData(name, weight, dueDate, mark);
                     createAssignment(newAssign);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                popUp.dismiss();
+            }
+        });
+    }
+
+    public void changeItem(assignmentsData assignItem, final int itemPosition) {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        exist = false;
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        conLayout = (ConstraintLayout) findViewById(R.id.assignments_main_layout);
+
+        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        container = (ViewGroup) layoutInf.inflate(R.layout.assignments_popup, null);
+
+        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.80), true);
+        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.10));
+
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popUp.dismiss();
+                return true;
+            }
+        });
+
+
+        EditText etName = (EditText) container.findViewById(R.id.ed_assignments_Name);
+        EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight2);
+        EditText etDueDate = (EditText) container.findViewById(R.id.ed_assignments_dueDate);
+        EditText etMark = (EditText) container.findViewById(R.id.ed_assignments_TotalMark);
+
+        etName.setText(assignItem.getAssignmentName());
+        etWeight.setText(assignItem.getAssignmentWeight());
+        etDueDate.setText(assignItem.getAssignmentDueDate());
+        etMark.setText(assignItem.getAssignmentTotalMark());
+
+        btnClose = (Button) container.findViewById(R.id.assignments_btn_close);
+        btnSave = (Button) container.findViewById(R.id.assignments_btn_save);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUp.dismiss();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText etName = (EditText) container.findViewById(R.id.ed_assignments_Name);
+                EditText etWeight = (EditText) container.findViewById(R.id.ed_assignments_Weight2);
+                EditText etDueDate = (EditText) container.findViewById(R.id.ed_assignments_dueDate);
+                EditText etMark = (EditText) container.findViewById(R.id.ed_assignments_TotalMark);
+
+                String name = etName.getText().toString().trim();
+                String weight = etWeight.getText().toString().trim();
+                String dueDate = etDueDate.getText().toString().trim();
+                String mark = etMark.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(weight)){
+                    weight += "%";
+                    assignmentsData newAssign = new assignmentsData(name, weight, dueDate, mark);
+                        rowItems.get(itemPosition).setAssignmentName(name);
+                        rowItems.get(itemPosition).setAssignmentWeight(weight);
+                        rowItems.get(itemPosition).setAssignmentTotalMark(mark);
+                        rowItems.get(itemPosition).setAssignmentDueDate(dueDate);
+                        saveData();
+                        loadData();
+                        //assignmentsData test = new assignmentsData("Assignment 1", "10%", "100","29-09-1990");
+                        //createAssignment(test);
+                        //deleteItem(rowItems.size()-1);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable to add blanks",
                             Toast.LENGTH_SHORT).show();
@@ -235,6 +310,31 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
 
         if (rowItems == null) {
             rowItems = new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Choose your option");
+        getMenuInflater().inflate(R.menu.subjects_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.subjects_changeDetails:
+                changeItem(rowItems.get(index), index);
+                return true;
+            case R.id.subjects_deleteSubject:
+                deleteItem(index);
+                Toast.makeText(this, "Item Deleted.", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 }

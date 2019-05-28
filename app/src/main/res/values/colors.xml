@@ -18,4 +18,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWhiteSmoke">#F5F5F5</color>
+    <color name="colorLightGray">#e4e4e4</color>
+    <color name="colorDarkGray">#A5A5A5</color>
 </resources>

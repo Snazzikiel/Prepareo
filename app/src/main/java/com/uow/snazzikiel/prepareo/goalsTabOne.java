@@ -2,12 +2,11 @@ package com.uow.snazzikiel.prepareo;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +19,12 @@ import java.util.List;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -40,10 +33,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 public class goalsTabOne extends Fragment implements AdapterView.OnItemClickListener {
@@ -95,6 +84,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
             }
         });
 
+        registerForContextMenu(myList);
         return view;
     }
 
@@ -135,7 +125,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
 
         if (assignItem != null) {
             EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
-            EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
+            EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_desc);
 
             etTitle.setText(assignItem.getGoalTitle());
             etDate.setText(assignItem.getGoalDueDate());
@@ -158,7 +148,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
             public void onClick(View v) {
                 Log.i(TAG, "goalsAdd");
                 EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
-                EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
+                EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_desc);
 
                 String title = etTitle.getText().toString().trim();
                 String date = etDate.getText().toString().trim();
@@ -249,6 +239,30 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
 
         if (rowItems == null) {
             rowItems = new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Choose your option");
+        getActivity().getMenuInflater().inflate(R.menu.subjects_menu, menu);
+    }
+
+    public boolean onContextItemSelected(MenuItem item, View v) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.subjects_changeDetails:
+                popupMethod(rowItems.get(index), v);
+                return true;
+            case R.id.subjects_deleteSubject:
+                deleteItem(index);
+                Toast.makeText(getContext(), "Item Deleted.", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 }

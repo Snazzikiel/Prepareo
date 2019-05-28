@@ -25,10 +25,53 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="350dp">
+            android:minHeight="700dp">
 
             <EditText
-                android:id="@+id/ed_assignments_Weight"
+                android:id="@+id/ed_assignments_TotalMark"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:hint="@string/assignments_str_totalMark"
+                android:inputType="text"
+                android:textSize="@dimen/form_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_Weight2" />
+
+            <EditText
+                android:id="@+id/ed_assignments_dueDate"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:hint="@string/assignment_dueDate"
+                android:inputType="text"
+                android:textSize="@dimen/form_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_TotalMark" />
+
+            <EditText
+                android:id="@+id/ed_assignments_Weight2"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -78,12 +121,12 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginLeft="60dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/textview_green_noborder"
                 android:text="@string/notification_btn_save"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintStart_toEndOf="@+id/assignments_btn_close"
-                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_Weight" />
+                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_dueDate" />
 
             <Button
                 android:id="@+id/assignments_btn_close"
@@ -91,7 +134,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="48dp"
                 android:layout_marginLeft="48dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginRight="60dp"
                 android:background="@drawable/textview_red_noborder"
@@ -99,7 +142,7 @@
                 android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toStartOf="@+id/assignments_btn_save"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_Weight" />
+                app:layout_constraintTop_toBottomOf="@+id/ed_assignments_dueDate" />
 
             <EditText
                 android:id="@+id/assignments_heading"

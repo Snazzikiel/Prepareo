@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -67,17 +68,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
             }
         });
 
-        myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                deleteSubject(position);
-                Toast.makeText(getApplicationContext(), "Item Deleted",
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
-
+        registerForContextMenu(myList);
     }
 
     @Override
@@ -99,7 +90,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         conLayout = (ConstraintLayout) findViewById(R.id.subjects_main_layout);
 
         layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.subjects_popup, null);
+        container = (ViewGroup) layoutInf.inflate(R.layout.subjects_popup2, null);
 
         popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
         popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.25));
@@ -143,6 +134,72 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
                     subjectsData newSubj = new subjectsData(name, code);
                     createSubject(newSubj);
                     loadData();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                popUp.dismiss();
+            }
+        });
+    }
+
+    public void editItem(subjectsData subjItem, final int itemPosition) {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        conLayout = (ConstraintLayout) findViewById(R.id.subjects_main_layout);
+
+        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        container = (ViewGroup) layoutInf.inflate(R.layout.subjects_popup2, null);
+
+        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
+        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.25));
+
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popUp.dismiss();
+                return true;
+            }
+        });
+
+            EditText etName = (EditText) container.findViewById(R.id.subjects_Name);
+            EditText etCode = (EditText) container.findViewById(R.id.subjects_Code);
+
+            etName.setText(subjItem.getCourseName());
+            etCode.setText(subjItem.getCourseCode());
+
+        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
+        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUp.dismiss();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EditText etName = (EditText) container.findViewById(R.id.subjects_Name);
+                EditText etCode = (EditText) container.findViewById(R.id.subjects_Code);
+
+                String name = etName.getText().toString().trim();
+                String code = etCode.getText().toString().trim();
+
+                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(code)){
+                    rowItems.get(itemPosition).setCourseCode(code);
+                    rowItems.get(itemPosition).setCourseName(name);
+                    saveData();
+                    loadData();
+                    subjectsData test = new subjectsData("s","s");
+                    createSubject(test);
+                    deleteSubject(rowItems.size()-1);
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable to add blanks",
                             Toast.LENGTH_SHORT).show();
@@ -226,6 +283,31 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
 
         if (rowItems == null) {
             rowItems = new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Choose your option");
+        getMenuInflater().inflate(R.menu.subjects_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.subjects_changeDetails:
+                editItem(rowItems.get(index), index);
+                return true;
+            case R.id.subjects_deleteSubject:
+                deleteSubject(index);
+                Toast.makeText(this, "Item Deleted.", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 
