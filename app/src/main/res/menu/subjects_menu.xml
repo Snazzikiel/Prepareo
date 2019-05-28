@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Subjects">
     <item
-        android:id="@+id/subjects_changeDetails"
+        android:id="@+id/subjects_changeIcon"
         android:orderInCategory="100"
-        android:title="Change Details"
+        android:title="Change Icon"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/subjects_changeName"
+        android:orderInCategory="100"
+        android:title="Change Name"
         app:showAsAction="never" />
 
     <item

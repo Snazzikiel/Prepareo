@@ -11,8 +11,8 @@
     >
 
     <FrameLayout
-        android:layout_width="320dp"
-        android:layout_height="472dp"
+        android:layout_width="314dp"
+        android:layout_height="295dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="150dp"
@@ -26,14 +26,12 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="470dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/textview_border"
-            android:minHeight="350dp"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:minHeight="350dp">
 
             <EditText
-                android:id="@+id/et_goals_date"
+                android:id="@+id/et_goals_title"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -46,16 +44,16 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/textview_border"
                 android:ems="10"
-                android:hint="@string/assignment_dueDate"
+                android:hint="@string/goals_title"
                 android:inputType="text"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_goals_Title" />
-
+                app:layout_constraintTop_toBottomOf="@+id/et_goals_dueDate" />
 
             <EditText
-                android:id="@+id/et_goals_desc"
+                android:id="@+id/et_goals_dueDate"
                 android:layout_width="260dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
@@ -63,30 +61,32 @@
                 android:layout_alignParentTop="false"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/textview_border"
                 android:ems="10"
-                android:hint="@string/goal_description"
+                android:hint="@string/goals_dueDate"
                 android:inputType="text"
                 android:textSize="@dimen/form_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_goals_date" />
+                app:layout_constraintTop_toBottomOf="@+id/goals_heading" />
+
 
             <Button
                 android:id="@+id/goals_btn_save"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginLeft="64dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="32dp"
                 android:background="@drawable/textview_green_noborder"
                 android:text="@string/notification_btn_save"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintStart_toEndOf="@+id/goals_btn_close"
-                app:layout_constraintTop_toBottomOf="@+id/et_goals_desc" />
+                app:layout_constraintTop_toBottomOf="@+id/et_goals_title" />
 
             <Button
                 android:id="@+id/goals_btn_close"
@@ -94,7 +94,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginRight="60dp"
                 android:background="@drawable/textview_red_noborder"
@@ -102,7 +102,7 @@
                 android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toStartOf="@+id/goals_btn_save"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_goals_desc" />
+                app:layout_constraintTop_toBottomOf="@+id/et_goals_title" />
 
             <EditText
                 android:id="@+id/goals_heading"
@@ -125,27 +125,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/et_goals_Title"
-                android:layout_width="260dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/textview_border"
-                android:ems="10"
-                android:hint="@string/goals_title"
-                android:inputType="text"
-                android:textSize="@dimen/form_font_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/goals_heading" />
 
         </android.support.constraint.ConstraintLayout>
 

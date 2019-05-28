@@ -4,110 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGray"
-    tools:context=".Assignments">
+    tools:context=".assignmentInfo">
 
     <TextView
-        android:id="@+id/tv_assdet_weight2"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_assdet_weight"
-        app:layout_constraintTop_toBottomOf="@+id/tv_assdet_title1" />
-
-    <TextView
-        android:id="@+id/tv_asdet_heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
-        android:text="Assignment Details"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_assdet_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/tv_assdet_title"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_asdet_heading" />
-
-    <TextView
-        android:id="@+id/tv_assdet_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/tv_assdet_weight"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_assdet_title" />
-
-    <TextView
-        android:id="@+id/tv_assdet_totalmark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/tv_assdet_totalmark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_assdet_weight" />
-
-    <TextView
-        android:id="@+id/tv_assdet_dueDate"
-        android:layout_width="127dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/tv_assdet_dueDate"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_assdet_totalmark" />
-
-    <TextView
-        android:id="@+id/tv_assdet_title1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="83dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_assdet_title"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_assdet_totalMark2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_assdet_totalmark"
-        app:layout_constraintTop_toBottomOf="@+id/tv_assdet_weight2" />
-
-    <TextView
-        android:id="@+id/tv_assdet_dueDate2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_assdet_dueDate"
-        app:layout_constraintTop_toBottomOf="@+id/tv_assdet_totalMark2" />
-
+        android:text="Assignment Information"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="300dp" />
 </android.support.constraint.ConstraintLayout>

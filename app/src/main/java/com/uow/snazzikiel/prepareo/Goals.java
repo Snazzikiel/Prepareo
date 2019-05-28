@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,9 +69,8 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.goals_tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -142,77 +140,6 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                     weight += "%";
                     goalsData newGoal = new goalsData(name, weight);
                     createItem(newGoal);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
-                            Toast.LENGTH_SHORT).show();
-                }
-
-                popUp.dismiss();
-            }
-        });
-    }
-
-    public void editItem(goalsData subjItem, final int itemPosition) {
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        conLayout = (ConstraintLayout) findViewById(R.id.subjects_main_layout);
-
-        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.subjects_popup2, null);
-
-        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
-        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.25));
-
-        container.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                popUp.dismiss();
-                return true;
-            }
-        });
-
-        EditText etTitle = (EditText) container.findViewById(R.id.subjects_Name);
-        EditText etDesc = (EditText) container.findViewById(R.id.subjects_Code);
-        EditText etDate = (EditText) container.findViewById(R.id.subjects_Code);
-
-        etTitle.setText(subjItem.getGoalTitle());
-        etDesc.setText(subjItem.getGoalDescription());
-        etDate.setText(subjItem.getGoalDueDate());
-
-        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
-        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUp.dismiss();
-            }
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                EditText etTitle = (EditText) container.findViewById(R.id.et_goals_Title);
-                EditText etDesc = (EditText) container.findViewById(R.id.et_goals_desc);
-                EditText etDate = (EditText) container.findViewById(R.id.et_goals_date);
-
-                String title = etTitle.getText().toString().trim();
-                String desc = etDesc.getText().toString().trim();
-                String date = etDate.getText().toString().trim();
-
-                if (!TextUtils.isEmpty(title) || !TextUtils.isEmpty(desc) || !TextUtils.isEmpty(date)){
-                    rowItems.get(itemPosition).setGoalTitle(title);
-                    rowItems.get(itemPosition).setGoalDescription(desc);
-                    rowItems.get(itemPosition).setGoalDescription(date);
-                    saveData();
-                    loadData();
-                    goalsData test = new goalsData("s","s", "s");
-                    createItem(test);
-                    deleteItem(rowItems.size()-1);
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable to add blanks",
                             Toast.LENGTH_SHORT).show();

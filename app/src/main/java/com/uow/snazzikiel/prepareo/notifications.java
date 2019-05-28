@@ -17,10 +17,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +28,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
@@ -85,7 +82,17 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-        registerForContextMenu(myList);
+
+        myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                deleteNotificationItem(position);
+                Toast.makeText(getApplicationContext(), "Item Deleted",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -269,29 +276,6 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Choose your option");
-        getMenuInflater().inflate(R.menu.subjects_menu, menu);
-    }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int index = info.position;
-
-        switch (item.getItemId()) {
-            case R.id.subjects_changeDetails:
-                popupMethod(rowItems.get(index));
-                return true;
-            case R.id.subjects_deleteSubject:
-                deleteNotificationItem(index);
-                Toast.makeText(this, "Item Deleted.", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
 
 }

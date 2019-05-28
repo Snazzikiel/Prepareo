@@ -103,13 +103,6 @@
     <string name="goals_dueDate">Goal Due Date</string>
     <string name="goals_boxTextOne">Credit Points</string>
     <string name="goals_boxTextOneAnswer">80%</string>
-    <string name="tv_assdet_weight">Weight</string>
-    <string name="tv_assdet_title">Title</string>
-    <string name="tv_assdet_totalmark">Total Mark</string>
-    <string name="tv_assdet_dueDate">Due Date</string>
-    <string name="assignment_dueDate">Due Date</string>
-    <string name="assignments_str_totalMark">Total Mark</string>
-    <string name="goal_description">Goal Description</string>
 
 </resources>
 

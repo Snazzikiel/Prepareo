@@ -29,7 +29,7 @@
 
             <EditText
                 android:id="@+id/ed_enrolment_Major"
-                android:layout_width="260dp"
+                android:layout_width="280dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="false"
@@ -39,7 +39,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/textview_border"
+                android:background="@android:drawable/dialog_holo_light_frame"
                 android:ems="10"
                 android:hint="@string/enrolment_str_major"
                 android:inputType="text"
@@ -51,7 +51,7 @@
 
             <EditText
                 android:id="@+id/ed_enrolment_Bachelor"
-                android:layout_width="260dp"
+                android:layout_width="280dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="false"
@@ -61,7 +61,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:background="@drawable/textview_border"
+                android:background="@android:drawable/dialog_holo_light_frame"
                 android:ems="10"
                 android:hint="@string/enrolment_str_bachelor"
                 android:inputType="text"
