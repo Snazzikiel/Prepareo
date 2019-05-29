@@ -27,8 +27,8 @@ public class statisticsTabOne extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.statistics_tab1,container,false);
 
-        createPieChartRed(view);
-        createPieChartWhite(view);
+        //createPieChartRed(view);
+        //createPieChartWhite(view);
         /*btnTEST = (Button) view.findViewById(R.id.btnTEST);
 
         btnTEST.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +41,7 @@ public class statisticsTabOne extends Fragment {
         return view;
     }
 
-    public void createPieChartRed(View v){
+    /*public void createPieChartRed(View v){
 
         PieChartView pieChartView = v.findViewById(R.id.chart1);
         List<SliceValue> pieData = new ArrayList<>();
@@ -67,6 +67,6 @@ public class statisticsTabOne extends Fragment {
         pieChartData.setHasCenterCircle(true).setCenterText1(Integer.toString(chartValue)).setCenterText1FontSize(18).setCenterText1Color(R.color.colorBlack);
 
         pieChartView.setPieChartData(pieChartData);
-    }
+    }*/
 }
 
