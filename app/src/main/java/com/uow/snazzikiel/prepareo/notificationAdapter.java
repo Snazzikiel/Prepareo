@@ -53,7 +53,7 @@ public class notificationAdapter extends BaseAdapter {
             notificationData row_pos = rowItems.get(position);
 
             holder.noteLogo.setImageResource(R.drawable.icon_notification);
-            holder.noteArrow.setImageResource(R.drawable.icon_arrow);
+            holder.noteArrow.setImageResource(R.drawable.baseline_more_vert_black_18dp);
             holder.name.setText(row_pos.getName());
 
             convertView.setTag(holder);

@@ -55,7 +55,7 @@ public class assignmentsAdapter extends BaseAdapter {
             assignmentsData row_pos = rowItems.get(position);
 
             holder.assignLogo.setImageResource(android.R.drawable.star_big_on);
-            holder.assignArrow.setImageResource(android.R.drawable.ic_menu_sort_by_size);
+            holder.assignArrow.setImageResource(R.drawable.baseline_more_vert_black_18dp);
             holder.name.setText(row_pos.getAssignmentName());
             holder.weight.setText(row_pos.getAssignmentWeight());
 

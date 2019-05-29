@@ -12,7 +12,6 @@ import com.hp.hpl.jena.update.UpdateExecutionFactory;
 import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateProcessor;
 import com.hp.hpl.jena.update.UpdateRequest;
-import com.uow.snazzikiel.prepareo.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -132,44 +131,41 @@ public class page extends AppCompatActivity
     }
 
 
-    protected class queryEndpoint extends AsyncTask<String, String, HashMap<String, List<String>>>
+    protected class queryEndpoint extends AsyncTask<String, String, HashMap<String, ArrayList<String>>>
     {
         @Override
-        protected HashMap<String, List<String>> doInBackground(String... queryTargetVars)
+        protected HashMap<String, ArrayList<String>> doInBackground(String... queryTargetVars)
         {
-            HashMap<String, List<String>> menu = new HashMap<String, List<String>>();
-
+            HashMap<String,ArrayList<String>> menu = new HashMap<String,ArrayList<String>>();
             Query sparqlQuery = sparqlQuery = QueryFactory.create(queryTargetVars[0]);
             QueryExecution qexec = QueryExecutionFactory.sparqlService(queryTargetVars[1], sparqlQuery);
 
             try
             {
                 ResultSet results = qexec.execSelect();
-
-                Map<String, List> mainMap = new HashMap<>();
                 String key = "";
-                List tmpList = new ArrayList<>();
+                ArrayList tmpList = new ArrayList<>();
 
                 for(;results.hasNext();)
                 {
                     QuerySolution soln = results.nextSolution();
                     RDFNode catNode = soln.get(queryTargetVars[2]);
-                    String cat = catNode.asNode().toString();
-
+                    String cat = catNode.asNode().getLocalName();
 
                     RDFNode subNode = soln.get(queryTargetVars[3]);
-                    String sub = subNode.asNode().toString();
+                    String sub = subNode.asNode().getLocalName();
 
-                    if (key.equals(cat)){
-                        tmpList.add(cat);
-                    } else {
-                        mainMap.put(key, tmpList);
+                    if(key.equals(cat))
+                    {
+                        tmpList.add(sub);
+                    }
+                    else
+                    {
+                        menu.put(key, tmpList);
                         key = cat;
                         tmpList = new ArrayList<>();
-
+                        tmpList.add(sub);
                     }
-
-                    ArrayList<String> subs = new ArrayList<>();
                 }
             }
             finally
@@ -180,9 +176,15 @@ public class page extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(HashMap <String, List<String>> menu)
+        protected void onPostExecute(HashMap <String, ArrayList<String>> menu)
         {
-
+            for (String s : menu.keySet()) {
+                txt1.append("Current key: " + s + "\n");
+                for (String r : menu.get(s)) {
+                    txt1.append(r + ", ");
+                }
+                txt1.append("\n");
+            }
         }
     }
     /*protected class queryEndpoint extends AsyncTask<String, String, ArrayList<String>>

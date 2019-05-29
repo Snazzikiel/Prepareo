@@ -55,7 +55,7 @@ public class subjectsAdapter extends BaseAdapter {
             subjectsData row_pos = rowItems.get(position);
 
             holder.subjLogo.setImageResource(android.R.drawable.star_big_on);
-            holder.subjArrow.setImageResource(android.R.drawable.ic_menu_sort_by_size);
+            holder.subjArrow.setImageResource(R.drawable.baseline_more_vert_black_18dp);
             holder.name.setText(row_pos.getCourseName());
             holder.code.setText(row_pos.getCourseCode());
 

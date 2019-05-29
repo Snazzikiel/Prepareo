@@ -95,6 +95,8 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
             }
         });
 
+
+
         return view;
     }
 
