@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -56,9 +57,6 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
     ViewGroup container;
     ListView myList;
 
-    private MenuItem menuItemSearch;
-    private MenuItem menuItemDelete;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,29 +80,15 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
             }
         });
 
-
-        myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                deleteNotificationItem(position);
-                Toast.makeText(getApplicationContext(), "Item Deleted",
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+        createNotificationChannel();
+        registerForContextMenu(myList);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        notificationData noteItem = (notificationData) parent.getItemAtPosition(position);
-        popupMethod(noteItem);
-    }
-
-    private void showDeleteMenu(boolean show){
-        menuItemDelete.setVisible(show);
-        menuItemSearch.setVisible(!show);
+        //notificationData noteItem = (notificationData) parent.getItemAtPosition(position);
+        //popupMethod(noteItem);
     }
 
     public void popupMethod(notificationData noteItem){
@@ -128,20 +112,6 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
                 return true;
             }
         });
-
-        if (noteItem != null){
-            EditText etName = (EditText)container.findViewById(R.id.notification_Name);
-            EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
-            EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-            EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
-            EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
-
-            etName.setText(noteItem.getName());
-            etFreq.setText(noteItem.getFrequency());
-            etStart.setText(noteItem.getStartDate());
-            etEnd.setText(noteItem.getEndDate());
-            etMsg.setText(noteItem.getPersonalMsg());
-        }
 
         btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
         btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
@@ -168,13 +138,98 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
                 String dateEnd = etEnd.getText().toString().trim();
                 String msg = etMsg.getText().toString().trim();
 
-                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(freq)){
-                    notificationData newNote = new notificationData(name, freq, dateStart, dateEnd, msg);
-                    addNotificationItem(newNote);
-                } else {
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(freq)){
                     Toast.makeText(getApplicationContext(), "Unable to add blanks",
                             Toast.LENGTH_SHORT).show();
+                } else {
+
+                    notificationData newNote = new notificationData(name, freq, dateStart, dateEnd, msg);
+                    notifyUser("Notification! " + name, msg);
+                    addNotificationItem(newNote);
                 }
+                popUp.dismiss();
+            }
+        });
+    }
+
+    public void editItem(notificationData subjItem, final int itemPosition) {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        conLayout = (ConstraintLayout) findViewById(R.id.subjects_main_layout);
+
+        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        container = (ViewGroup) layoutInf.inflate(R.layout.notification_popup, null);
+
+        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
+        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.25));
+
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popUp.dismiss();
+                return true;
+            }
+        });
+
+        EditText etName = (EditText)container.findViewById(R.id.notification_Name);
+        EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
+        EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
+        EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
+        EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
+
+        etName.setText(subjItem.getName());
+        etFreq.setText(subjItem.getFrequency());
+        etStart.setText(subjItem.getStartDate());
+        etEnd.setText(subjItem.getEndDate());
+        etMsg.setText(subjItem.getPersonalMsg());
+
+        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
+        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUp.dismiss();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EditText etName = (EditText)container.findViewById(R.id.notification_Name);
+                EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
+                EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
+                EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
+                EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
+
+                String name = etName.getText().toString().trim();
+                String freq = etFreq.getText().toString().trim();
+                String dateStart = etStart.getText().toString().trim();
+                String dateEnd = etEnd.getText().toString().trim();
+                String msg = etMsg.getText().toString().trim();
+
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dateStart) ||
+                        TextUtils.isEmpty(freq) || TextUtils.isEmpty(dateEnd) || TextUtils.isEmpty(msg)){
+                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    rowItems.get(itemPosition).setEndDate(dateEnd);
+                    rowItems.get(itemPosition).setName(name);
+                    rowItems.get(itemPosition).setFrequency(freq);
+                    rowItems.get(itemPosition).setPersonalMsg(msg);
+                    rowItems.get(itemPosition).setStartDate(dateStart);
+                    saveData();
+                    loadData();
+                    notificationData test = new notificationData("s", "s" , "s" +
+                            "s","s","s");
+                    addNotificationItem(test);
+                    deleteNotificationItem(rowItems.size()-1);
+                }
+
                 popUp.dismiss();
             }
         });
@@ -275,6 +330,33 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
             rowItems = new ArrayList<>();
         }
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Choose your option");
+        getMenuInflater().inflate(R.menu.subjects_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.subjects_changeDetails:
+                popupMethod(rowItems.get(index));
+                return true;
+            case R.id.subjects_deleteSubject:
+                deleteNotificationItem(index);
+                Toast.makeText(this, "Item Deleted.", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
 
 
 

@@ -2,6 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
     defaultConfig {
         applicationId "com.uow.snazzikiel.prepareo"
         minSdkVersion 15
@@ -9,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -34,5 +42,19 @@ dependencies {
     implementation 'com.muditsen.multilevelrecyclerview:multilevelview:1.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
 
+    implementation 'mobi.seus.jena:jena-android-arq:2.13.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
     implementation 'com.google.code.gson:gson:2.8.5'
 }
+
+configurations {
+    implementation {
+        exclude group: 'org.apache.jena', module: 'jena-core'
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.jena', module: 'jena-iri'
+        exclude group: 'xerces', module: 'xercesImpl'
+        exclude group: 'xml-apis', module: 'xml-apis'
+    }
+}
+

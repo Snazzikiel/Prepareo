@@ -8,13 +8,172 @@
     android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/colorTransparent"
+        android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_whitebg"
+            android:layout_width="433dp"
+            android:layout_height="80dp"
+            android:background="@drawable/background_fill_off_white"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="617dp">
+
+            <lecho.lib.hellocharts.view.PieChartView
+                android:id="@+id/chart2"
+                android:layout_width="127dp"
+                android:layout_height="80dp"
+
+                android:layout_marginEnd="260dp"
+                android:layout_marginRight="260dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/statistics_whitebg_Heading2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginRight="50dp"
+                android:text="@string/statistics_whiteHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statistics_whitebg_Text2"
+                android:layout_width="198dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginRight="50dp"
+                android:gravity="end"
+                android:text="On track to meet your goals!"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statistics_whitebg_Heading2" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_redBg"
+            android:layout_width="420dp"
+            android:layout_height="80dp"
+            android:background="@drawable/background_fill_red"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="-5dp"
+            tools:layout_editor_absoluteY="537dp">
+
+            <lecho.lib.hellocharts.view.PieChartView
+                android:id="@+id/chart1"
+                android:layout_width="127dp"
+                android:layout_height="80dp"
+
+                android:layout_marginEnd="29dp"
+                android:layout_marginRight="29dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statistics_redbg_Heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/statistics_redHeading"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statistics_redbg_Text"
+                android:layout_width="198dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="8dp"
+                android:text="You have completed 1/2tasks for this"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statistics_redbg_Heading" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="31dp"
+            android:layout_height="29dp"
+            android:checked="true"
+            tools:layout_editor_absoluteX="356dp"
+            tools:layout_editor_absoluteY="322dp" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="336dp"
+            android:layout_height="25dp"
+            android:text="Summarise Lecture Slides for MGNT110"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.173"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="322dp" />
+
+        <TextView
+            android:id="@+id/statistics_tab2_heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="116dp"
+            android:text="@string/statistics_tab2_heading"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <lecho.lib.hellocharts.view.ComboLineColumnChartView
+            android:id="@+id/statistics_tab2_mainChart"
+            android:layout_width="379dp"
+            android:layout_height="149dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="158dp" />
+
+        <TextView
+            android:id="@+id/statistics_tab2_noticeHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="88dp"
+            android:text="@string/statistics_tab2_notingHeading"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_mainChart" />
+
+        <TextView
+            android:id="@+id/statistics_tab2_noticeQuote"
+            android:layout_width="374dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:text="You are falling behind this week. You have not completed: Complete Diary for CSIT321. Don't forget you have 3 assignments to work on this week."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_noticeHeading" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_whitebg"
         android:layout_width="433dp"
         android:layout_height="80dp"
         android:background="@drawable/background_fill_off_white"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_redBg" >
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="617dp">
 
         <lecho.lib.hellocharts.view.PieChartView
             android:id="@+id/chart2"
@@ -51,46 +210,14 @@
             app:layout_constraintTop_toBottomOf="@+id/statistics_whitebg_Heading2" />
     </android.support.constraint.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/stat_tab1_tasksHeading"
-        android:layout_width="149dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="233dp"
-        android:layout_marginRight="233dp"
-        android:text="@string/statistics_heading"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/stat_tab1_taskDescription"
-        android:layout_width="277dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
-        android:text="@string/statistics_descriptionOne"
-        android:textColor="@color/colorBlack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stat_tab1_tasksHeading" />
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_redBg"
         android:layout_width="420dp"
         android:layout_height="80dp"
-        android:layout_marginTop="180dp"
         android:background="@drawable/background_fill_red"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stat_tab1_taskDescription">
+        tools:layout_editor_absoluteX="-5dp"
+        tools:layout_editor_absoluteY="537dp">
 
         <lecho.lib.hellocharts.view.PieChartView
             android:id="@+id/chart1"
@@ -121,10 +248,39 @@
             android:layout_marginStart="48dp"
             android:layout_marginLeft="48dp"
             android:layout_marginTop="8dp"
-            android:text="You have completed 7/10 tasks for this"
+            android:text="You have completed 1/2 tasks for this"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statistics_redbg_Heading" />
 
     </android.support.constraint.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/statistics_tab2_heading3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="116dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="291dp"
+        android:layout_height="27dp"
+        android:text="Complete Diary for CSIT321"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="352dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox7"
+        android:layout_width="31dp"
+        android:layout_height="29dp"
+        android:checked="true"
+        tools:layout_editor_absoluteX="356dp"
+        tools:layout_editor_absoluteY="351dp" />
 </android.support.constraint.ConstraintLayout>

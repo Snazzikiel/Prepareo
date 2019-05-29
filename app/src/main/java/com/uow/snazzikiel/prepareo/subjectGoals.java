@@ -74,7 +74,7 @@ public class subjectGoals extends Goals {
                 popupMethod(noteItem);
             }
         });*/
-
+/*
         myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,7 +84,9 @@ public class subjectGoals extends Goals {
                         Toast.LENGTH_SHORT).show();
                 return true;
             }
-        });
+        });*/
+
+        registerForContextMenu(myList);
     }
 
 

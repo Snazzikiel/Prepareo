@@ -1,24 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/colorTransparent"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="25sp"
-        android:text="Tab3"
-        android:layout_marginTop="40dp"
-        android:id="@+id/textTab3"/>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/colorTransparent"
+        android:orientation="vertical">
 
-    <Button
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_whitebg"
+            android:layout_width="433dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_fill_off_white"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/cl_redBg"
+            tools:layout_editor_absoluteX="8dp">
+
+            <lecho.lib.hellocharts.view.PieChartView
+                android:id="@+id/chart2"
+                android:layout_width="127dp"
+                android:layout_height="80dp"
+
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statistics_whitebg_Heading2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="48dp"
+                android:layout_marginRight="48dp"
+                android:text="@string/statistics_whiteHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="7dp" />
+
+            <TextView
+                android:id="@+id/statistics_whitebg_Text2"
+                android:layout_width="198dp"
+                android:layout_height="50dp"
+                android:gravity="end"
+                android:text="You are 2 weeks behind on your overall progress."
+                app:layout_constraintTop_toBottomOf="@+id/statistics_whitebg_Heading2"
+                tools:layout_editor_absoluteX="185dp" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_redBg"
+            android:layout_width="420dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_fill_red"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_noticeQuote"
+            tools:layout_editor_absoluteX="-5dp">
+
+            <lecho.lib.hellocharts.view.PieChartView
+                android:id="@+id/chart1"
+                android:layout_width="127dp"
+                android:layout_height="80dp"
+
+                android:layout_marginEnd="29dp"
+                android:layout_marginRight="29dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statistics_redbg_Heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/statistics_redHeading"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/statistics_redbg_Text"
+                android:layout_width="198dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="8dp"
+                android:text="You have completed 1/2 tasks for this"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statistics_redbg_Heading" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="31dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginLeft="112dp"
+            android:layout_marginTop="8dp"
+            android:checked="true"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_mainChart" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="235dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="8dp"
+            android:text="Complete Assignments"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_mainChart" />
+
+        <TextView
+            android:id="@+id/statistics_tab2_heading2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="116dp"
+            android:text="@string/statistics_tab2_heading"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <lecho.lib.hellocharts.view.ComboLineColumnChartView
+            android:id="@+id/statistics_tab2_mainChart"
+            android:layout_width="379dp"
+            android:layout_height="149dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_heading2" />
+
+        <TextView
+            android:id="@+id/statistics_tab2_noticeHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="88dp"
+            android:text="@string/statistics_tab2_notingHeading"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_mainChart" />
+
+        <TextView
+            android:id="@+id/statistics_tab2_noticeQuote"
+            android:layout_width="374dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:text="You are behind this month. Make sure you complete: Condense Lecute Summaries. You are also far behind on your weekly tasks. You need to catch up on the last 2 weeks."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_noticeHeading" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="364dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="#DFD83535"
+            android:text="This feature is coming soon. You will have access to statistics such as charts and percentages to display your current progress of goals and course marks."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.548"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="291dp"
+            android:layout_height="27dp"
+            android:text="Condense Lecture Summaries"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.066"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="351dp" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="31dp"
+            android:layout_height="29dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:checked="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/statistics_tab2_heading5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnTEST3"
-        android:text="TESTBTN 3"/>
+
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="116dp"
+        android:text="@string/statistics_tab2_heading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>

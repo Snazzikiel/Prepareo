@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,6 +70,8 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.goals_tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+
     }
 
 
@@ -99,7 +102,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         container = (ViewGroup) layoutInf.inflate(R.layout.subjectgoals_popup, null);
 
-        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
+        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.80), true);
         popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.10));
 
         container.setOnTouchListener(new View.OnTouchListener() {
@@ -109,14 +112,6 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                 return true;
             }
         });
-
-        if (assignItem != null) {
-            EditText etName = (EditText) container.findViewById(R.id.ed_subjectgoals_Name);
-            EditText etDate = (EditText) container.findViewById(R.id.ed_subjectgoals_dueDate);
-
-            etName.setText(assignItem.getGoalTitle());
-            etDate.setText(assignItem.getGoalDueDate());
-        }
 
         btnClose = (Button) container.findViewById(R.id.subjectgoals_btn_close);
         btnSave = (Button) container.findViewById(R.id.subjectgoals_btn_save);
@@ -131,18 +126,91 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText etName = (EditText) container.findViewById(R.id.ed_subjectgoals_Name);
+                EditText etName = (EditText) container.findViewById(R.id.ed_subjectgoals_Title);
                 EditText etDate = (EditText) container.findViewById(R.id.ed_subjectgoals_dueDate);
+                EditText etDesc = (EditText) container.findViewById(R.id.ed_subjectgoals_desc);
 
                 String name = etName.getText().toString();
-                String weight = etDate.getText().toString();
-                if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(weight)){
-                    weight += "%";
-                    goalsData newGoal = new goalsData(name, weight);
-                    createItem(newGoal);
-                } else {
+                String date = etDate.getText().toString();
+                String desc = etDesc.getText().toString();
+
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(date) || TextUtils.isEmpty(desc)){
                     Toast.makeText(getApplicationContext(), "Unable to add blanks",
                             Toast.LENGTH_SHORT).show();
+                } else {
+                    goalsData newGoal = new goalsData(name, date);
+                    createItem(newGoal);
+                }
+
+                popUp.dismiss();
+            }
+        });
+    }
+
+    public void editItem(goalsData assignItem, final int iPosition) {
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        conLayout = (ConstraintLayout) findViewById(R.id.subject_main_layout);
+
+        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        container = (ViewGroup) layoutInf.inflate(R.layout.subjectgoals_popup, null);
+
+        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.80), true);
+        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.10));
+
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popUp.dismiss();
+                return true;
+            }
+        });
+
+        EditText etName = (EditText) container.findViewById(R.id.ed_subjectgoals_Title);
+        EditText etDate = (EditText) container.findViewById(R.id.ed_subjectgoals_dueDate);
+        EditText etDesc = (EditText) container.findViewById(R.id.ed_subjectgoals_desc);
+
+        etName.setText(assignItem.getGoalTitle());
+        etDate.setText(assignItem.getGoalDueDate());
+        etDesc.setText(assignItem.getGoalDesc());
+
+
+        btnClose = (Button) container.findViewById(R.id.subjectgoals_btn_close);
+        btnSave = (Button) container.findViewById(R.id.subjectgoals_btn_save);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUp.dismiss();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText etName = (EditText) container.findViewById(R.id.ed_subjectgoals_Title);
+                EditText etDate = (EditText) container.findViewById(R.id.ed_subjectgoals_dueDate);
+                EditText etDesc = (EditText) container.findViewById(R.id.ed_subjectgoals_desc);
+
+                String name = etName.getText().toString();
+                String date = etDate.getText().toString();
+                String desc = etDesc.getText().toString();
+
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(date) || TextUtils.isEmpty(desc)){
+                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    rowItems.get(iPosition).setGoalTitle(name);
+                    rowItems.get(iPosition).setGoalDesc(desc);
+                    rowItems.get(iPosition).setGoalDueDate(date);
+                    saveData();
+                    loadData();
+                    goalsData test = new goalsData("a","a","a");
+                    createItem(test);
+                    deleteItem(rowItems.size()-1);
                 }
 
                 popUp.dismiss();
@@ -225,5 +293,36 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
             rowItems = new ArrayList<>();
         }
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Choose your option");
+        getMenuInflater().inflate(R.menu.goals_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+
+        switch (item.getItemId()) {
+            case R.id.goal_complete:
+                deleteItem(index);
+                Toast.makeText(this, "Goals Complete. Well Done", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.goal_changeDetails:
+                editItem(rowItems.get(index), index);
+                return true;
+
+            case R.id.goal_delete:
+                deleteItem(index);
+                Toast.makeText(this, "Item Deleted.", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
 
 }

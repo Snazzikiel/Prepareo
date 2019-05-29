@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/colorTransparent"
-    >
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="31dp"
+        android:layout_height="29dp"
+        android:checked="true"
+        tools:layout_editor_absoluteX="356dp"
+        tools:layout_editor_absoluteY="322dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="235dp"
+        android:layout_height="28dp"
+        android:text="Study one hour for CSIT115"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="323dp" />
 
     <TextView
         android:id="@+id/statistics_tab2_goalTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="8dp"
         android:text="@string/statistics_tab2_goalActive"
         app:layout_constraintStart_toEndOf="@+id/statistics_tab2_goalOne"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -24,9 +41,9 @@
         android:id="@+id/statistics_tab2_goalOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginLeft="33dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="8dp"
         android:text="@string/statistics_tab2_goalComplete"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -35,8 +52,8 @@
         android:id="@+id/imageView2"
         android:layout_width="96dp"
         android:layout_height="95dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/textview_green_noborder"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,13 +61,14 @@
         app:srcCompat="@android:drawable/checkbox_on_background" />
 
     <TextView
-        android:id="@+id/statistics_tab2_heading"
+        android:id="@+id/statistics_tab2_heading2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="116dp"
         android:text="@string/statistics_tab2_heading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,18 +78,18 @@
         android:layout_height="149dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="56dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_heading" />
+        tools:layout_editor_absoluteY="163dp" />
 
     <TextView
         android:id="@+id/statistics_tab2_noticeHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="88dp"
         android:text="@string/statistics_tab2_notingHeading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_mainChart" />
 
@@ -79,10 +97,10 @@
         android:id="@+id/statistics_tab2_noticeQuote"
         android:layout_width="374dp"
         android:layout_height="76dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:text="@string/statistics_tab2_noticeQuote"
+        android:text="You have met your daily tasks! Make sure you don't forget about CSIT115 Assignment that is coming up on Friday."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_noticeHeading" />
 
@@ -90,10 +108,11 @@
         android:id="@+id/statistics_tab2_dailyGoalsHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
         android:text="@string/statistics_tab2_dailyGoalsHeading"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statistics_tab2_noticeQuote" />
 
@@ -115,8 +134,8 @@
         android:id="@+id/imageView3"
         android:layout_width="96dp"
         android:layout_height="95dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_fill_red"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -127,11 +146,39 @@
         android:id="@+id/statistics_tab2_goalThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginLeft="97dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="8dp"
         android:text="@string/statistics_tab2_goalActive"
         app:layout_constraintStart_toEndOf="@+id/statistics_tab2_goalTwo"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="364dp"
+        android:layout_height="56dp"
+        android:background="#DFD83535"
+        android:text="This feature is coming soon. You will have access to statistics such as charts and percentages to display your current progress of goals and course marks."
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="60dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="291dp"
+        android:layout_height="27dp"
+        android:text="Check Moodle and SOLS for notices"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="351dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="31dp"
+        android:layout_height="29dp"
+        android:checked="true"
+        tools:layout_editor_absoluteX="356dp"
+        tools:layout_editor_absoluteY="351dp" />
 
 </android.support.constraint.ConstraintLayout>

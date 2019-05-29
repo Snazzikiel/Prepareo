@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android = "http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools = "http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/enrolment_main_layout"
     android:layout_width="match_parent"
-    android:layout_height = "match_parent"
-    android:paddingLeft= "@dimen/activity_horizontal_margin"
-    android:paddingRight = "@dimen/activity_horizontal_margin"
-    android:paddingTop = "@dimen/activity_vertical_margin"
-    android:paddingBottom = "@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
     android:background="@drawable/background_nobar"
-    android:id="@+id/subjects_main_layout"
-    tools:context = ".Subjects">
+    tools:context=".EnrolmentRecord">
+
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="331dp"
-        android:layout_height="212dp"
+        android:layout_width="335dp"
+        android:layout_height="72dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,41 +24,22 @@
         app:srcCompat="@drawable/textview_green_noborder" />
 
     <TextView
-        android:id="@+id/subjects_tv_percentage"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical"
-        android:text="@string/subjects_boxTextOneAnswer"
+        android:id="@+id/enrolment_tv_creditAvg"
+        android:layout_width="331dp"
+        android:layout_height="68dp"
+        android:gravity="center_horizontal|center_vertical"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/subjects_tv_creditAvg"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-    <TextView
-        android:id="@+id/subjects_tv_creditAvg"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="@string/subjects_boxTextOne"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <ScrollView
-        android:id="@+id/subjects_scrollView"
+        android:id="@+id/enrolment_scrollView"
         android:layout_width="439dp"
         android:layout_height="478dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="116dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4">
@@ -74,7 +52,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ListView
-                android:id="@+id/subjects_main_list"
+                android:id="@+id/enrolment_main_list"
                 android:layout_width="344dp"
                 android:layout_height="1496dp"
                 android:layout_marginStart="20dp"
@@ -95,17 +73,44 @@
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addSubjects"
+        android:id="@+id/btn_enrolment_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
         android:clickable="true"
         android:focusable="auto"
         app:backgroundTint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="333dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:srcCompat="@color/colorOrange" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Add New Subject"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/btn_enrolment_add"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+    />
 
 </android.support.constraint.ConstraintLayout>

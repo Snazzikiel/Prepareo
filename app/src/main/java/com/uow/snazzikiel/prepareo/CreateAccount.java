@@ -35,7 +35,7 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View x) {
                 saveData();
-                startActivity(new Intent(CreateAccount.this, LoginPage.class));
+                startActivity(new Intent(CreateAccount.this, Dashboard.class));
             }
         });
 
@@ -61,7 +61,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     public void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(accountList);
@@ -70,7 +70,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     public void loadData( ) {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(getString(R.string.account_savedata), null);
         Type type = new TypeToken<ArrayList<notificationData>>() {}.getType();

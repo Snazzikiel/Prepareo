@@ -4,14 +4,21 @@
     tools:context=".Subjects">
 
     <item
-        android:id="@+id/subjects_changeDetails"
+        android:id="@+id/goal_changeDetails"
         android:orderInCategory="100"
         android:title="Change Details"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/subjects_deleteSubject"
+        android:id="@+id/goal_delete"
         android:orderInCategory="100"
         android:title="Delete Item"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/goal_complete"
+        android:orderInCategory="100"
+        android:title="Complete Goal"
+        app:showAsAction="never" />
+
 </menu>
