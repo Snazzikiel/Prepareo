@@ -1,22 +1,24 @@
 package com.uow.snazzikiel.prepareo;
+
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.update.UpdateExecutionFactory;
 import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateProcessor;
 import com.hp.hpl.jena.update.UpdateRequest;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class page extends AppCompatActivity
 {
@@ -24,6 +26,9 @@ public class page extends AppCompatActivity
     TextView txt1, txt2;
     EditText nameBox, numBox, userBox;
     String prefix;
+
+    //Map<String, List> owlData = new HashMap<>();
+    HashMap<String,ArrayList<String>> menu = new HashMap<String,ArrayList<String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -136,7 +141,7 @@ public class page extends AppCompatActivity
         @Override
         protected HashMap<String, ArrayList<String>> doInBackground(String... queryTargetVars)
         {
-            HashMap<String,ArrayList<String>> menu = new HashMap<String,ArrayList<String>>();
+            menu = new HashMap<String,ArrayList<String>>();
             Query sparqlQuery = sparqlQuery = QueryFactory.create(queryTargetVars[0]);
             QueryExecution qexec = QueryExecutionFactory.sparqlService(queryTargetVars[1], sparqlQuery);
 
@@ -178,13 +183,7 @@ public class page extends AppCompatActivity
         @Override
         protected void onPostExecute(HashMap <String, ArrayList<String>> menu)
         {
-            for (String s : menu.keySet()) {
-                txt1.append("Current key: " + s + "\n");
-                for (String r : menu.get(s)) {
-                    txt1.append(r + ", ");
-                }
-                txt1.append("\n");
-            }
+            saveOwl();
         }
     }
     /*protected class queryEndpoint extends AsyncTask<String, String, ArrayList<String>>
@@ -260,4 +259,14 @@ public class page extends AppCompatActivity
             txt2.append(success + " ");
         }
     }
+
+    public void saveOwl() {
+        SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(menu);
+        editor.putString("aSyncOwlData", json);
+        editor.apply();
+    }
+
 }

@@ -60,6 +60,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".time" />
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"

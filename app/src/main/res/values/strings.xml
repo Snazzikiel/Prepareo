@@ -94,6 +94,7 @@
     <string name="assignments_savedata">assignments-</string>
     <string name="goals_savedata">goals-</string>
     <string name="subjects_notifications_savedata">notification-</string>
+    <string name="owl_savedata">owlSavedData</string>
 
     <!-- Goals -->
     <string name="goals_tab1">PERSONAL</string>
@@ -106,6 +107,7 @@
     <string name="goal_description">Goal Description</string>
     <string name="enrolment_boxTextTwo">Outstanding Assignments</string>
     <string name="enrolment_boxTextThree">6</string>
+
 
 </resources>
 

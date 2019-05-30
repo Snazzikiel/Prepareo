@@ -1,129 +1,161 @@
 package com.uow.snazzikiel.prepareo;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CalendarView;
-import android.widget.ListView;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
-public class Calendar extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Calendar extends AppCompatActivity {
+    private static final String TAG = "stateCheck";
+    public GregorianCalendar cal_month, cal_month_copy;
+    private HwAdapter hwAdapter;
+    private TextView tv_month;
+    GridView gridview;
 
-    private static final String TAG = "calendarCheck";
-    CalendarView calView;
-    TextView tvDate;
-
-    List<assignmentsData> rowItems = new ArrayList<assignmentsData>();
-    ViewGroup container;
-    ListView myList;
+    List<HomeCollection> calItems = new ArrayList<HomeCollection>();
+    String owl = "owl";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Calendar");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_main);
 
-        String dateToday = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        String dateToday1 = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
-        String dateToday2 = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
-        String dateToday3 = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
-        Log.i(TAG, dateToday1 + " /// " + dateToday2 + " /// " + dateToday3 + " /// ");
+        HomeCollection.date_collection_arr=new ArrayList<HomeCollection>();
+        calItems = new ArrayList<>();
 
-        calView = (CalendarView) findViewById(R.id.calender_selection);
-        tvDate = (TextView) findViewById(R.id.calendar_heading);
-        tvDate.setText(dateToday);
+        Log.i(TAG, String.valueOf(calItems.size()));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2019-05-28" ,"Diwali","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2019-05-13" ,"Holi","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2019-05-05" ,"Statehood Day","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2019-05-02" ,"Republic Unian","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2019-04-05" ,"ABC","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2017-06-15" ,"demo","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2017-09-26" ,"weekly off","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2018-01-08" ,"Events","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2018-01-16" ,"Dasahara","Holiday","this is holiday"));
+        HomeCollection.date_collection_arr.add( new HomeCollection("2018-02-09" ,"Christmas","Holiday","this is holiday"));
+        saveData();
 
-        // Add Listener in calendar
-        calView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        loadData();
+        Log.i(TAG, String.valueOf(calItems.size()));
+
+        cal_month = (GregorianCalendar) GregorianCalendar.getInstance();
+        cal_month_copy = (GregorianCalendar) cal_month.clone();
+        hwAdapter = new HwAdapter(this, cal_month,HomeCollection.date_collection_arr);
+
+        tv_month = (TextView) findViewById(R.id.tv_month);
+        tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
+
+
+        ImageButton previous = (ImageButton) findViewById(R.id.ib_prev);
+        previous.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view,
-                                            int year, int month, int dayOfMonth) {
-
-                String Date = dayOfMonth + "-" + (month + 1) + "-" + year;
-                tvDate.setText(Date);
+            public void onClick(View v) {
+                if (cal_month.get(GregorianCalendar.MONTH) == 4&&cal_month.get(GregorianCalendar.YEAR)==2017) {
+                    //cal_month.set((cal_month.get(GregorianCalendar.YEAR) - 1), cal_month.getActualMaximum(GregorianCalendar.MONTH), 1);
+                    Toast.makeText(Calendar.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    setPreviousMonth();
+                    refreshCalendar();
+                }
             }
         });
-
-        myList = (ListView) findViewById(R.id.calendar_main_list);
-
-        //Add two test Subjects
-        assignmentsData assignment = new assignmentsData("Assignment 1", "10%");
-        createItems(assignment);
-
-        assignment = new assignmentsData("Assignment 2", "10%");
-        createItems(assignment);
-
-        assignment = new assignmentsData("Assignment 3", "10%");
-        createItems(assignment);
-        assignment = new assignmentsData("Assignment 4", "10%");
-        createItems(assignment);
-        assignment = new assignmentsData("Assignment 5", "10%");
-        createItems(assignment);
-        assignment = new assignmentsData("Assignment 6", "10%");
-        createItems(assignment);
-
-
-        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ImageButton next = (ImageButton) findViewById(R.id.Ib_next);
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the selected item text from ListView
-                //Intent myIntent = new Intent(getApplicationContext(), subjectsOptions.class);
-                //startActivityForResult(myIntent, 0);
-
+            public void onClick(View v) {
+                if (cal_month.get(GregorianCalendar.MONTH) == 5&&cal_month.get(GregorianCalendar.YEAR)==2018) {
+                    //cal_month.set((cal_month.get(GregorianCalendar.YEAR) + 1), cal_month.getActualMinimum(GregorianCalendar.MONTH), 1);
+                    Toast.makeText(Calendar.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    setNextMonth();
+                    refreshCalendar();
+                }
             }
         });
-    }
+        gridview = (GridView) findViewById(R.id.gv_calendar);
+        gridview.setAdapter(hwAdapter);
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-        String assignName = rowItems.get(position).getAssignmentName();
-        Toast.makeText(getApplicationContext(), "" + assignName,
-                Toast.LENGTH_SHORT).show();
-    }
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                String selectedGridDate = HwAdapter.day_string.get(position);
+                //((HwAdapter) parent.getAdapter()).getPositionList(selectedGridDate, MainActivity.this);
+                //gridview.getChildAt(position).setBackgroundColor(Color.BLACK);
+                // v.setBackgroundColor(Color.RED);
 
-    public void createItems(assignmentsData assignment1) {
-
-        Log.i(TAG, "addAssignment");
-        rowItems.add(assignment1);
-
-
-        assignmentsAdapter adapter = new assignmentsAdapter(this, rowItems) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                // Get the current item from ListView
-                View view = super.getView(position, convertView, parent);
-                // Set a background color for ListView regular row/item
-                view.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                return view;
+                refreshCalendar();
+                Log.i(TAG, selectedGridDate);
             }
-        };
-        myList.setAdapter(adapter);
 
-        myList.setOnItemClickListener(this);
+        });
+    }
+    protected void setNextMonth() {
+        if (cal_month.get(GregorianCalendar.MONTH) == cal_month.getActualMaximum(GregorianCalendar.MONTH)) {
+            cal_month.set((cal_month.get(GregorianCalendar.YEAR) + 1), cal_month.getActualMinimum(GregorianCalendar.MONTH), 1);
+        } else {
+            cal_month.set(GregorianCalendar.MONTH,
+                    cal_month.get(GregorianCalendar.MONTH) + 1);
+        }
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
-        startActivityForResult(myIntent, 0);
-        return true;
+    protected void setPreviousMonth() {
+        if (cal_month.get(GregorianCalendar.MONTH) == cal_month.getActualMinimum(GregorianCalendar.MONTH)) {
+            cal_month.set((cal_month.get(GregorianCalendar.YEAR) - 1), cal_month.getActualMaximum(GregorianCalendar.MONTH), 1);
+        } else {
+            cal_month.set(GregorianCalendar.MONTH, cal_month.get(GregorianCalendar.MONTH) - 1);
+        }
+    }
+
+    public void refreshCalendar() {
+        hwAdapter.refreshDays();
+        hwAdapter.notifyDataSetChanged();
+        tv_month.setText(android.text.format.DateFormat.format("MMMM yyyy", cal_month));
+    }
+
+    public void saveData() {
+        Log.i(TAG, "saveSubject");
+        SharedPreferences sharedPreferences = getSharedPreferences("owlData" + owl, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(HomeCollection.date_collection_arr);
+        editor.putString((getString(R.string.owl_savedata) + owl), json);
+        editor.apply();
+    }
+
+    public void loadData( ) {
+        Log.i(TAG, "loadSubjects");
+        SharedPreferences sharedPreferences = getSharedPreferences("owlData" + owl, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString((getString(R.string.owl_savedata) + owl), null);
+        Type type = new TypeToken<ArrayList<HomeCollection>>() {}.getType();
+        /*HomeCollection.date_collection_arr = gson.fromJson(json, type);
+
+        if (HomeCollection.date_collection_arr == null) {
+            HomeCollection.date_collection_arr = new ArrayList<>();
+        }*/
+
+        calItems = gson.fromJson(json, type);
+
+        if (calItems == null) {
+            calItems = new ArrayList<>();
+        }
     }
 }
-
