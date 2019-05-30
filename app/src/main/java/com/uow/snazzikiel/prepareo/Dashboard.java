@@ -86,7 +86,7 @@ public class Dashboard extends AppCompatActivity {
         goOWL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                startActivity(new Intent(Dashboard.this, Profile.class));
+                startActivity(new Intent(Dashboard.this, time.class));
             }
         });
 

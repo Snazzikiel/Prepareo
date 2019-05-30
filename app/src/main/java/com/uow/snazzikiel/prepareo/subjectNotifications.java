@@ -1,5 +1,6 @@
 package com.uow.snazzikiel.prepareo;
 
+import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -7,6 +8,8 @@ import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -26,14 +29,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 import com.google.gson.Gson;
@@ -57,6 +64,11 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
     Button btnSave;
     ViewGroup container;
     ListView myList;
+
+    EditText dateChoice;
+    private DatePickerDialog.OnDateSetListener dateListener;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +169,30 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
                 return true;
             }
         });
+
+        //Make date selector
+        EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
+        etStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dateToday = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+                int year = Integer.parseInt(dateToday);
+                dateToday = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+                int month = Integer.parseInt(dateToday);
+                dateToday = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
+                int day = Integer.parseInt(dateToday);
+
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        subjectNotifications.this,
+                        android.R.style.Widget_Holo_ActionBar_Solid,
+                        dateListener,
+                        year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
 
         btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
         btnSave = (Button) container.findViewById(R.id.subjects_btn_save);

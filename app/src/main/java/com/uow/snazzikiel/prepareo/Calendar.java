@@ -39,6 +39,10 @@ public class Calendar extends AppCompatActivity implements AdapterView.OnItemCli
         setContentView(R.layout.activity_calendar);
 
         String dateToday = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String dateToday1 = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
+        String dateToday2 = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+        String dateToday3 = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+        Log.i(TAG, dateToday1 + " /// " + dateToday2 + " /// " + dateToday3 + " /// ");
 
         calView = (CalendarView) findViewById(R.id.calender_selection);
         tvDate = (TextView) findViewById(R.id.calendar_heading);

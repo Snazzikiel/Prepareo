@@ -2,7 +2,6 @@ package com.uow.snazzikiel.prepareo;
 import android.app.TimePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import com.hp.hpl.jena.update.UpdateRequest;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class time extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener
 {
@@ -24,26 +22,26 @@ public class time extends AppCompatActivity implements TimePickerDialog.OnTimeSe
     Button endTime;
     TextView startTxt;
     TextView endTxt;
-    TextView difTxt;
 
-    Date today = Calendar.getInstance().getTime();
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    String theDate = formatter.format(today);
+    Date curTime = Calendar.getInstance().getTime();
+    SimpleDateFormat getDate = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat getSuffix = new SimpleDateFormat("yyyyMMddmmssMs");
+    String theDate = getDate.format(curTime);
+    String uniqueSuffix = getSuffix.format(curTime);
 
-    String username = "sallyseo";
-    String activityType = "Driving";
-    String activityDate = activityType +"-"+ theDate;
-    String activityInterval = activityDate + "-Duration";
+    String activityType;
+    String activityDate;
+    String activityInterval;
     String addStartTime = "";
     String addEndTime = "";
+    String callback = "new";
 
-    String callback = "";
-
-    String prefix ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-            "PREFIX owl: <http://www.w3.org/2002/07/owl#>" +
-            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
-            "PREFIX onto: <http://www.semanticweb.org/snoop/ontologies/2019/4/student-planner#>";
+    String prefix =
+            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                    "PREFIX owl: <http://www.w3.org/2002/07/owl#>" +
+                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                    "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
+                    "PREFIX onto: <http://www.semanticweb.org/snoop/ontologies/2019/4/student-planner#>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +56,23 @@ public class time extends AppCompatActivity implements TimePickerDialog.OnTimeSe
             @Override
             public void onClick(View v)
             {
-                callback = "start";
-                DialogFragment timePicker = new timepick();
-                timePicker.show(getSupportFragmentManager(), "time picker");
-            }
-        });
+                if(callback.equals("initialized"))
+                {
+                    addStartTime = addEndTime;
+                    activityType = "Exam"; //Get this from activity picked. auto to "Sleeping" if first entry
+                    activityDate = activityType +":"+ uniqueSuffix;
+                    activityInterval = activityDate +":INTERVAL";
+                    DialogFragment timePicker = new timepick();
+                    timePicker.show(getSupportFragmentManager(), "time picker");
+                }
+                else
+                {
+                    DialogFragment timePicker = new timepick();
+                    timePicker.show(getSupportFragmentManager(), "time picker");
 
-        endTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callback = "end";
-                DialogFragment timePicker = new timepick();
-                timePicker.show(getSupportFragmentManager(), "time picker");
+                    DialogFragment timePicker2 = new timepick();
+                    timePicker2.show(getSupportFragmentManager(), "time picker");
+                }
             }
         });
     }
@@ -77,11 +80,6 @@ public class time extends AppCompatActivity implements TimePickerDialog.OnTimeSe
     @Override
     public void onTimeSet(TimePicker view, int hour, int minute)
     {
-        if (callback.isEmpty())
-        {
-            return;
-        }
-
         String hh = String.valueOf(hour);
         String mm = String.valueOf(minute);
 
@@ -93,37 +91,32 @@ public class time extends AppCompatActivity implements TimePickerDialog.OnTimeSe
         {
             mm = "0" + mm;
         }
-        if (callback.equals("start"))
-        {
-            addStartTime = (theDate + "T" + hh + ":" + mm + ":00");
-            startTxt.setText(addStartTime);
-            callback = "";
-        }
-        else if (callback.equals("end"))
+
+        if (callback.equals("initialized"))
         {
             addEndTime = (theDate + "T" + hh + ":" + mm + ":00");
-            endTxt.setText(addEndTime);
-            callback = "";
 
             String updateEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/update";
 
             String updateString = prefix +
                     "INSERT DATA { " +
                     "onto:"+activityInterval+" rdf:type onto:Interval ; " +
-                    "onto:hasStartTime '" + addStartTime + "' ;" +
-                    "onto:hasEndTime '" + addEndTime + "' ." +
+                    "onto:hasStartTime '" + addStartTime +"'^^xsd:dateTime ;" +
+                    "onto:hasEndTime '" + addEndTime +"'^^xsd:dateTime ." +
                     "onto:"+activityDate+" rdf:type onto:" + activityType + " ;" +
                     "onto:hasDuration onto:"+activityInterval + " }";
-                    /*"INSERT {" +
-                    "?s onto:hasActivity onto:"+activityDate+"' }" +
-                    "WHERE {" +
-                    "?p rdf:type onto:Student ;" +
-                    "onto:hasUsername '"+username+"' " +
-                    "}";*/
-
             new time.updateEndpoint().execute(updateString, updateEndpoint);
         }
+        if (callback.equals("new"))
+        {
+            activityType = "Sleeping";
+            activityDate = activityType +":"+ uniqueSuffix;
+            activityInterval = activityDate +":INTERVAL";
+            addStartTime = (theDate + "T" + hh + ":" + mm + ":00");
+            callback = "initialized";
+        }
     }
+
     protected class updateEndpoint extends AsyncTask<String, String, String>
     {
         @Override
@@ -134,7 +127,6 @@ public class time extends AppCompatActivity implements TimePickerDialog.OnTimeSe
             uexec.execute();
             return "update";
         }
-
         @Override
         protected void onPostExecute(String success)
         {
