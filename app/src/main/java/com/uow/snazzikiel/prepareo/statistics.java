@@ -51,8 +51,8 @@ public class statistics extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         statisticsTabAdapter adapter = new statisticsTabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new statisticsTabTwo(), "TODAY");
-        adapter.addFragment(new statisticsTabOne(), "WEEK");
+        adapter.addFragment(new statisticsTabOne(), "TODAY");
+        adapter.addFragment(new statisticsTabTwo(), "WEEK");
         adapter.addFragment(new statisticsTabThree(), "MONTH");
         viewPager.setAdapter(adapter);
     }
