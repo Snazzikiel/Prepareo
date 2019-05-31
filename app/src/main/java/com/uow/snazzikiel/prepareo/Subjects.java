@@ -73,6 +73,11 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
 
         greeting = (TextView) findViewById(R.id.enrolment_tv_creditAvg);
         getProfile();
+
+
+        Log.i(TAG, String.valueOf(accountList.size()));
+        //Log.i(TAG, String.valueOf(accountList.get(1).getName()));
+        Log.i(TAG, String.valueOf(accountList.get(0).getName()));
         if ( accountList.size() != 0){
             String temp = "Hello " + accountList.get(0).getName();
             greeting.setText(temp);
@@ -302,7 +307,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(getString(R.string.account_savedata), null);
-        Type type = new TypeToken<ArrayList<notificationData>>() {}.getType();
+        Type type = new TypeToken<ArrayList<accountData>>() {}.getType();
         accountList = gson.fromJson(json, type);
 
         if (accountList == null) {

@@ -17,10 +17,10 @@
     <string name="login_button_register">Register Now</string>
 
     <!-- Strings related to Create Account -->
-    <string name="create_fullname_hint">Full Name</string>
+    <string name="create_firstname_hint">First Name</string>
+    <string name="create_lastname_hint">Last Name</string>
     <string name="create_email_hint">Email</string>
-    <string name="create_birthday_hint">Birthday</string>
-    <string name="create_address_hint">Address</string>
+    <string name="create_birthday_hint">Date of Birth</string>
     <string name="create_password_hint1">Password</string>
     <string name="create_password_hint2">Re-Enter Password</string>
     <string name="create_button_continue">Continue</string>
@@ -95,6 +95,9 @@
     <string name="goals_savedata">goals-</string>
     <string name="subjects_notifications_savedata">notification-</string>
     <string name="owl_savedata">owlSavedData</string>
+    <string name="calendar_savedata">calendarSavedData</string>
+
+
 
     <!-- Goals -->
     <string name="goals_tab1">PERSONAL</string>

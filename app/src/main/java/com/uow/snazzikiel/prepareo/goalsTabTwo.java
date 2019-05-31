@@ -82,6 +82,19 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
             }
         });
 
+        myList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+                deleteItem(pos);
+                goalsData goal = new goalsData("Goal 1", "10-01-2019");
+                createItem(goal);
+                deleteItem(rowItems.size()-1);
+
+                return true;
+            }
+        });
+
         return view;
     }
 
@@ -89,9 +102,73 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
 
-        String goalsTitle = rowItems.get(position).getGoalTitle();
-        Toast.makeText(getContext(), "" + goalsTitle,
-                Toast.LENGTH_SHORT).show();
+        editItem(rowItems.get(position), view);
+    }
+
+    public void editItem(goalsData assignItem, View v) {
+        Log.i(TAG, "goalsPopup");
+        DisplayMetrics dm = new DisplayMetrics();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowmanager = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+        windowmanager.getDefaultDisplay().getMetrics(displayMetrics);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        popupView = getLayoutInflater().inflate(R.layout.goals_popup, null);
+        popUp = new PopupWindow(popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+
+        int location[] = new int[2];
+        v.getLocationOnScreen(location);
+        popUp.showAtLocation(v, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.45));
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popUp.dismiss();
+                return true;
+            }
+        });
+
+        EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
+        EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
+
+        etTitle.setText(assignItem.getGoalTitle());
+        etDate.setText(assignItem.getGoalDueDate());
+
+
+        btnSave = (Button) popupView.findViewById(R.id.goals_btn_save);
+        btnClose = (Button) popupView.findViewById(R.id.goals_btn_close);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popUp.dismiss();
+
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText etTitle = (EditText) popupView.findViewById(R.id.et_goals_title);
+                EditText etDate = (EditText) popupView.findViewById(R.id.et_goals_dueDate);
+
+                String title = etTitle.getText().toString().trim();
+                String date = etDate.getText().toString().trim();
+                if (TextUtils.isEmpty(title) || TextUtils.isEmpty(date)){
+                    Toast.makeText(getContext(), "Unable to add blanks",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    date += "%";
+                    goalsData newGoal = new goalsData(title, date);
+                    createItem(newGoal);
+                }
+                Log.i(TAG, "goalsAdd");
+                popUp.dismiss();
+            }
+        });
     }
 
     public void popupMethod(goalsData assignItem, View v) {

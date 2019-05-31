@@ -3,15 +3,24 @@ package com.uow.snazzikiel.prepareo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
+
+import java.util.Date;
 import java.util.Locale;
 
 public class Dashboard extends AppCompatActivity {
 
+    private static final String TAG = "dashBoard";
     Button goNotification;
     Button goGoals;
     Button goSubject;
@@ -19,7 +28,6 @@ public class Dashboard extends AppCompatActivity {
     Button goOWL;
     Button goCalendar;
     ImageView imgExit;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +47,9 @@ public class Dashboard extends AppCompatActivity {
         imgExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                finish();
-                System.exit(0);
+                //finish();
+                //System.exit(0);
+                startActivity(new Intent(Dashboard.this, page.class));
             }
         });
 
@@ -79,7 +88,7 @@ public class Dashboard extends AppCompatActivity {
         goCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
-                startActivity(new Intent(Dashboard.this, Calendar.class));
+                startActivity(new Intent(Dashboard.this, CalendarSelect.class));
             }
         });
 
@@ -92,5 +101,22 @@ public class Dashboard extends AppCompatActivity {
 
 
 
+    }
+
+    public static Date getWeekStartDate() {
+        Calendar calendar = Calendar.getInstance();
+        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            calendar.add(Calendar.DATE, -1);
+        }
+        return calendar.getTime();
+    }
+
+    public static Date getWeekEndDate() {
+        Calendar calendar = Calendar.getInstance();
+        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        calendar.add(Calendar.DATE, -1);
+        return calendar.getTime();
     }
 }

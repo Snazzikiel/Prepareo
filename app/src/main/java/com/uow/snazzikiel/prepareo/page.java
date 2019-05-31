@@ -4,24 +4,35 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.sparql.function.library.date;
 import com.hp.hpl.jena.update.UpdateExecutionFactory;
 import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateProcessor;
 import com.hp.hpl.jena.update.UpdateRequest;
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class page extends AppCompatActivity
 {
+    private static final String TAG = "owlCheck";
     Button selectButton, addButton, deleteButton, editButton;
     TextView txt1, txt2;
     EditText nameBox, numBox, userBox;
@@ -91,7 +102,7 @@ public class page extends AppCompatActivity
             }
         });
 
-        deleteButton.setOnClickListener(new View.OnClickListener()
+        /*deleteButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View x)
@@ -106,6 +117,34 @@ public class page extends AppCompatActivity
                         "onto:hasUsername '"+user+"' ;" +
                         "?prop ?value }";
                 new updateEndpoint().execute(updateString, updateEndpoint);
+            }
+        });*/
+
+        deleteButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View x)
+            {
+                String user;
+                String subString;
+                user = userBox.getText().toString();
+                subString = nameBox.getText().toString();
+
+                String firstDateOfWeek = "2019-05-27T00:00:00";
+                String firstDayOfNextWeek = "2019-06-03T00:00:00";
+                String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
+                String queryString = prefix +
+                        "SELECT DISTINCT ?person ?action ?start ?end WHERE { " +
+                        "?person onto:hasAction ?a ;" +
+                        "onto:hasUsername '" + user + "' ." +
+                        "?action onto:hasDuration ?duration ." +
+                        "?duration onto:hasStartTime ?start ; "+
+                        "onto:hasEndTime ?end ." +
+                        "FILTER (?start >= '" + firstDateOfWeek + "'^^xsd:dateTime) ." +
+                        "FILTER (?start < '" + firstDayOfNextWeek + "'^^xsd:dateTime) ." +
+                        "FILTER regex(str(?action), '" + subString + "') ." +
+                        "}";
+                new queryEndpointQuota().execute(queryString, queryEndpoint, "person", "action", "start", "end");
             }
         });
 
@@ -134,7 +173,6 @@ public class page extends AppCompatActivity
             }
         });
     }
-
 
     protected class queryEndpoint extends AsyncTask<String, String, HashMap<String, ArrayList<String>>>
     {
@@ -166,12 +204,21 @@ public class page extends AppCompatActivity
                     }
                     else
                     {
-                        menu.put(key, tmpList);
-                        key = cat;
-                        tmpList = new ArrayList<>();
-                        tmpList.add(sub);
+                        if(key.equals(""))
+                        {
+                            key = cat;
+                            tmpList.add(sub);
+                        }
+                        else
+                        {
+                            menu.put(key, tmpList);
+                            tmpList = new ArrayList<>();
+                            key = cat;
+                            tmpList.add(sub);
+                        }
                     }
                 }
+                menu.put(key, tmpList);
             }
             finally
             {
@@ -186,60 +233,62 @@ public class page extends AppCompatActivity
             saveOwl();
         }
     }
-    /*protected class queryEndpoint extends AsyncTask<String, String, ArrayList<String>>
+
+    protected class queryEndpointQuota extends AsyncTask<String, String, Long>
     {
         @Override
-        protected ArrayList<String> doInBackground(String... queryTargetVars)
+        protected Long doInBackground(String... queryTargetVars)
         {
-            ArrayList<String> people = new ArrayList<String>();
-            Query sparqlQuery = sparqlQuery = QueryFactory.create(queryTargetVars[0]);
+            Query sparqlQuery = QueryFactory.create(queryTargetVars[0]);
             QueryExecution qexec = QueryExecutionFactory.sparqlService(queryTargetVars[1], sparqlQuery);
-
+            long totalMiniutes = 0;
             try
             {
                 ResultSet results = qexec.execSelect();
-                for( ; results.hasNext() ; )
+                for(;results.hasNext();)
                 {
-                    String line = "";
                     QuerySolution soln = results.nextSolution();
-                    for(int k = 2; k < queryTargetVars.length; k++)
-                    {
-                        RDFNode a = soln.get(queryTargetVars[k]);
-                        line += queryTargetVars[k] + ": ";
-                        if (a != null)
-                        {
-                            if (a.isURIResource())
-                            {
-                                String data = a.asNode().getLocalName();
-                                line += (data + ", ");
-                            }
-                            else
-                            {
-                                String data = a.asLiteral().getLexicalForm();
-                                line += (data + ", ");
-                            }
-                        }
-                    }
-                    people.add(line);
+                    RDFNode startTime = soln.get(queryTargetVars[4]);
+                    RDFNode endTime = soln.get(queryTargetVars[5]);
+
+                    String startHours = startTime.asLiteral().getLexicalForm();
+                    String endHours = endTime.asLiteral().getLexicalForm();
+
+                    startHours = StringUtils.substringAfterLast(startHours, "T");
+                    endHours = StringUtils.substringAfterLast(endHours, "T");
+
+                    SimpleDateFormat dif = new SimpleDateFormat("HH:mm:ss");
+                    Date parsedStart = dif.parse(startHours);
+                    Date parsedEnd = dif.parse(endHours);
+
+                    long milSec = parsedEnd.getTime() - parsedStart.getTime();
+                    long min = TimeUnit.MILLISECONDS.toMinutes(milSec);
+                    totalMiniutes += min;
+
+                    //testing
+                    RDFNode name = soln.get(queryTargetVars[2]);
+                    RDFNode action = soln.get(queryTargetVars[3]);
+                    name.asResource().getLocalName();
+                    action.asResource().getLocalName();
+                    Log.i(TAG, name+ "   " + action);
+                    Log.i(TAG, startHours+ "   " + endHours);
+                    Log.i(TAG, String.valueOf(min));
                 }
-            }
-            finally
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } finally
             {
                 qexec.close();
             }
-            return people;
+            return totalMiniutes;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<String> people)
+        protected void onPostExecute(Long total)
         {
-            txt1.setText("");
-            for(String person : people)
-            {
-                txt1.append(person + "\n");
-            }
+            Log.i(TAG, String.valueOf(total));
         }
-    }*/
+    }
 
     protected class updateEndpoint extends AsyncTask<String, String, String>
     {
@@ -268,5 +317,4 @@ public class page extends AppCompatActivity
         editor.putString("aSyncOwlData", json);
         editor.apply();
     }
-
 }

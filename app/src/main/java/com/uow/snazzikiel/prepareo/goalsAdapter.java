@@ -59,7 +59,7 @@ public class goalsAdapter extends BaseAdapter {
             goalsData row_pos = rowItems.get(position);
 
             holder.assignLogo.setImageResource(android.R.drawable.star_big_on);
-            holder.assignArrow.setImageResource(android.R.drawable.ic_menu_sort_by_size);
+            holder.assignArrow.setImageResource(R.drawable.baseline_more_vert_black_18dp);
             holder.title.setText(row_pos.getGoalTitle());
             //holder.date.setText(row_pos.getAssignmentWeight());
             /*holder.goalsChkBox.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 package com.uow.snazzikiel.prepareo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginPage extends AppCompatActivity {
 
     private static final String TAG = "stateCheck";
@@ -18,6 +26,10 @@ public class LoginPage extends AppCompatActivity {
     EditText txtLogin, txtPassword;
     TextView tvHint;
     int counter = 3;
+
+    List<accountData> accountList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +40,24 @@ public class LoginPage extends AppCompatActivity {
         txtPassword = (EditText)findViewById(R.id.login_password);
         goRegister = (Button)findViewById(R.id.noAccount);
 
+        accountList = new ArrayList<>();
+        //loadData();
+
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String login = txtLogin.getText().toString().trim();
+                String pass = txtPassword.getText().toString().trim();
+
+                //add user session to memory
+                accountData acc = new accountData(login, login, login, "2019-03-22T00:00:00", pass );
+                accountList.add(acc);
+                saveData();
+
                 startActivity(new Intent(LoginPage.this, Dashboard.class));
                 Toast.makeText(getApplicationContext(),
-                        "Success!...",Toast.LENGTH_SHORT).show();
+                        "Success!",Toast.LENGTH_SHORT).show();
                 /*
 
                 ** UNLOCK THIS WHEN COMPLETE TO ADD TEST FOR CONTINUE BUTTON
@@ -58,6 +81,8 @@ public class LoginPage extends AppCompatActivity {
                 */
             }
         });
+
+
 
         goRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +134,29 @@ public class LoginPage extends AppCompatActivity {
         super.onDestroy();
         Log.i(TAG, "onDestroy");
     }
+
+
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(accountList);
+        editor.putString(getString(R.string.account_savedata), json);
+        editor.apply();
+    }
+
+    /* Retrieval not needed as database enquiry
+    public void loadData( ) {
+        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(getString(R.string.account_savedata), null);
+        Type type = new TypeToken<ArrayList<accountData>>() {}.getType();
+        accountList = gson.fromJson(json, type);
+
+        if (accountList == null) {
+            accountList = new ArrayList<>();
+        }
+    }*/
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

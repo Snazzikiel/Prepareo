@@ -15,7 +15,7 @@
 
         <activity android:name=".AssignmentInfo" />
         <activity android:name=".EnrolmentRecord" />
-        <activity android:name=".Calendar" />
+        <activity android:name=".CalendarSelect" />
         <activity
             android:name=".statistics"
             android:label="@string/title_activity_statistics"
