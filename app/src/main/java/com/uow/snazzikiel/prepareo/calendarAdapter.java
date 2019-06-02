@@ -123,6 +123,53 @@ class calendarAdapter extends BaseAdapter {
         return v;
     }
 
+    public View activityView(int position, View convertView, ViewGroup parent) {
+        View v = convertView;
+        TextView dayView;
+        if (convertView == null) {
+            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = vi.inflate(R.layout.activity_item, null);
+
+        }
+        dayView = (TextView) v.findViewById(R.id.date);
+        String[] separatedTime = day.get(position).split("-");
+
+        gridvalue = separatedTime[2].replaceFirst("^0*", "");
+        if ((Integer.parseInt(gridvalue) > 1) && (position < monthFDay)) {
+            dayView.setTextColor(context.getResources().getColor(R.color.colorGridGray));
+            dayView.setClickable(true);
+            dayView.setFocusable(true);
+        } else if ((Integer.parseInt(gridvalue) < 7) && (position > 28)) {
+            dayView.setTextColor(context.getResources().getColor(R.color.colorGridGray));
+            dayView.setClickable(true);
+            dayView.setFocusable(true);
+        } else {
+            dayView.setTextColor(context.getResources().getColor(R.color.colorGridMonth));
+        }
+
+
+        if (day.get(position).equals(todayDate)) {
+            v.setBackgroundColor(Color.WHITE);
+        } else {
+            v.setBackgroundColor(Color.WHITE);
+        }
+
+        dayView.setText(gridvalue);
+        String date = day.get(position);
+        if (date.length() == 1) {
+            date = "0" + date;
+        }
+
+        String monthStr = "" + (month.get(GregorianCalendar.MONTH) + 1);
+        if (monthStr.length() == 1) {
+            monthStr = "0" + monthStr;
+        }
+
+        setEventView(v, position,dayView);
+
+        return v;
+    }
+
     private int getMaxP() {
         int maxPrevMonth;
         if (month.get(GregorianCalendar.MONTH) == month

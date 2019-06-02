@@ -273,8 +273,7 @@ public class time extends AppCompatActivity {
         }
     }
 
-    public void loadOwl( )
-    {
+    public void loadOwl( ){
         SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("aSyncOwlData", null);

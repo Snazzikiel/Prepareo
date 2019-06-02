@@ -82,18 +82,20 @@ public class CalendarSelect extends AppCompatActivity {
         String mon2 = calAdapter.getNextMonday();
 
         p.getUserActivities(mon1, mon2, userName);
+        if (owlData.owlInfo == null){
+            owlData.owlInfo = new ArrayList<owlData>();
+            owlData.owlInfo.add(new owlData("ptd665", "empty", (long)0));
+        }
 
-        /*Log.i(TAG, String.valueOf(owlData.owlInfo));
+        Log.i(TAG, String.valueOf(owlData.owlInfo));
         for(owlData tmp : owlData.owlInfo){
             String user = tmp.getUserName();
             Long i = tmp.getMapTime();
             String key = tmp.getMapKey();
             Log.i(TAG, user + " " + key + " long: " + i);
-        }*/
+        }
 
 
-
-/*
         tvMonth = (TextView) findViewById(R.id.tv_month);
         tvMonth.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
 
@@ -112,6 +114,7 @@ public class CalendarSelect extends AppCompatActivity {
                 }
             }
         });
+
         ImageButton next = (ImageButton) findViewById(R.id.Ib_next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +129,7 @@ public class CalendarSelect extends AppCompatActivity {
                 }
             }
         });
+
         calView = (GridView) findViewById(R.id.gv_calendar);
         calView.setAdapter(calAdapter);
 
@@ -143,7 +147,6 @@ public class CalendarSelect extends AppCompatActivity {
 
         });
 
-        */
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -206,6 +209,7 @@ public class CalendarSelect extends AppCompatActivity {
         accountList = gson.fromJson(json, type);
 
         if (accountList == null) {
+            //create fake user account (*this will never be null due to login/create account script, primarily used for testing, secondary for error checking)
             accountData acc = new accountData("user", "user", "user", "user", "2019-06-03T00:00:00", "user");
             accountList.add(acc);
         }
