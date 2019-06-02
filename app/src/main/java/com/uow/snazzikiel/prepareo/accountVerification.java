@@ -28,7 +28,7 @@ public class accountVerification extends AppCompatActivity {
 
     boolean verified = false;
 
-    public boolean verifyUser(String email, String pw1) {
+    public void verifyUser(String email, String pw1) {
 
         this.email = email;
         this.pw1 = pw1;
@@ -41,7 +41,7 @@ public class accountVerification extends AppCompatActivity {
                 "}";
         new accountVerification.passCheck().execute(queryString, queryEndpoint);
 
-        return verified;
+        //return verified;
     }
 
     public void verifyCreateUser(String fName, String lName, String email, String bday, String pw1) {
@@ -94,7 +94,7 @@ public class accountVerification extends AppCompatActivity {
             if(found)
             {
                 //checkText.setText("YOU IN HERE ALREADY");
-                verified = false;
+                //verified = false;
             }
             else
             {
@@ -121,7 +121,7 @@ public class accountVerification extends AppCompatActivity {
             UpdateRequest update = UpdateFactory.create(updateAndTarget[0]);
             UpdateProcessor uexec = UpdateExecutionFactory.createRemote(update, updateAndTarget[1]);
             uexec.execute();
-            verified = true;
+            //verified = true;
             return "UPDATED";
         }
         @Override
@@ -157,12 +157,12 @@ public class accountVerification extends AppCompatActivity {
         {
             if(found)
             {
-                verified = true;
+                //verified = true;
                 //checkText.setText("YOU HAVE LOGGED IN???");
             }
             else
             {
-                verified = false;
+                //verified = false;
                 //checkText.setText("WRONG!");
             }
         }

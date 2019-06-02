@@ -46,6 +46,7 @@ public class CreateAccount extends AppCompatActivity {
 
     TextView tvFirstName;
     TextView tvLastName;
+    TextView tvUserName;
     TextView tvBirthday;
     TextView tvEmail;
     TextView tvPassword;
@@ -53,6 +54,7 @@ public class CreateAccount extends AppCompatActivity {
 
     String fName;
     String lName;
+    String userName;
     String bday;
     String email;
     String pw1;
@@ -71,6 +73,7 @@ public class CreateAccount extends AppCompatActivity {
         btRegister = (Button)findViewById(R.id.create_btn_Register);
         tvFirstName = (TextView)findViewById(R.id.create_acc_firstName);
         tvLastName = (TextView)findViewById(R.id.create_acc_LastName);
+        tvUserName = (TextView)findViewById(R.id.create_acc_userName);
         tvBirthday = (TextView)findViewById(R.id.create_acc_Birthday);
         tvEmail = (TextView)findViewById(R.id.create_acc_Email);
         tvPassword = (TextView)findViewById(R.id.create_Password);
@@ -111,7 +114,9 @@ public class CreateAccount extends AppCompatActivity {
             public void onClick(View v) {
                 fName = tvFirstName.getText().toString().trim();
                 lName = tvLastName.getText().toString().trim();
-                bday = tvBirthday.getText().toString().trim() + "T00:00:00";
+                userName = tvUserName.getText().toString().trim();
+                //bday = tvBirthday.getText().toString().trim() + "T00:00:00";
+                bday = "2019-06-03T00:00:00";
                 email = tvEmail.getText().toString().trim();
                 pw1 = tvPassword.getText().toString().trim();
                 pw2 = tvPassword2.getText().toString().trim();
@@ -124,7 +129,7 @@ public class CreateAccount extends AppCompatActivity {
 
     public void verifyFields(View v){
 
-        if (TextUtils.isEmpty(fName) || TextUtils.isEmpty(bday) ||
+        if (TextUtils.isEmpty(fName) || TextUtils.isEmpty(bday) || TextUtils.isEmpty(userName) ||
                 TextUtils.isEmpty(email) || TextUtils.isEmpty(lName) ||
                 TextUtils.isEmpty(pw1) || TextUtils.isEmpty(pw2)){
             Toast.makeText(getApplicationContext(), "Fields cannot be empty.",
@@ -133,10 +138,10 @@ public class CreateAccount extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Both password fields must match.",
                     Toast.LENGTH_SHORT).show();
         }else {
-            accountVerification p = new accountVerification();
-            p.verifyCreateUser(fName, lName, email, bday, pw1);
+            //accountVerification p = new accountVerification();
+            //p.verifyCreateUser(fName, lName, email, bday, pw1);
 
-            accountData user = new accountData(fName, lName, email, bday, pw1);
+            accountData user = new accountData(fName, lName, userName, email, bday, pw1);
             accountList.add(user);
 
             Toast.makeText(getApplicationContext(), "Success!",
@@ -178,3 +183,4 @@ public class CreateAccount extends AppCompatActivity {
     }
 
 }
+

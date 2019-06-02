@@ -41,6 +41,7 @@ public class CalendarSelect extends AppCompatActivity {
     GridView calView;
 
     List<calendarData> calItems = new ArrayList<calendarData>();
+    ArrayList<accountData> accountList;
 
     //HashMap<String,Long> hoursMap = new HashMap<String,Long>();
 
@@ -57,8 +58,8 @@ public class CalendarSelect extends AppCompatActivity {
         month2 = (GregorianCalendar) month.clone();
         calAdapter = new calendarAdapter( this, month, calendarData.calData);
 
-        Log.i(TAG, calAdapter.getFirstMonday());
-        Log.i(TAG, calAdapter.getNextMonday());
+        getProfile();
+        String userName = accountList.get(0).getUserName();
 
 //        Query.getUserActivities(calAdapter.getFirstMonday(), calAdapter.getNextMonday());
 
@@ -66,6 +67,7 @@ public class CalendarSelect extends AppCompatActivity {
 
         Log.i(TAG, "Owl Info!" + String.valueOf(owlData.owlInfo.size()));
 */
+
         Date tmpDate = new Date();
         Calendar s = Calendar.getInstance();
         s.setTime(tmpDate);
@@ -78,8 +80,8 @@ public class CalendarSelect extends AppCompatActivity {
 
         String mon1 = calAdapter.getFirstMonday();
         String mon2 = calAdapter.getNextMonday();
-        Log.i(TAG, mon1 + mon2);
-        p.getUserActivities(mon1, mon2);
+
+        p.getUserActivities(mon1, mon2, userName);
 
         /*Log.i(TAG, String.valueOf(owlData.owlInfo));
         for(owlData tmp : owlData.owlInfo){
@@ -193,6 +195,19 @@ public class CalendarSelect extends AppCompatActivity {
 
         if (calItems == null) {
             calItems = new ArrayList<>();
+        }
+    }
+
+    public void getProfile( ) {
+        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(getString(R.string.account_savedata), null);
+        Type type = new TypeToken<ArrayList<accountData>>() {}.getType();
+        accountList = gson.fromJson(json, type);
+
+        if (accountList == null) {
+            accountData acc = new accountData("user", "user", "user", "user", "2019-06-03T00:00:00", "user");
+            accountList.add(acc);
         }
     }
 

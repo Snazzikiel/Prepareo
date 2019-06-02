@@ -53,10 +53,12 @@ public class LoginPage extends AppCompatActivity {
                 login = txtLogin.getText().toString().trim();
                 pw1 = txtPassword.getText().toString().trim();
                 //verifyData();
-
+                if (login == ""){
+                    login = "user";
+                }
 
                 //add user session to memory
-                accountData acc = new accountData(login, login, login, "2019-03-22T00:00:00", pw1 );
+                accountData acc = new accountData(login, login, login, login, "2019-03-22T00:00:00", pw1 );
                 accountList.add(acc);
                 saveData();
 
@@ -106,12 +108,14 @@ public class LoginPage extends AppCompatActivity {
         } else {
             Boolean answer = false;
             accountVerification p = new accountVerification();
-            answer = p.verifyUser(login, pw1);
+            /*answer = p.verifyUser(login, pw1);
             if (answer){
                 Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Incorrect Data!", Toast.LENGTH_SHORT).show();
-            }
+               */ Toast.makeText(getApplicationContext(), "Incorrect Data!", Toast.LENGTH_SHORT).show();
+            //}
+
+            Toast.makeText(getApplicationContext(), "12345", Toast.LENGTH_SHORT).show();
 
         }
     }

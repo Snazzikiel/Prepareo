@@ -1,5 +1,6 @@
 package com.uow.snazzikiel.prepareo;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
@@ -32,7 +34,10 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -56,6 +61,8 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
     Button btnSave;
     ViewGroup container;
     ListView myList;
+
+    int noteCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,6 +235,9 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
                             "s","s","s");
                     addNotificationItem(test);
                     deleteNotificationItem(rowItems.size()-1);
+
+                    setNotification(true,true, dateEnd);
+
                 }
 
                 popUp.dismiss();
@@ -305,7 +315,6 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-        // notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, mBuilder.build());
     }
 
@@ -354,6 +363,30 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    //used to set the notifications for future delay
+    //needs work to set date ** come back to for future problem**
+    private void setNotification(boolean isNotification, boolean isRepeat, String strDate) {
+        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent myIntent;
+        PendingIntent pendingIntent;
+
+        //Change date entered to ints
+        //Date df = new SimpleDateFormat("dd/MM/yyyy").parse(strDate);
+        Calendar calendar= Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY,15);
+        calendar.set(Calendar.MINUTE,20);
+
+
+        myIntent = new Intent(notifications.this,notificationAdapter.AlarmNotificationReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
+
+
+        if(!isRepeat)
+            manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000,pendingIntent);
+        else
+            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
     }
 
 

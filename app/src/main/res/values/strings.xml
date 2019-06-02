@@ -20,6 +20,7 @@
     <string name="create_firstname_hint">First Name</string>
     <string name="create_lastname_hint">Last Name</string>
     <string name="create_email_hint">Email</string>
+    <string name="create_username_hint">Username</string>
     <string name="create_birthday_hint">Date of Birth</string>
     <string name="create_password_hint1">Password</string>
     <string name="create_password_hint2">Re-Enter Password</string>

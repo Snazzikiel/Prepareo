@@ -49,7 +49,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View x) {
                 //finish();
                 //System.exit(0);
-                startActivity(new Intent(Dashboard.this, page.class));
+                startActivity(new Intent(Dashboard.this, CreateAccount.class));
             }
         });
 

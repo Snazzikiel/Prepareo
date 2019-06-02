@@ -313,7 +313,7 @@ public class page extends AppCompatActivity
         }
     }
 
-    public void getUserActivities(String firstDate, String firstDateOfNextRange){
+    public void getUserActivities(String firstDate, String firstDateOfNextRange, String userName){
         //user = userBox.getText().toString();
         //firstDate = "2019-05-27T00:00:00";
         //firstDateOfNextRange = "2019-06-03T00:00:00";
@@ -321,11 +321,17 @@ public class page extends AppCompatActivity
         //firstDate = "2019-05-27T00:00:00"; can use 2 different dates for current day hours
         //firstDateOfNextRange = "2019-05-28T00:00:00";
 
+        prefix ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX owl: <http://www.w3.org/2002/07/owl#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
+                "PREFIX onto: <http://www.semanticweb.org/snoop/ontologies/2019/4/student-planner#>";
+
         String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
         String queryString = prefix +
                 "SELECT DISTINCT ?type ?start ?end WHERE { " +
                 "?person onto:hasAction ?action ;" +
-                "onto:hasUsername '" + user + "' ." +
+                "onto:hasUsername '" + userName + "' ." +
                 "?action onto:hasDuration ?duration ;"+
                 "rdf:type ?type ." +
                 "?duration onto:hasStartTime ?start ; "+

@@ -2,15 +2,17 @@ package com.uow.snazzikiel.prepareo;
 
 class accountData {
     private String firstName;
+    private String userName;
     private String email;
     private String lastName;
     private String birthday;
     private String password;
 
-    public accountData(String firstName, String lName, String email,
+    public accountData(String firstName, String lName, String userName, String email,
                             String birthday, String password){
         this.firstName = firstName;
         this.lastName = lName;
+        this.userName = userName;
         this.email = email;
         this.birthday = birthday;
         this.password = password;
@@ -21,12 +23,14 @@ class accountData {
     public String getAddress(){ return lastName; }
     public String getBirthday() { return birthday; }
     public String getPassword(){ return password; }
+    public String getUserName() { return userName; }
 
     public void setName(String firstName) { this.firstName = firstName; }
     public void setFrequency(String email) { this.email = email; }
     public void setStartDate(String address) { this.lastName = address; }
     public void setBirthday(String birthday) { this.birthday = birthday; }
     public void setPassword(String password) { this.password = password; }
+    public void setUserName(String userName) { this.userName = userName; }
 
 
 };
