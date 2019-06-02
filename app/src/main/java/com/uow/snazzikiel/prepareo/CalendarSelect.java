@@ -79,7 +79,7 @@ public class CalendarSelect extends AppCompatActivity {
         String mon1 = calAdapter.getFirstMonday();
         String mon2 = calAdapter.getNextMonday();
         Log.i(TAG, mon1 + mon2);
-        //p.getUserActivities(mon1, mon2);
+        p.getUserActivities(mon1, mon2);
 
         /*Log.i(TAG, String.valueOf(owlData.owlInfo));
         for(owlData tmp : owlData.owlInfo){

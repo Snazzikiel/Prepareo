@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3c11bb71-c641-4a65-9dae-e3abf46fd852" name="Default Changelist" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_calendar_info.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Dialogpojo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/HomeCollection.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/HwAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/MainActivity.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Assignments.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Assignments.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CalendarSelect.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CalendarSelect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_page.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_page.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+    </list>
+    <ignored path="$PROJECT_DIR$/build/classes/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CalendarSelect.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CalendarSelect.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1343">
+              <caret line="98" column="47" lean-forward="false" selection-start-line="98" selection-start-column="35" selection-end-line="98" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Assignments.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Assignments.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3417">
+              <caret line="235" column="4" lean-forward="false" selection-start-line="235" selection-start-column="4" selection-end-line="240" selection-end-column="5" />
+              <folding>
+                <marker date="1559362489858" expanded="true" signature="1526:3046" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="2439:2563" ph="{...}" />
+                <marker date="1559362489858" expanded="false" signature="2502:2521" ph=" { " />
+                <marker date="1559362489858" expanded="false" signature="2539:2553" ph=" }" />
+                <marker date="1559362489858" expanded="true" signature="3175:3577" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="3635:6190" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="4365:4547" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="4460:4537" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="5129:5251" ph="{...}" />
+                <marker date="1559362489858" expanded="false" signature="5192:5211" ph=" { " />
+                <marker date="1559362489858" expanded="false" signature="5227:5241" ph=" }" />
+                <marker date="1559362489858" expanded="true" signature="5317:6182" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="5381:6172" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="6269:8933" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="6999:7181" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="7094:7171" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="7704:7826" ph="{...}" />
+                <marker date="1559362489858" expanded="false" signature="7767:7786" ph=" { " />
+                <marker date="1559362489858" expanded="false" signature="7802:7816" ph=" }" />
+                <marker date="1559362489858" expanded="true" signature="7892:8925" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="7956:8915" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="8992:9167" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="9002:9122" ph="//..." />
+                <marker date="1559362489858" expanded="true" signature="9231:10173" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="9614:10064" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="9720:10054" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="10216:10925" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="10369:10816" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="10474:10806" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="10954:11369" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="11399:11912" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="12028:12203" ph="{...}" />
+                <marker date="1559362489858" expanded="true" signature="12275:12890" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="calendarInfo.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="657">
+              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1649">
+              <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="calendarAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2380">
+              <caret line="161" column="26" lean-forward="false" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/page.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile" />
+        <option value="resourceFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>toast</find>
+      <find>gv_calendar</find>
+      <find>assi</find>
+      <find>Color.RED</find>
+      <find>Color.</find>
+      <find>assign</find>
+      <find>setEventView</find>
+      <find>MainActivity</find>
+      <find>DialogAdaptorStudent</find>
+      <find>loadOwl</find>
+      <find>catPick</find>
+      <find>startPick</find>
+      <find>endPick</find>
+      <find>selectTime</find>
+      <find>selCat</find>
+      <find>switchTime</find>
+      <find>log</find>
+      <find>full</find>
+      <find>CalendarSelect</find>
+      <find>firstDay</find>
+      <find>alCustom</find>
+      <find>refreshDays</find>
+      <find>refreshCal</find>
+      <find>clearCalendar</find>
+      <find>day</find>
+      <find>day_string</find>
+      <find>getItemId</find>
+      <find>Home</find>
+      <find>hw</find>
+      <find>hwAdapter</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>first</replace>
+    </replaceStrings>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="C:\Users\Snazzikiel\OneDrive\UOW\CSCI321 - Project\android-apkversion.jks" />
+    <option name="KEY_ALIAS" value="key0" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_subjects.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/calendar_test.xml" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/calendar_add_note_test.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/calendar_preview_activity.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/MyEventDay.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/AddNoteActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/NotePreviewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/EventDay.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/RangePickerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Dialogpojo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/DialogAdapterStudent.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/cal_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_infom.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/row_addapt.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/time2.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/numpickbackground.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/time.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/time.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_create_account.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CreateAccount.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Subjects.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/LoginPage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/accountData.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/owl_button_bg.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/owl_button_bg_next.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/goals_tab1.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/goals_tab2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/goals_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/goalsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Goals.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/goalsTabOne.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/goalsTabTwo.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Calendar.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Dashboard.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/HomeCollection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarData.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_calendar.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/page.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/HwAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Assignments.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CalendarSelect.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_page.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarInfo.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="prepareo" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="menu" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="Prepareo-0c393428536584464f79fd3a23713673c3d95e12" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ExportApk.ApkPath" value="C:\Users\Snazzikiel\Desktop\Prepareo-0c393428536584464f79fd3a23713673c3d95e12\app" />
+    <property name="ExportApk.BuildVariants" value="debug&#10;release" />
+    <property name="ExportApk.SignV2" value="true" />
+    <property name="device.picker.selection" value="Pixel_2_API_28" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Custom-Calendar-View-master" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.packageName">
+      <recent name="com.uow.snazzikiel.prepareo" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Snazzikiel\Desktop\Prepareo-0c393428536584464f79fd3a23713673c3d95e12\app\src\main\res\layout" />
+      <recent name="C:\Users\Snazzikiel\Desktop\Prepareo-0c393428536584464f79fd3a23713673c3d95e12\app\src\main\res\drawable" />
+      <recent name="C:\Users\Snazzikiel\Desktop\Prepareo-0c393428536584464f79fd3a23713673c3d95e12\app\src\main\java\com\uow\snazzikiel\prepareo" />
+      <recent name="C:\Users\Snazzikiel\Desktop\Prepareo-0c393428536584464f79fd3a23713673c3d95e12\app\src\main\res\drawable-v24" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Snazzikiel\Desktop\Prepareo-0c393428536584464f79fd3a23713673c3d95e12\app\src\main\res\drawable" />
+      <recent name="C:\Users\Snazzikiel\Desktop\Prepareo-0c393428536584464f79fd3a23713673c3d95e12\app\src\main\res\layout" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Android App.app" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3c11bb71-c641-4a65-9dae-e3abf46fd852" name="Default Changelist" comment="" />
+      <created>1559085333987</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1559085333987</updated>
+    </task>
+    <task id="LOCAL-00001" summary="working rollback">
+      <created>1559086872548</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559086872549</updated>
+    </task>
+    <task id="LOCAL-00002" summary="working rollback">
+      <created>1559115711721</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1559115711721</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Complete">
+      <created>1559116439048</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1559116439048</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated Statistic layout to add feature later">
+      <created>1559116907636</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1559116907636</updated>
+    </task>
+    <task id="LOCAL-00005" summary="corrected Tab Pages">
+      <created>1559210771460</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559210771461</updated>
+    </task>
+    <task id="LOCAL-00006" summary="save working file 30/5">
+      <created>1559219906790</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1559219906790</updated>
+    </task>
+    <task id="LOCAL-00007" summary="save working file 30/5">
+      <created>1559239403299</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1559239403299</updated>
+    </task>
+    <task id="LOCAL-00008" summary="save working file 30/5">
+      <created>1559324696457</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1559324696457</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="working rollback" />
+    <MESSAGE value="Complete" />
+    <MESSAGE value="Updated Statistic layout to add feature later" />
+    <MESSAGE value="corrected Tab Pages" />
+    <MESSAGE value="save working file 30/5" />
+    <option name="LAST_COMMIT_MESSAGE" value="save working file 30/5" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CalendarSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1343">
+          <caret line="98" column="47" lean-forward="false" selection-start-line="98" selection-start-column="35" selection-end-line="98" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Assignments.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3417">
+          <caret line="235" column="4" lean-forward="false" selection-start-line="235" selection-start-column="4" selection-end-line="240" selection-end-column="5" />
+          <folding>
+            <marker date="1559362489858" expanded="true" signature="1526:3046" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="2439:2563" ph="{...}" />
+            <marker date="1559362489858" expanded="false" signature="2502:2521" ph=" { " />
+            <marker date="1559362489858" expanded="false" signature="2539:2553" ph=" }" />
+            <marker date="1559362489858" expanded="true" signature="3175:3577" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="3635:6190" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="4365:4547" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="4460:4537" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="5129:5251" ph="{...}" />
+            <marker date="1559362489858" expanded="false" signature="5192:5211" ph=" { " />
+            <marker date="1559362489858" expanded="false" signature="5227:5241" ph=" }" />
+            <marker date="1559362489858" expanded="true" signature="5317:6182" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="5381:6172" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="6269:8933" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="6999:7181" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="7094:7171" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="7704:7826" ph="{...}" />
+            <marker date="1559362489858" expanded="false" signature="7767:7786" ph=" { " />
+            <marker date="1559362489858" expanded="false" signature="7802:7816" ph=" }" />
+            <marker date="1559362489858" expanded="true" signature="7892:8925" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="7956:8915" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="8992:9167" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="9002:9122" ph="//..." />
+            <marker date="1559362489858" expanded="true" signature="9231:10173" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="9614:10064" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="9720:10054" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10216:10925" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10369:10816" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10474:10806" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10954:11369" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="11399:11912" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="12028:12203" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="12275:12890" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="97" column="0" lean-forward="true" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="161" column="26" lean-forward="false" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/page.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/ic_launcher_background.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="12" lean-forward="true" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="63" lean-forward="false" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/notificationAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/DialogAdapterStudent.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="41" lean-forward="true" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/notificationData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="4" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="31" column="4" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/textview_green_noborder.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/assignmentsData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Subjects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="77" column="55" lean-forward="false" selection-start-line="77" selection-start-column="55" selection-end-line="77" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/LoginPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1795">
+          <caret line="147" column="47" lean-forward="false" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/accountData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/numpickbackground.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/owl_button_bg_next.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/owl_button_bg.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/goalsTabTwo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="171" column="5" lean-forward="false" selection-start-line="171" selection-start-column="5" selection-end-line="171" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/goalsTabOne.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="187" column="5" lean-forward="false" selection-start-line="120" selection-start-column="12" selection-end-line="187" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Goals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="218" column="5" lean-forward="false" selection-start-line="149" selection-start-column="4" selection-end-line="218" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/goalsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="70" column="39" lean-forward="false" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/notifications.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="66" column="57" lean-forward="false" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Calendar.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Dashboard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CreateAccount.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="165" column="5" lean-forward="false" selection-start-line="155" selection-start-column="4" selection-end-line="165" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/time.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2336">
+          <caret line="106" column="91" lean-forward="false" selection-start-line="106" selection-start-column="91" selection-end-line="106" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/page.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarData.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/HomeCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="161" column="26" lean-forward="false" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/HwAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2958">
+          <caret line="204" column="21" lean-forward="false" selection-start-line="204" selection-start-column="21" selection-end-line="204" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Dialogpojo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/CalendarSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1343">
+          <caret line="98" column="47" lean-forward="false" selection-start-line="98" selection-start-column="35" selection-end-line="98" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/Assignments.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3417">
+          <caret line="235" column="4" lean-forward="false" selection-start-line="235" selection-start-column="4" selection-end-line="240" selection-end-column="5" />
+          <folding>
+            <marker date="1559362489858" expanded="true" signature="1526:3046" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="2439:2563" ph="{...}" />
+            <marker date="1559362489858" expanded="false" signature="2502:2521" ph=" { " />
+            <marker date="1559362489858" expanded="false" signature="2539:2553" ph=" }" />
+            <marker date="1559362489858" expanded="true" signature="3175:3577" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="3635:6190" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="4365:4547" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="4460:4537" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="5129:5251" ph="{...}" />
+            <marker date="1559362489858" expanded="false" signature="5192:5211" ph=" { " />
+            <marker date="1559362489858" expanded="false" signature="5227:5241" ph=" }" />
+            <marker date="1559362489858" expanded="true" signature="5317:6182" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="5381:6172" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="6269:8933" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="6999:7181" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="7094:7171" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="7704:7826" ph="{...}" />
+            <marker date="1559362489858" expanded="false" signature="7767:7786" ph=" { " />
+            <marker date="1559362489858" expanded="false" signature="7802:7816" ph=" }" />
+            <marker date="1559362489858" expanded="true" signature="7892:8925" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="7956:8915" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="8992:9167" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="9002:9122" ph="//..." />
+            <marker date="1559362489858" expanded="true" signature="9231:10173" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="9614:10064" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="9720:10054" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10216:10925" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10369:10816" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10474:10806" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="10954:11369" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="11399:11912" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="12028:12203" ph="{...}" />
+            <marker date="1559362489858" expanded="true" signature="12275:12890" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/uow/snazzikiel/prepareo/calendarInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
