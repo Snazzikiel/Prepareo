@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -16,10 +17,21 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import static com.uow.snazzikiel.prepareo.Dashboard.getWeekStartDate;
 
 public class CalendarSelect extends AppCompatActivity {
     private static final String TAG = "stateCheck";
@@ -30,32 +42,56 @@ public class CalendarSelect extends AppCompatActivity {
 
     List<calendarData> calItems = new ArrayList<calendarData>();
 
+    //HashMap<String,Long> hoursMap = new HashMap<String,Long>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Activity Calendar");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_calendar);
 
         calendarData.calData = new ArrayList<calendarData>();
-
-
-        loadData();
-
-        if (calItems != null){
-            calendarData.calData.add(new calendarData("2019-06-28" ,"Diwali","Holiday","this is holiday"));
-            calendarData.calData.add(new calendarData("2019-06-13" ,"Holi","Holiday","this is holiday"));
-            calendarData.calData.add(new calendarData("2019-06-05" ,"Statehood Day","Holiday","this is holiday"));
-            calendarData.calData.add(new calendarData("2019-05-02" ,"Republic Unian","Holiday","this is holiday"));
-            calendarData.calData.add(new calendarData("2019-04-05" ,"ABC","Holiday","this is holiday"));
-            calendarData.calData.add(new calendarData("2017-06-15" ,"demo","Holiday","this is holiday"));
-            saveData();
-        }
-
-        Log.i(TAG, String.valueOf(calItems.size()));
 
         month = (GregorianCalendar) GregorianCalendar.getInstance();
         month2 = (GregorianCalendar) month.clone();
         calAdapter = new calendarAdapter( this, month, calendarData.calData);
 
+        Log.i(TAG, calAdapter.getFirstMonday());
+        Log.i(TAG, calAdapter.getNextMonday());
+
+//        Query.getUserActivities(calAdapter.getFirstMonday(), calAdapter.getNextMonday());
+
+        /*
+
+        Log.i(TAG, "Owl Info!" + String.valueOf(owlData.owlInfo.size()));
+*/
+        Date tmpDate = new Date();
+        Calendar s = Calendar.getInstance();
+        s.setTime(tmpDate);
+        s.add(Calendar.DATE, 1);
+        tmpDate = s.getTime();
+        String nextMonday = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
+        Log.i(TAG, "-----------");
+
+        page p = new page();
+
+        String mon1 = calAdapter.getFirstMonday();
+        String mon2 = calAdapter.getNextMonday();
+        Log.i(TAG, mon1 + mon2);
+        //p.getUserActivities(mon1, mon2);
+
+        /*Log.i(TAG, String.valueOf(owlData.owlInfo));
+        for(owlData tmp : owlData.owlInfo){
+            String user = tmp.getUserName();
+            Long i = tmp.getMapTime();
+            String key = tmp.getMapKey();
+            Log.i(TAG, user + " " + key + " long: " + i);
+        }*/
+
+
+
+/*
         tvMonth = (TextView) findViewById(R.id.tv_month);
         tvMonth.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
 
@@ -104,7 +140,15 @@ public class CalendarSelect extends AppCompatActivity {
             }
 
         });
+
+        */
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
+    }
+
     protected void setNextMonth() {
         if (month.get(GregorianCalendar.MONTH) == month.getActualMaximum(GregorianCalendar.MONTH)) {
             month.set((month.get(GregorianCalendar.YEAR) + 1), month.getActualMinimum(GregorianCalendar.MONTH), 1);
@@ -151,4 +195,6 @@ public class CalendarSelect extends AppCompatActivity {
             calItems = new ArrayList<>();
         }
     }
+
+
 }

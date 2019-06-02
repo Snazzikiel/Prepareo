@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,8 @@ public class LoginPage extends AppCompatActivity {
 
     List<accountData> accountList;
 
+    String login;
+    String pw1;
 
 
     @Override
@@ -47,19 +50,21 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String login = txtLogin.getText().toString().trim();
-                String pass = txtPassword.getText().toString().trim();
+                login = txtLogin.getText().toString().trim();
+                pw1 = txtPassword.getText().toString().trim();
+                //verifyData();
+
 
                 //add user session to memory
-                accountData acc = new accountData(login, login, login, "2019-03-22T00:00:00", pass );
+                accountData acc = new accountData(login, login, login, "2019-03-22T00:00:00", pw1 );
                 accountList.add(acc);
                 saveData();
 
                 startActivity(new Intent(LoginPage.this, Dashboard.class));
                 Toast.makeText(getApplicationContext(),
                         "Success!",Toast.LENGTH_SHORT).show();
-                /*
 
+/*
                 ** UNLOCK THIS WHEN COMPLETE TO ADD TEST FOR CONTINUE BUTTON
                 if(txtLogin.getText().toString().equals("user") &&
 
@@ -92,6 +97,23 @@ public class LoginPage extends AppCompatActivity {
         });
 
         Log.i(TAG, "onCreate");
+    }
+
+    private void verifyData(){
+        if (TextUtils.isEmpty(login) || TextUtils.isEmpty(pw1)){
+            Toast.makeText(getApplicationContext(), "Fields cannot be empty.",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Boolean answer = false;
+            accountVerification p = new accountVerification();
+            answer = p.verifyUser(login, pw1);
+            if (answer){
+                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Incorrect Data!", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
     @Override

@@ -1,11 +1,11 @@
 package com.uow.snazzikiel.prepareo;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,12 +15,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.update.UpdateExecutionFactory;
+import com.hp.hpl.jena.update.UpdateFactory;
+import com.hp.hpl.jena.update.UpdateProcessor;
+import com.hp.hpl.jena.update.UpdateRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -30,6 +38,11 @@ public class CreateAccount extends AppCompatActivity {
     private static final String TAG = "CreateAccount";
     Button btRegister;
     ArrayList<accountData> accountList;
+
+    Button checkButton;
+    TextView checkText;
+    EditText userCheckBox;
+    String prefix;
 
     TextView tvFirstName;
     TextView tvLastName;
@@ -86,16 +99,16 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                Log.d(TAG, "onDateSet: dd/mm/yyy: " + day + "/" + month + "/" + year);
+                Log.d(TAG, "onDateSet: dd/mm/yyy: " + day + "-" + month + "-" + year);
 
-                String date = year + "/" + month + "/" + day;
+                String date = year + "-" + month + "-" + day;
                 tvBirthday.setText(date);
             }
         };
 
         btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View x) {
+            public void onClick(View v) {
                 fName = tvFirstName.getText().toString().trim();
                 lName = tvLastName.getText().toString().trim();
                 bday = tvBirthday.getText().toString().trim() + "T00:00:00";
@@ -103,41 +116,40 @@ public class CreateAccount extends AppCompatActivity {
                 pw1 = tvPassword.getText().toString().trim();
                 pw2 = tvPassword2.getText().toString().trim();
 
-                Log.d(TAG, bday);
-
-                if (TextUtils.isEmpty(fName) || TextUtils.isEmpty(bday) ||
-                        TextUtils.isEmpty(email) || TextUtils.isEmpty(lName) ||
-                        TextUtils.isEmpty(pw1) || TextUtils.isEmpty(pw2)){
-                    Toast.makeText(getApplicationContext(), "Fields cannot be empty.",
-                            Toast.LENGTH_SHORT).show();
-                } else if (!pw1.equals(pw2)){
-                    Toast.makeText(getApplicationContext(), "Both password fields must match.",
-                            Toast.LENGTH_SHORT).show();
-                }else {
-                    accountData user = new accountData(fName, lName, email, bday, pw1);
-                    accountList.add(user);
-                    saveData();
-                    startActivity(new Intent(CreateAccount.this, Dashboard.class));
-                }
-
+                verifyFields(v);
             }
         });
 
     }
 
+    public void verifyFields(View v){
+
+        if (TextUtils.isEmpty(fName) || TextUtils.isEmpty(bday) ||
+                TextUtils.isEmpty(email) || TextUtils.isEmpty(lName) ||
+                TextUtils.isEmpty(pw1) || TextUtils.isEmpty(pw2)){
+            Toast.makeText(getApplicationContext(), "Fields cannot be empty.",
+                    Toast.LENGTH_SHORT).show();
+        } else if (!pw1.equals(pw2)){
+            Toast.makeText(getApplicationContext(), "Both password fields must match.",
+                    Toast.LENGTH_SHORT).show();
+        }else {
+            accountVerification p = new accountVerification();
+            p.verifyCreateUser(fName, lName, email, bday, pw1);
+
+            accountData user = new accountData(fName, lName, email, bday, pw1);
+            accountList.add(user);
+
+            Toast.makeText(getApplicationContext(), "Success!",
+                    Toast.LENGTH_SHORT).show();
+            saveData();
+            startActivity(new Intent(CreateAccount.this, Dashboard.class));
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), LoginPage.class);
-        startActivityForResult(myIntent, 0);
+        finish();
         return true;
-
-        /*switch (item.getItemId()) {
-            case R.id.:
-                finish();
-                return true;
-        }*/
-
-        //return super.onOptionsItemSelected(item);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,4 +176,5 @@ public class CreateAccount extends AppCompatActivity {
             accountList = new ArrayList<>();
         }
     }
+
 }

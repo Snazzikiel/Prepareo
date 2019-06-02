@@ -13,9 +13,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+
+import static com.uow.snazzikiel.prepareo.Dashboard.getWeekStartDate;
 
 class calendarAdapter extends BaseAdapter {
 
@@ -154,7 +157,8 @@ class calendarAdapter extends BaseAdapter {
                         txt.setTextColor(Color.parseColor("#696969"));
                     }
                 }
-            }}
+            }
+        }
     }
 
     public void refreshCal() {
@@ -176,6 +180,38 @@ class calendarAdapter extends BaseAdapter {
             gcMaxMonth.add(GregorianCalendar.DATE, 1);
             day.add(selectionDate);
         }
+    }
+
+    public String getFirstMonday(){
+
+        Date s = getWeekStartDate();
+        String mondayDate = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", s));
+
+        return mondayDate + "T00:00:00";
+    }
+
+    public String getNextMonday(){
+        Calendar calendar = Calendar.getInstance();
+        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        calendar.add(Calendar.DATE, -1);
+
+        Date tmpDate = calendar.getTime();
+        String nextMonday = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
+        return nextMonday + "T00:00:00";
+    }
+
+    public String getNextDay(){
+        Calendar calendar = Calendar.getInstance();
+        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        calendar.add(Calendar.DATE, -1);
+
+        Date tmpDate = calendar.getTime();
+        String nextMonday = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
+        return nextMonday + "T00:00:00";
     }
 }
 

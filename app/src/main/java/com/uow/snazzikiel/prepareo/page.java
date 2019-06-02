@@ -18,12 +18,14 @@ import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateProcessor;
 import com.hp.hpl.jena.update.UpdateRequest;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class page extends AppCompatActivity
@@ -33,10 +35,13 @@ public class page extends AppCompatActivity
     TextView txt1, txt2;
     EditText nameBox, numBox, userBox;
     String prefix;
+    String user;
 
     //Map<String, List> owlData = new HashMap<>();
     HashMap<String,ArrayList<String>> menu = new HashMap<String,ArrayList<String>>();
     HashMap<String,Long> hoursMap = new HashMap<String,Long>();
+    List<owlData> owlList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -99,7 +104,8 @@ public class page extends AppCompatActivity
             }
         });
 
-        /*deleteButton.setOnClickListener(new View.OnClickListener()
+        /*
+        deleteButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View x)
@@ -115,35 +121,16 @@ public class page extends AppCompatActivity
                         "?prop ?value }";
                 new updateEndpoint().execute(updateString, updateEndpoint);
             }
-        });*/
+        });
+        */
 
         deleteButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View x)
             {
-                String user;
-                user = userBox.getText().toString();
-                String firstDate = "2019-05-27T00:00:00";
-                String firstDateOfNextRange = "2019-06-03T00:00:00";
 
-                //firstDate = "2019-05-27T00:00:00"; can use 2 different dates for current day hours
-                //firstDateOfNextRange = "2019-05-28T00:00:00";
 
-                String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
-                String queryString = prefix +
-                        "SELECT DISTINCT ?type ?start ?end WHERE { " +
-                        "?person onto:hasAction ?action ;" +
-                        "onto:hasUsername '" + user + "' ." +
-                        "?action onto:hasDuration ?duration ;"+
-                        "rdf:type ?type ." +
-                        "?duration onto:hasStartTime ?start ; "+
-                        "onto:hasEndTime ?end ." +
-                        "FILTER (?start >= '" + firstDate + "'^^xsd:dateTime) ." +
-                        "FILTER (?start < '" + firstDateOfNextRange + "'^^xsd:dateTime) ." +
-                        "}";
-                //"FILTER regex(str(?action), '" + subString + "') ." +
-                new queryEndpointQuota().execute(queryString, queryEndpoint, "type", "start", "end");
             }
         });
 
@@ -290,7 +277,8 @@ public class page extends AppCompatActivity
         @Override
         protected void onPostExecute(HashMap<String, Long> hours)
         {
-            saveOwl();
+            //saveOwl();
+            createOWL_Objects();
         }
     }
 
@@ -313,12 +301,62 @@ public class page extends AppCompatActivity
         }
     }
 
+    public void createOWL_Objects(){
+
+        Log.i(TAG, "Owl created.");
+        owlData.owlInfo = new ArrayList<owlData>();
+
+        for(String key : hoursMap.keySet()){
+            Long i = hoursMap.get(key);
+            Log.i(TAG, key + ": " + Long.toString(i));
+            owlData.owlInfo.add(new owlData(user, key, i));
+        }
+    }
+
+    public void getUserActivities(String firstDate, String firstDateOfNextRange){
+        //user = userBox.getText().toString();
+        //firstDate = "2019-05-27T00:00:00";
+        //firstDateOfNextRange = "2019-06-03T00:00:00";
+
+        //firstDate = "2019-05-27T00:00:00"; can use 2 different dates for current day hours
+        //firstDateOfNextRange = "2019-05-28T00:00:00";
+
+        String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
+        String queryString = prefix +
+                "SELECT DISTINCT ?type ?start ?end WHERE { " +
+                "?person onto:hasAction ?action ;" +
+                "onto:hasUsername '" + user + "' ." +
+                "?action onto:hasDuration ?duration ;"+
+                "rdf:type ?type ." +
+                "?duration onto:hasStartTime ?start ; "+
+                "onto:hasEndTime ?end ." +
+                "FILTER (?start >= '" + firstDate + "'^^xsd:dateTime) ." +
+                "FILTER (?start < '" + firstDateOfNextRange + "'^^xsd:dateTime) ." +
+                "}";
+        //"FILTER regex(str(?action), '" + subString + "') ." +
+        new queryEndpointQuota().execute(queryString, queryEndpoint, "type", "start", "end");
+    }
+
+
     public void saveOwl() {
+    /*
         SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(hoursMap);
-        editor.putString("aSyncOwlData", json);
+        String json = gson.toJson(owlData.owlInfo);
+        editor.putString("aSyncOwlData", json).apply();
         editor.apply();
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
+
+        if (sharedPreferences != null) {
+            JSONObject jsonObject = new JSONObject(hoursMap);
+            String jsonString = jsonObject.toString();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove("My_owl").commit();
+            editor.putString("My_owl", jsonString);
+            editor.commit();
+        }*/
     }
 }
