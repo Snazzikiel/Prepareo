@@ -33,7 +33,7 @@ import java.util.List;
 public class Assignments extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 
-    private static final String TAG = "stateCheck";
+    private static final String TAG = "assignmentCheck";
     List<assignmentsData> rowItems = new ArrayList<assignmentsData>();
     String subjectCode;
     int itemPosition;

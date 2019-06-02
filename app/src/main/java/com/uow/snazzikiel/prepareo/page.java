@@ -13,19 +13,15 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.sparql.function.library.date;
 import com.hp.hpl.jena.update.UpdateExecutionFactory;
 import com.hp.hpl.jena.update.UpdateFactory;
 import com.hp.hpl.jena.update.UpdateProcessor;
 import com.hp.hpl.jena.update.UpdateRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Interval;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +36,7 @@ public class page extends AppCompatActivity
 
     //Map<String, List> owlData = new HashMap<>();
     HashMap<String,ArrayList<String>> menu = new HashMap<String,ArrayList<String>>();
+    HashMap<String,Long> hoursMap = new HashMap<String,Long>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -126,25 +123,27 @@ public class page extends AppCompatActivity
             public void onClick(View x)
             {
                 String user;
-                String subString;
                 user = userBox.getText().toString();
-                subString = nameBox.getText().toString();
+                String firstDate = "2019-05-27T00:00:00";
+                String firstDateOfNextRange = "2019-06-03T00:00:00";
 
-                String firstDateOfWeek = "2019-05-27T00:00:00";
-                String firstDayOfNextWeek = "2019-06-03T00:00:00";
+                //firstDate = "2019-05-27T00:00:00"; can use 2 different dates for current day hours
+                //firstDateOfNextRange = "2019-05-28T00:00:00";
+
                 String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
                 String queryString = prefix +
-                        "SELECT DISTINCT ?person ?action ?start ?end WHERE { " +
-                        "?person onto:hasAction ?a ;" +
+                        "SELECT DISTINCT ?type ?start ?end WHERE { " +
+                        "?person onto:hasAction ?action ;" +
                         "onto:hasUsername '" + user + "' ." +
-                        "?action onto:hasDuration ?duration ." +
+                        "?action onto:hasDuration ?duration ;"+
+                        "rdf:type ?type ." +
                         "?duration onto:hasStartTime ?start ; "+
                         "onto:hasEndTime ?end ." +
-                        "FILTER (?start >= '" + firstDateOfWeek + "'^^xsd:dateTime) ." +
-                        "FILTER (?start < '" + firstDayOfNextWeek + "'^^xsd:dateTime) ." +
-                        "FILTER regex(str(?action), '" + subString + "') ." +
+                        "FILTER (?start >= '" + firstDate + "'^^xsd:dateTime) ." +
+                        "FILTER (?start < '" + firstDateOfNextRange + "'^^xsd:dateTime) ." +
                         "}";
-                new queryEndpointQuota().execute(queryString, queryEndpoint, "person", "action", "start", "end");
+                //"FILTER regex(str(?action), '" + subString + "') ." +
+                new queryEndpointQuota().execute(queryString, queryEndpoint, "type", "start", "end");
             }
         });
 
@@ -234,23 +233,25 @@ public class page extends AppCompatActivity
         }
     }
 
-    protected class queryEndpointQuota extends AsyncTask<String, String, Long>
+    protected class queryEndpointQuota extends AsyncTask<String, String, HashMap<String, Long>>
     {
         @Override
-        protected Long doInBackground(String... queryTargetVars)
+        protected HashMap<String, Long> doInBackground(String... queryTargetVars)
         {
             Query sparqlQuery = QueryFactory.create(queryTargetVars[0]);
             QueryExecution qexec = QueryExecutionFactory.sparqlService(queryTargetVars[1], sparqlQuery);
-            long totalMiniutes = 0;
             try
             {
                 ResultSet results = qexec.execSelect();
                 for(;results.hasNext();)
                 {
                     QuerySolution soln = results.nextSolution();
-                    RDFNode startTime = soln.get(queryTargetVars[4]);
-                    RDFNode endTime = soln.get(queryTargetVars[5]);
 
+                    RDFNode typeNode = soln.get(queryTargetVars[2]);
+                    RDFNode startTime = soln.get(queryTargetVars[3]);
+                    RDFNode endTime = soln.get(queryTargetVars[4]);
+
+                    String type = typeNode.asNode().getLocalName();
                     String startHours = startTime.asLiteral().getLexicalForm();
                     String endHours = endTime.asLiteral().getLexicalForm();
 
@@ -263,16 +264,19 @@ public class page extends AppCompatActivity
 
                     long milSec = parsedEnd.getTime() - parsedStart.getTime();
                     long min = TimeUnit.MILLISECONDS.toMinutes(milSec);
-                    totalMiniutes += min;
 
-                    //testing
-                    RDFNode name = soln.get(queryTargetVars[2]);
-                    RDFNode action = soln.get(queryTargetVars[3]);
-                    name.asResource().getLocalName();
-                    action.asResource().getLocalName();
-                    Log.i(TAG, name+ "   " + action);
+                    if(hoursMap.containsKey(type))
+                    {
+                        hoursMap.put(type, (min + hoursMap.get(type)));
+                    }
+                    else
+                    {
+                        hoursMap.put(type, (min));
+                    }
+                    Log.i(TAG, type);
                     Log.i(TAG, startHours+ "   " + endHours);
                     Log.i(TAG, String.valueOf(min));
+                    Log.i(TAG, hoursMap.values().toString());
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -280,13 +284,13 @@ public class page extends AppCompatActivity
             {
                 qexec.close();
             }
-            return totalMiniutes;
+            return hoursMap;
         }
 
         @Override
-        protected void onPostExecute(Long total)
+        protected void onPostExecute(HashMap<String, Long> hours)
         {
-            Log.i(TAG, String.valueOf(total));
+            saveOwl();
         }
     }
 
@@ -313,7 +317,7 @@ public class page extends AppCompatActivity
         SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(menu);
+        String json = gson.toJson(hoursMap);
         editor.putString("aSyncOwlData", json);
         editor.apply();
     }

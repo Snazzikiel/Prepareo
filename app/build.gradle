@@ -58,5 +58,7 @@ configurations {
         exclude group: 'xerces', module: 'xercesImpl'
         exclude group: 'xml-apis', module: 'xml-apis'
     }
+    all {
+        exclude module: 'httpclient'
+    }
 }
-

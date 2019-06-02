@@ -1,5 +1,6 @@
 package com.uow.snazzikiel.prepareo;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -93,12 +94,12 @@ public class CalendarSelect extends AppCompatActivity {
         calView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                String selectedGridDate = HwAdapter.day_string.get(position);
-                //((HwAdapter) parent.getAdapter()).getPositionList(selectedGridDate, MainActivity.this);
-                //gridview.getChildAt(position).setBackgroundColor(Color.BLACK);
-                // v.setBackgroundColor(Color.RED);
+                String selectedGridDate = calendarAdapter.day.get(position);
+                Intent myIntent = new Intent(getApplicationContext(), calendarInfo.class);
+                myIntent.putExtra("dateSelected", selectedGridDate);
+                startActivityForResult(myIntent, 0);
 
-                clearCalendar();
+                //clearCalendar();
                 Log.i(TAG, selectedGridDate);
             }
 
@@ -122,9 +123,9 @@ public class CalendarSelect extends AppCompatActivity {
     }
 
     public void clearCalendar() {
-        //calAdapter.refreshCal();
-        //calAdapter.notifyDataSetChanged();
-        //tvMonth.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
+        calAdapter.refreshCal();
+        calAdapter.notifyDataSetChanged();
+        tvMonth.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
     }
 
     public void saveData() {
@@ -132,7 +133,7 @@ public class CalendarSelect extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("calendarData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(HomeCollection.date_collection_arr);
+        String json = gson.toJson(calendarData.calData);
         editor.putString((getString(R.string.calendar_savedata)), json);
         editor.apply();
     }
@@ -142,12 +143,7 @@ public class CalendarSelect extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("calendarData", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString((getString(R.string.calendar_savedata)), null);
-        Type type = new TypeToken<ArrayList<HomeCollection>>() {}.getType();
-        /*HomeCollection.date_collection_arr = gson.fromJson(json, type);
-
-        if (HomeCollection.date_collection_arr == null) {
-            HomeCollection.date_collection_arr = new ArrayList<>();
-        }*/
+        Type type = new TypeToken<ArrayList<calendarData>>() {}.getType();
 
         calItems = gson.fromJson(json, type);
 

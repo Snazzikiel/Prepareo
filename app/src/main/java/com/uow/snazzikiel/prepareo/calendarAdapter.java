@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -46,7 +45,7 @@ class calendarAdapter extends BaseAdapter {
 
     public calendarAdapter(Activity context, GregorianCalendar monthCal,ArrayList<calendarData> calData) {
         this.calData=calData;
-        HwAdapter.day_string = new ArrayList<String>();
+        calendarAdapter.day = new ArrayList<String>();
         Locale.setDefault(Locale.US);
         month = monthCal;
         gcDateSelect = (GregorianCalendar) monthCal.clone();
@@ -58,7 +57,7 @@ class calendarAdapter extends BaseAdapter {
 
         dfSelection = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         todayDate = dfSelection.format(gcDateSelect.getTime());
-        //refreshCal();
+        refreshCal();
 
     }
 
@@ -100,7 +99,6 @@ class calendarAdapter extends BaseAdapter {
 
 
         if (day.get(position).equals(todayDate)) {
-
             v.setBackgroundColor(Color.WHITE);
         } else {
             v.setBackgroundColor(Color.WHITE);
@@ -122,11 +120,8 @@ class calendarAdapter extends BaseAdapter {
         return v;
     }
 
-
-
-    //get the max for previous month
     private int getMaxP() {
-        int maxP;
+        int maxPrevMonth;
         if (month.get(GregorianCalendar.MONTH) == month
                 .getActualMinimum(GregorianCalendar.MONTH)) {
             gcMonth.set((month.get(GregorianCalendar.YEAR) - 1),
@@ -135,34 +130,52 @@ class calendarAdapter extends BaseAdapter {
             gcMonth.set(GregorianCalendar.MONTH,
                     month.get(GregorianCalendar.MONTH) - 1);
         }
-        maxP = gcMonth.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+        maxPrevMonth = gcMonth.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 
-        return maxP;
+        return maxPrevMonth;
     }
 
-    public void setEventView(View v,int pos,TextView txt){
-
-        int len=HomeCollection.date_collection_arr.size();
+    //colour events
+    public void setEventView(View v,int iPosition,TextView txt){
+        int len=calendarData.calData.size();
         for (int i = 0; i < len; i++) {
-            HomeCollection cal_obj=HomeCollection.date_collection_arr.get(i);
-            String date=cal_obj.date;
-            int len1=day.size();
-            if (len1>pos) {
+            calendarData eventLoaded = calendarData.calData.get(i);
+            String date = eventLoaded.date;
+            int len1 = day.size();
+            if (len1 > iPosition) {
+                if (day.get(iPosition).equals(date)) {
+                    if ((Integer.parseInt(gridvalue) > 1) && (iPosition < monthFDay)) {
 
-                if (day.get(pos).equals(date)) {
-                    if ((Integer.parseInt(gridvalue) > 1) && (pos < monthFDay)) {
-
-                    } else if ((Integer.parseInt(gridvalue) < 7) && (pos > 28)) {
+                    } else if ((Integer.parseInt(gridvalue) < 7) && (iPosition > 28)) {
 
                     } else {
                         v.setBackgroundColor(Color.parseColor("#343434"));
                         v.setBackgroundResource(R.drawable.rounded_calender);
                         txt.setTextColor(Color.parseColor("#696969"));
                     }
-
                 }
             }}
     }
 
+    public void refreshCal() {
+        eventItems.clear();
+        day.clear();
+        Locale.setDefault(Locale.US);
+        gcMonth = (GregorianCalendar) month.clone();
+        monthFDay = month.get(GregorianCalendar.DAY_OF_WEEK);
+        iTotalWeekNumber = month.getActualMaximum(GregorianCalendar.WEEK_OF_MONTH);
+        monthDays = iTotalWeekNumber * 7;
+        totalPreviousMonth = getMaxP();
+        calendarMaxPrevious = totalPreviousMonth - (monthFDay - 1);
+        gcMaxMonth = (GregorianCalendar) gcMonth.clone();
+        gcMaxMonth.set(GregorianCalendar.DAY_OF_MONTH, calendarMaxPrevious + 1);
+
+
+        for (int n = 0; n < monthDays; n++) {
+            selectionDate = dfSelection.format(gcMaxMonth.getTime());
+            gcMaxMonth.add(GregorianCalendar.DATE, 1);
+            day.add(selectionDate);
+        }
+    }
 }
 

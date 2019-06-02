@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.uow.snazzikiel.prepareo">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".calendarInfo"></activity>
         <activity android:name=".AssignmentInfo" />
         <activity android:name=".EnrolmentRecord" />
         <activity android:name=".CalendarSelect" />
@@ -60,7 +61,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".time" />
-        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
