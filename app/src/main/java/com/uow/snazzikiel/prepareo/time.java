@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class time extends AppCompatActivity {
 
@@ -284,6 +286,11 @@ public class time extends AppCompatActivity {
         if (owlItems == null)
         {
             owlItems = new HashMap<>();
+            ArrayList<String> tmp = new ArrayList<>();
+            tmp.add("temp");
+            owlItems.put("temp", tmp);
         }
     }
+
+
 }

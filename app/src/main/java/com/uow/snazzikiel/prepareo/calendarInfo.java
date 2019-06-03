@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -18,7 +19,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class calendarInfo extends AppCompatActivity {
+public class calendarInfo extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final String TAG = "calendarInfo";
 
     String calendarDate;
@@ -34,21 +35,27 @@ public class calendarInfo extends AppCompatActivity {
         Intent thisIntent = getIntent();
         calendarDate = thisIntent.getStringExtra("dateSelected");
         setTitle("Activities - " + calendarDate);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_notifications);
 
-        allActivities = new ArrayList<owlData>();
         dayActivities = new ArrayList<owlData>();
         myList = (ListView) findViewById(R.id.main_list);//list for notifications
         
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_notifications);
+
 
         for(owlData tmp : owlData.owlInfo){
             String user = tmp.getUserName();
+            String d = tmp.getDate();
             Long i = tmp.getMapTime();
             String key = tmp.getMapKey();
-            allActivities.add(new owlData(user, key, i));
+            Log.i(TAG, d + " = " + calendarDate);
+            if (calendarDate.equals(d)){
+                createActivities(tmp);
+                Log.i(TAG, d);
+            }
         }
+
         saveData();
         addNote = (FloatingActionButton) findViewById(R.id.addNotification);//button for add notifications
         addNote.setOnClickListener(new View.OnClickListener(){
@@ -56,8 +63,16 @@ public class calendarInfo extends AppCompatActivity {
             public void onClick(View v){
                 Intent myIntent = new Intent(getApplicationContext(), time.class);
                 myIntent.putExtra("activityDate", calendarDate);
+                startActivityForResult(myIntent, 0);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        //notificationData noteItem = (notificationData) parent.getItemAtPosition(position);
+        //popupMethod(noteItem);
     }
 
     public void saveData() {
@@ -70,29 +85,15 @@ public class calendarInfo extends AppCompatActivity {
         editor.apply();
     }
 
-    /*public void loadData( ) {
-        Log.i(TAG, "loadSubjects");
-        SharedPreferences sharedPreferences = getSharedPreferences("calendarData", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString((getString(R.string.calendar_savedata)), null);
-        Type type = new TypeToken<ArrayList<calendarData>>() {}.getType();
-
-        calItems = gson.fromJson(json, type);
-
-        if (calItems == null) {
-            calItems = new ArrayList<>();
-        }
-    }*/
-
-    public void createActivities(owlData allActivities) {
+    public void createActivities(owlData activity) {
 
         Log.i(TAG, "addActivities");
-        if (allActivities.getMapKey() == null || allActivities.getUserName() == "" ||
-                allActivities.getMapTime() == null){
+        if (activity.getMapKey() == null || activity.getUserName() == "" ||
+                activity.getMapTime() == null){
             return;
         }
 
-        dayActivities.add(allActivities);
+        dayActivities.add(activity);
         
         calendarInfoAdapter adapter = new calendarInfoAdapter(this, dayActivities) {
 

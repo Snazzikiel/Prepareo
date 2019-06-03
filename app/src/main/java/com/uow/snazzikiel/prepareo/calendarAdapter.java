@@ -9,13 +9,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.hp.hpl.jena.sparql.function.library.date;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
 
 import static com.uow.snazzikiel.prepareo.Dashboard.getWeekStartDate;
@@ -259,6 +264,37 @@ class calendarAdapter extends BaseAdapter {
         Date tmpDate = calendar.getTime();
         String nextMonday = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
         return nextMonday + "T00:00:00";
+    }
+
+    public String getFirstDay(){
+        //Get start of the month
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        Date tmpDate = new Date();
+        tmpDate = cal.getTime();
+        String firstDay = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
+
+        return firstDay;
+    }
+
+    public String getFirstDayYear(){
+        //Get start of the month
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_YEAR, 1);
+        Date tmpDate = new Date();
+        tmpDate = cal.getTime();
+        String firstDay = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
+        firstDay += "T00:00:00";
+        return firstDay;
+    }
+
+    public String getLastDay(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+        Date lastDayOfMonth = cal.getTime();
+        String lastDay = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", lastDayOfMonth));
+        lastDay += "T00:00:00";
+        return lastDay;
     }
 }
 

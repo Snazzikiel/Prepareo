@@ -40,8 +40,10 @@ public class CalendarSelect extends AppCompatActivity {
     private TextView tvMonth;
     GridView calView;
 
-    List<calendarData> calItems = new ArrayList<calendarData>();
+    List<owlData> calItems = new ArrayList<owlData>();
     ArrayList<accountData> accountList;
+
+    List<owlData> allActivities;
 
     //HashMap<String,Long> hoursMap = new HashMap<String,Long>();
 
@@ -52,48 +54,25 @@ public class CalendarSelect extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_calendar);
 
+        if (owlData.owlInfo == null){
+            owlData.owlInfo = new ArrayList<owlData>();
+            owlData.owlInfo.add(new owlData("ptd665", "empty", "empty", (long)0));
+        }
         calendarData.calData = new ArrayList<calendarData>();
 
+        for(owlData tmp : owlData.owlInfo){
+            String user = tmp.getUserName();
+            String d = tmp.getDate();
+            Long i = tmp.getMapTime();
+            String key = tmp.getMapKey();
+            Log.i(TAG, user + " " + d + " " + key + " long1234: " + i);
+            calendarData.calData.add(new calendarData(d, user, key, String.valueOf(i)));
+        }
+
+        calendarData.calData = new ArrayList<calendarData>();
         month = (GregorianCalendar) GregorianCalendar.getInstance();
         month2 = (GregorianCalendar) month.clone();
         calAdapter = new calendarAdapter( this, month, calendarData.calData);
-
-        getProfile();
-        String userName = accountList.get(0).getUserName();
-
-//        Query.getUserActivities(calAdapter.getFirstMonday(), calAdapter.getNextMonday());
-
-        /*
-
-        Log.i(TAG, "Owl Info!" + String.valueOf(owlData.owlInfo.size()));
-*/
-
-        Date tmpDate = new Date();
-        Calendar s = Calendar.getInstance();
-        s.setTime(tmpDate);
-        s.add(Calendar.DATE, 1);
-        tmpDate = s.getTime();
-        String nextMonday = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
-        Log.i(TAG, "-----------");
-
-        page p = new page();
-
-        String mon1 = calAdapter.getFirstMonday();
-        String mon2 = calAdapter.getNextMonday();
-
-        p.getUserActivities(mon1, mon2, userName);
-        if (owlData.owlInfo == null){
-            owlData.owlInfo = new ArrayList<owlData>();
-            owlData.owlInfo.add(new owlData("ptd665", "empty", (long)0));
-        }
-
-        Log.i(TAG, String.valueOf(owlData.owlInfo));
-        for(owlData tmp : owlData.owlInfo){
-            String user = tmp.getUserName();
-            Long i = tmp.getMapTime();
-            String key = tmp.getMapKey();
-            Log.i(TAG, user + " " + key + " long: " + i);
-        }
 
 
         tvMonth = (TextView) findViewById(R.id.tv_month);
@@ -146,7 +125,6 @@ public class CalendarSelect extends AppCompatActivity {
             }
 
         });
-
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

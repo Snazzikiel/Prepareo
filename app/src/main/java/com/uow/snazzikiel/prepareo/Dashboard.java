@@ -1,6 +1,7 @@
 package com.uow.snazzikiel.prepareo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,13 +10,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class Dashboard extends AppCompatActivity {
@@ -28,11 +35,20 @@ public class Dashboard extends AppCompatActivity {
     Button goOWL;
     Button goCalendar;
     ImageView imgExit;
+    String userName;
+    String firstDay;
+    String lastDay;
+    public GregorianCalendar month, month2;
+    private calendarAdapter calAdapter;
+
+    ArrayList<accountData> accountList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        getProfile();
 
         //button definition
         goNotification = (Button)findViewById(R.id.dashboard_button_notifications);
@@ -67,7 +83,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-
         goSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
@@ -75,7 +90,6 @@ public class Dashboard extends AppCompatActivity {
                 //startActivity(new Intent(Dashboard.this, EnrolmentRecord.class));
             }
         });
-
 
         goStat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +114,19 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
+        //get Activity list ready for calendar page
+
+        userName = accountList.get(0).getUserName();
+        calendarData.calData = new ArrayList<calendarData>();
+        month = (GregorianCalendar) GregorianCalendar.getInstance();
+        month2 = (GregorianCalendar) month.clone();
+        calAdapter = new calendarAdapter( this, month, calendarData.calData);
+        page p = new page();
+        firstDay = calAdapter.getFirstDayYear();
+        lastDay = calAdapter.getLastDay();
+        p.getUserActivities(firstDay, lastDay, userName);
+        //p.queryEnd();
+
 
     }
 
@@ -118,5 +145,19 @@ public class Dashboard extends AppCompatActivity {
         }
         calendar.add(Calendar.DATE, -1);
         return calendar.getTime();
+    }
+
+    public void getProfile( ) {
+        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(getString(R.string.account_savedata), null);
+        Type type = new TypeToken<ArrayList<accountData>>() {}.getType();
+        accountList = gson.fromJson(json, type);
+
+        if (accountList == null) {
+            //create fake user account (*this will never be null due to login/create account script, primarily used for testing, secondary for error checking)
+            accountData acc = new accountData("user", "user", "user", "user", "2019-06-03T00:00:00", "user");
+            accountList.add(acc);
+        }
     }
 }

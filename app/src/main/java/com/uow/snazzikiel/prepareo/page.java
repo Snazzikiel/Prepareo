@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.update.UpdateExecutionFactory;
@@ -20,6 +21,7 @@ import com.hp.hpl.jena.update.UpdateRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +36,14 @@ public class page extends AppCompatActivity
     Button selectButton, addButton, deleteButton, editButton;
     TextView txt1, txt2;
     EditText nameBox, numBox, userBox;
-    String prefix;
+    final String  prefix ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+            "PREFIX owl: <http://www.w3.org/2002/07/owl#>" +
+            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
+            "PREFIX onto: <http://www.semanticweb.org/snoop/ontologies/2019/4/student-planner#>";
+
     String user;
+    ArrayList<accountData> accountList;
 
     //Map<String, List> owlData = new HashMap<>();
     HashMap<String,ArrayList<String>> menu = new HashMap<String,ArrayList<String>>();
@@ -49,11 +57,6 @@ public class page extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phone);
 
-        prefix ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX owl: <http://www.w3.org/2002/07/owl#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
-                "PREFIX onto: <http://www.semanticweb.org/snoop/ontologies/2019/4/student-planner#>";
 
         selectButton = (Button) findViewById(R.id.button12);
         addButton = (Button) findViewById(R.id.button11);
@@ -72,13 +75,7 @@ public class page extends AppCompatActivity
             @Override
             public void onClick(View x)
             {
-                String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
-                String queryString = prefix +
-                        "SELECT ?cat ?sub WHERE { " +
-                        "?cat rdfs:subClassOf onto:Action . " +
-                        "?sub rdfs:subClassOf ?cat " +
-                        "}";
-                new queryEndpoint().execute(queryString, queryEndpoint, "cat", "sub");
+
             }
         });
 
@@ -160,6 +157,16 @@ public class page extends AppCompatActivity
         });
     }
 
+    public void queryEnd(){
+        String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
+        String queryString = prefix +
+                "SELECT ?cat ?sub WHERE { " +
+                "?cat rdfs:subClassOf onto:Action . " +
+                "?sub rdfs:subClassOf ?cat " +
+                "}";
+        new queryEndpoint().execute(queryString, queryEndpoint, "cat", "sub");
+    }
+
     protected class queryEndpoint extends AsyncTask<String, String, HashMap<String, ArrayList<String>>>
     {
         @Override
@@ -201,6 +208,7 @@ public class page extends AppCompatActivity
                             tmpList = new ArrayList<>();
                             key = cat;
                             tmpList.add(sub);
+                            Log.i(TAG, sub);
                         }
                     }
                 }
@@ -216,7 +224,7 @@ public class page extends AppCompatActivity
         @Override
         protected void onPostExecute(HashMap <String, ArrayList<String>> menu)
         {
-            saveOwl();
+            saveOwl(menu);
         }
     }
 
@@ -230,6 +238,7 @@ public class page extends AppCompatActivity
             try
             {
                 ResultSet results = qexec.execSelect();
+                owlData.owlInfo = new ArrayList<owlData>();
                 for(;results.hasNext();)
                 {
                     QuerySolution soln = results.nextSolution();
@@ -242,6 +251,8 @@ public class page extends AppCompatActivity
                     String startHours = startTime.asLiteral().getLexicalForm();
                     String endHours = endTime.asLiteral().getLexicalForm();
 
+                    String dateTime = StringUtils.substringBeforeLast(startHours, "T");
+
                     startHours = StringUtils.substringAfterLast(startHours, "T");
                     endHours = StringUtils.substringAfterLast(endHours, "T");
 
@@ -251,6 +262,9 @@ public class page extends AppCompatActivity
 
                     long milSec = parsedEnd.getTime() - parsedStart.getTime();
                     long min = TimeUnit.MILLISECONDS.toMinutes(milSec);
+
+
+                    owlData.owlInfo.add(new owlData(user, dateTime, type, min));
 
                     if(hoursMap.containsKey(type))
                     {
@@ -304,12 +318,12 @@ public class page extends AppCompatActivity
     public void createOWL_Objects(){
 
         Log.i(TAG, "Owl created.");
-        owlData.owlInfo = new ArrayList<owlData>();
+        //owlData.owlInfo = new ArrayList<owlData>();
 
         for(String key : hoursMap.keySet()){
             Long i = hoursMap.get(key);
             Log.i(TAG, key + ": " + Long.toString(i));
-            owlData.owlInfo.add(new owlData(user, key, i));
+            //owlData.owlInfo.add(new owlData(user, key, i));
         }
     }
 
@@ -317,16 +331,9 @@ public class page extends AppCompatActivity
         //user = userBox.getText().toString();
         //firstDate = "2019-05-27T00:00:00";
         //firstDateOfNextRange = "2019-06-03T00:00:00";
-
+        this.user = userName;
         //firstDate = "2019-05-27T00:00:00"; can use 2 different dates for current day hours
         //firstDateOfNextRange = "2019-05-28T00:00:00";
-
-        prefix ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX owl: <http://www.w3.org/2002/07/owl#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
-                "PREFIX onto: <http://www.semanticweb.org/snoop/ontologies/2019/4/student-planner#>";
-
         String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
         String queryString = prefix +
                 "SELECT DISTINCT ?type ?start ?end WHERE { " +
@@ -343,26 +350,14 @@ public class page extends AppCompatActivity
         new queryEndpointQuota().execute(queryString, queryEndpoint, "type", "start", "end");
     }
 
-
-    public void saveOwl() {
-    /*
+    public void saveOwl(HashMap <String, ArrayList<String>> menu) {
+      /*  Log.i(TAG, "saveOwl");
         SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(owlData.owlInfo);
-        editor.putString("aSyncOwlData", json).apply();
-        editor.apply();
-
-
-        SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
-
-        if (sharedPreferences != null) {
-            JSONObject jsonObject = new JSONObject(hoursMap);
-            String jsonString = jsonObject.toString();
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.remove("My_owl").commit();
-            editor.putString("My_owl", jsonString);
-            editor.commit();
-        }*/
+        String json = gson.toJson(menu);
+        editor.putString("aSyncOwlData", json);
+        editor.apply();*/
     }
+
 }

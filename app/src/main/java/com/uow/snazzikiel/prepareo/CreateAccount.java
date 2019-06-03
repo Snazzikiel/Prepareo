@@ -1,5 +1,6 @@
 package com.uow.snazzikiel.prepareo;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -59,6 +60,7 @@ public class CreateAccount extends AppCompatActivity {
     String email;
     String pw1;
     String pw2;
+    Boolean userNameFound = false;
 
     DatePickerDialog.OnDateSetListener mDateSet;
 
@@ -138,16 +140,24 @@ public class CreateAccount extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Both password fields must match.",
                     Toast.LENGTH_SHORT).show();
         }else {
-            //accountVerification p = new accountVerification();
-            //p.verifyCreateUser(fName, lName, email, bday, pw1);
-
-            accountData user = new accountData(fName, lName, userName, email, bday, pw1);
-            accountList.add(user);
-
-            Toast.makeText(getApplicationContext(), "Success!",
+            Toast.makeText(getApplicationContext(), "Verifying..!",
                     Toast.LENGTH_SHORT).show();
-            saveData();
-            startActivity(new Intent(CreateAccount.this, Dashboard.class));
+            accountVerification p = new accountVerification();
+            userNameFound = p.verifyCreateUser(fName, lName, userName, bday, pw1);
+            if(userNameFound){
+                Toast.makeText(getApplicationContext(), "User name already exists.",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                accountData user = new accountData(fName, lName, userName, email, bday, pw1);
+                accountList.add(user);
+
+                Toast.makeText(getApplicationContext(), "Success!",
+                        Toast.LENGTH_SHORT).show();
+                saveData();
+                startActivity(new Intent(CreateAccount.this, Dashboard.class));
+            }
         }
     }
 
@@ -181,6 +191,4 @@ public class CreateAccount extends AppCompatActivity {
             accountList = new ArrayList<>();
         }
     }
-
 }
-

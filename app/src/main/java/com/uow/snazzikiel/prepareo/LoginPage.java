@@ -27,6 +27,7 @@ public class LoginPage extends AppCompatActivity {
     EditText txtLogin, txtPassword;
     TextView tvHint;
     int counter = 3;
+    boolean verified = false;
 
     List<accountData> accountList;
 
@@ -52,7 +53,8 @@ public class LoginPage extends AppCompatActivity {
 
                 login = txtLogin.getText().toString().trim();
                 pw1 = txtPassword.getText().toString().trim();
-                //verifyData();
+                verifyData();
+                /*
                 if (login == ""){
                     login = "user";
                 }
@@ -89,8 +91,6 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
-
-
         goRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
@@ -106,17 +106,25 @@ public class LoginPage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Fields cannot be empty.",
                     Toast.LENGTH_SHORT).show();
         } else {
-            Boolean answer = false;
+            Toast.makeText(getApplicationContext(), "Verifying..", Toast.LENGTH_SHORT).show();
             accountVerification p = new accountVerification();
-            /*answer = p.verifyUser(login, pw1);
-            if (answer){
-                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+            verified = p.verifyUser(login, pw1);
+            if (verified){
+
+                //add user session to memory
+                accountData acc = new accountData(login, login, login, login, "2019-03-22T00:00:00", pw1 );
+                accountList.add(acc);
+                saveData();
+
+                startActivity(new Intent(LoginPage.this, Dashboard.class));
+                Toast.makeText(getApplicationContext(),
+                        "Success!",Toast.LENGTH_SHORT).show();
             } else {
-               */ Toast.makeText(getApplicationContext(), "Incorrect Data!", Toast.LENGTH_SHORT).show();
-            //}
+                Toast.makeText(getApplicationContext(), "Incorrect Data!", Toast.LENGTH_SHORT).show();
+                //}
 
-            Toast.makeText(getApplicationContext(), "12345", Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(getApplicationContext(), "12345", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

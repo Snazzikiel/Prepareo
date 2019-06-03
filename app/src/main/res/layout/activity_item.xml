@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/activityDate"
-        android:layout_width="wrap_content"
+        android:layout_width="151dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activityName"
         android:layout_marginLeft="9dp"
@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/activityName"
-        android:layout_width="wrap_content"
+        android:layout_width="151dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="9dp"
@@ -44,9 +44,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginRight="54dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
         android:contentDescription="desc"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
