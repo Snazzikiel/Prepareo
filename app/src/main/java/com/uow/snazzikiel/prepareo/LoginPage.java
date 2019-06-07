@@ -16,11 +16,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class LoginPage extends AppCompatActivity {
+
+
 
     private static final String TAG = "stateCheck";
     Button btLogin, btFacebook, goRegister;
@@ -37,6 +42,12 @@ public class LoginPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Properties prop = new Properties();
+        prop.setProperty("log4j.rootLogger", "WARN");
+        PropertyConfigurator.configure(prop);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         btLogin = (Button)findViewById(R.id.login_btn_login);

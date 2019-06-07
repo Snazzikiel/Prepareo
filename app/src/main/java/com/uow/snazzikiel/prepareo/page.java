@@ -84,7 +84,7 @@ public class page extends AppCompatActivity
             @Override
             public void onClick(View x)
             {
-                String name, num, user;
+                /*String name, num, user;
                 name = nameBox.getText().toString();
                 num = numBox.getText().toString();
                 user = userBox.getText().toString();
@@ -97,7 +97,7 @@ public class page extends AppCompatActivity
                         "onto:hasStudentNumber '"+num+"' ;" +
                         "onto:hasUsername '"+user+"'" +
                         "}";
-                new updateEndpoint().execute(updateString, updateEndpoint);
+                new updateEndpoint().execute(updateString, updateEndpoint);*/
             }
         });
 
@@ -157,7 +157,7 @@ public class page extends AppCompatActivity
         });
     }
 
-    public void queryEnd(){
+    public void getActivityList(){
         String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
         String queryString = prefix +
                 "SELECT ?cat ?sub WHERE { " +
@@ -224,6 +224,7 @@ public class page extends AppCompatActivity
         @Override
         protected void onPostExecute(HashMap <String, ArrayList<String>> menu)
         {
+            Log.i(TAG, "saving to the owl file!!!");
             saveOwl(menu);
         }
     }
@@ -268,6 +269,7 @@ public class page extends AppCompatActivity
 
                     if(hoursMap.containsKey(type))
                     {
+
                         hoursMap.put(type, (min + hoursMap.get(type)));
                     }
                     else
@@ -311,12 +313,13 @@ public class page extends AppCompatActivity
         @Override
         protected void onPostExecute(String success)
         {
-            txt2.append(success + " ");
+            //txt2.append(success + " ");
         }
     }
 
     public void createOWL_Objects(){
 
+        //obsolete function due to adding this line in the endpointquota
         Log.i(TAG, "Owl created.");
         //owlData.owlInfo = new ArrayList<owlData>();
 
@@ -350,14 +353,27 @@ public class page extends AppCompatActivity
         new queryEndpointQuota().execute(queryString, queryEndpoint, "type", "start", "end");
     }
 
+    //public void getActivityList(String name, String num, String user){
+    public void updateActivityList(String name, String user){
+        String updateEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/update";
+        String updateString = prefix +
+                "INSERT DATA { " +
+                "onto:"+name+" rdf:type onto:Student ; " +
+                "onto:hasFirstName '"+name+"' ; " +
+                //"onto:hasStudentNumber '"+num+"' ;" +
+                "onto:hasUsername '"+user+"'" +
+                "}";
+        new updateEndpoint().execute(updateString, updateEndpoint);
+    }
+
     public void saveOwl(HashMap <String, ArrayList<String>> menu) {
-      /*  Log.i(TAG, "saveOwl");
-        SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
+        Log.i(TAG, "saveOwl");
+        SharedPreferences sharedPreferences = getSharedPreferences("aSyncData2", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(menu);
         editor.putString("aSyncOwlData", json);
-        editor.apply();*/
+        editor.apply();
     }
 
 }

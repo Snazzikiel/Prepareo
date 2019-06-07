@@ -42,6 +42,7 @@ public class Dashboard extends AppCompatActivity {
     private calendarAdapter calAdapter;
 
     ArrayList<accountData> accountList;
+    page owlLoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,18 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         getProfile();
+
+        //Get all data from the owl file for student
+        owlLoad = new page();
+        userName = accountList.get(0).getUserName();
+        calendarData.calData = new ArrayList<calendarData>();
+        month = (GregorianCalendar) GregorianCalendar.getInstance();
+        month2 = (GregorianCalendar) month.clone();
+        calAdapter = new calendarAdapter( this, month, calendarData.calData);
+        firstDay = calAdapter.getFirstDayYear();
+        lastDay = calAdapter.getLastDay();
+        loadActivityList();
+        loadUserActivities();
 
         //button definition
         goNotification = (Button)findViewById(R.id.dashboard_button_notifications);
@@ -114,20 +127,20 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        //get Activity list ready for calendar page
 
-        userName = accountList.get(0).getUserName();
-        calendarData.calData = new ArrayList<calendarData>();
-        month = (GregorianCalendar) GregorianCalendar.getInstance();
-        month2 = (GregorianCalendar) month.clone();
-        calAdapter = new calendarAdapter( this, month, calendarData.calData);
-        page p = new page();
-        firstDay = calAdapter.getFirstDayYear();
-        lastDay = calAdapter.getLastDay();
-        p.getUserActivities(firstDay, lastDay, userName);
         //p.queryEnd();
 
 
+    }
+
+    public void loadUserActivities(){
+        //get Activity list ready for calendar page, get all activities loaded for user
+        owlLoad.getUserActivities(firstDay, lastDay, userName);
+    }
+
+    public void loadActivityList(){
+        //get list of activities for the user to load activities
+       // owlLoad.getActivityList();
     }
 
     public static Date getWeekStartDate() {

@@ -1,6 +1,7 @@
 package com.uow.snazzikiel.prepareo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class owlData {
 
@@ -10,6 +11,7 @@ public class owlData {
     private Long mapTime;
 
     public static ArrayList<owlData> owlInfo;
+    public static HashMap<String, ArrayList<String>> activityList;
 
     public owlData(String userName, String date, String mapKey, Long mapTime){
         this.userName = userName;
