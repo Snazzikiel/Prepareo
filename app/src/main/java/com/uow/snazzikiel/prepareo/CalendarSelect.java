@@ -17,24 +17,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import static com.uow.snazzikiel.prepareo.Dashboard.getWeekStartDate;
-
+/*
+    Class:   CalendarSelect
+    ---------------------------------------
+    Actioned when a date is selected in the Calendar
+*/
 public class CalendarSelect extends AppCompatActivity {
-    private static final String TAG = "stateCheck";
+    private static final String TAG = "calendarSelect";
     public GregorianCalendar month, month2;
     private calendarAdapter calAdapter;
     private TextView tvMonth;
@@ -47,6 +41,11 @@ public class CalendarSelect extends AppCompatActivity {
 
     //HashMap<String,Long> hoursMap = new HashMap<String,Long>();
 
+    /*
+        Function: onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,22 +53,16 @@ public class CalendarSelect extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_calendar);
 
-        if (owlData.owlInfo == null){
-            owlData.owlInfo = new ArrayList<owlData>();
-            owlData.owlInfo.add(new owlData("ptd665", "empty", "empty", (long)0));
-        }
-        calendarData.calData = new ArrayList<calendarData>();
-
         for(owlData tmp : owlData.owlInfo){
+
             String user = tmp.getUserName();
             String d = tmp.getDate();
-            Long i = tmp.getMapTime();
             String key = tmp.getMapKey();
+            Long i = tmp.getMapTime();
             Log.i(TAG, user + " " + d + " " + key + " long1234: " + i);
             calendarData.calData.add(new calendarData(d, user, key, String.valueOf(i)));
         }
 
-        calendarData.calData = new ArrayList<calendarData>();
         month = (GregorianCalendar) GregorianCalendar.getInstance();
         month2 = (GregorianCalendar) month.clone();
         calAdapter = new calendarAdapter( this, month, calendarData.calData);
@@ -127,11 +120,21 @@ public class CalendarSelect extends AppCompatActivity {
         });
     }
 
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default required function to include a back button arrow on the top of the page
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
     }
 
+    /*
+        Function:   setNextMonth
+        ---------------------------------------
+        Get name/number of next month
+    */
     protected void setNextMonth() {
         if (month.get(GregorianCalendar.MONTH) == month.getActualMaximum(GregorianCalendar.MONTH)) {
             month.set((month.get(GregorianCalendar.YEAR) + 1), month.getActualMinimum(GregorianCalendar.MONTH), 1);
@@ -141,6 +144,11 @@ public class CalendarSelect extends AppCompatActivity {
         }
     }
 
+    /*
+        Function:   setLastMonth
+        ---------------------------------------
+        get last month
+    */
     protected void setLastMonth() {
         if (month.get(GregorianCalendar.MONTH) == month.getActualMinimum(GregorianCalendar.MONTH)) {
             month.set((month.get(GregorianCalendar.YEAR) - 1), month.getActualMaximum(GregorianCalendar.MONTH), 1);
@@ -149,12 +157,23 @@ public class CalendarSelect extends AppCompatActivity {
         }
     }
 
+    /*
+        Function:   clearCalendar
+        ---------------------------------------
+        Clears the calendar and all information loaded on interface
+    */
     public void clearCalendar() {
         calAdapter.refreshCal();
         calAdapter.notifyDataSetChanged();
         tvMonth.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
     }
 
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the activity list object to the local android device.
+        Use a loadData function to call "calendarData" SharedPreference to access.
+    */
     public void saveData() {
         Log.i(TAG, "saveSubject");
         SharedPreferences sharedPreferences = getSharedPreferences("calendarData", MODE_PRIVATE);
@@ -165,6 +184,12 @@ public class CalendarSelect extends AppCompatActivity {
         editor.apply();
     }
 
+    /*
+        Function:   loadData
+        ---------------------------------------
+        Used to retrieve the calItems object to the local android device.
+        Use a saveData function to call "calendarData" SharedPreference to overwrite.
+    */
     public void loadData( ) {
         Log.i(TAG, "loadSubjects");
         SharedPreferences sharedPreferences = getSharedPreferences("calendarData", MODE_PRIVATE);
@@ -179,6 +204,12 @@ public class CalendarSelect extends AppCompatActivity {
         }
     }
 
+    /*
+        Function:   getProfile
+        ---------------------------------------
+        Used to retrieve the loadSubjects object to the local android device.
+        Use a saveData function to call "createAccount" SharedPreference to overwrite.
+    */
     public void getProfile( ) {
         SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         Gson gson = new Gson();

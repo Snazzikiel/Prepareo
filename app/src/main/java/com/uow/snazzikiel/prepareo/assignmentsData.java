@@ -1,5 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
+/*
+    Class:   assignmentsData
+    ---------------------------------------
+    Data stored locally of all assignments
+*/
 class assignmentsData {
 
     String assignmentName;

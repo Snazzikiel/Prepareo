@@ -64,6 +64,11 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
     int noteCount = 0;
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +96,15 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         registerForContextMenu(myList);
     }
 
+    /*
+        Function:   onItemClick
+        ---------------------------------------
+        Default function for action when item is pressed
+
+        parent:     Parent variable to include adapter view
+        view:       Current activity view
+        position:   Position of item pressed by user
+    */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -98,6 +112,16 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         //popupMethod(noteItem);
     }
 
+    /*
+        Function:   popupMethod
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Used to fill out information
+        and save it in to the object for list creation.
+
+        assignItem:     (goalsData)Object Information retrieved from class.
+
+        TO DO: Input data in to OWL file, create query and post data
+    */
     public void popupMethod(notificationData noteItem){
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -159,6 +183,17 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         });
     }
 
+    /*
+        Function:   editItem
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Fill items with data that has been
+        previously entered. Re-save data with new items entered.
+
+        assignItem:     (notificationData)Object Information retrieved from class
+        itemPosition:   position of Item
+
+        TO DO: Write query to update/input data in to OWL file
+    */
     public void editItem(notificationData subjItem, final int itemPosition) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -245,6 +280,13 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         });
     }
 
+    /*
+        Function:   deleteNotificationItem
+        ---------------------------------------
+        Delete the notification item from the List
+
+        iPosition:    Position of list item clicked
+    */
     public void deleteNotificationItem(int iPosition){
         Log.i(TAG, "deleteNotification");
         rowItems.remove(iPosition);
@@ -264,6 +306,13 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         myList.setOnItemClickListener(this);
     }
 
+    /*
+        Function:   addNotificationItem
+        ---------------------------------------
+        Add a notification item to the list
+
+        iPosition:    Position of list item clicked
+    */
     public void addNotificationItem(notificationData note1){
 
         Log.i(TAG, "addNotification");
@@ -288,12 +337,24 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         myList.setOnItemClickListener(this);
     }
 
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default function for back button
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
         startActivityForResult(myIntent, 0);
         return true;
     }
 
+    /*
+        Function:   createNotificationChannel
+        ---------------------------------------
+        Create the notification channel to start up push notifications.
+        Each channel must have a different ID.
+        Main Function used to send push notification
+    */
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "name";
@@ -306,6 +367,12 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
+    /*
+        Function:   NotifyUser
+        ---------------------------------------
+        Used to create a notification once the notification channel has been used. Call the channelID created
+        and notification will appear with the details below.
+    */
     public void notifyUser(String title, String message) {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "1234")
                 .setSmallIcon(R.drawable.heart)
@@ -318,6 +385,12 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         notificationManager.notify(0, mBuilder.build());
     }
 
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the accountList object to the local android device.
+        Use a loadData function to call "notificationData" SharedPreference to access.
+    */
     public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("notificationData", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -327,8 +400,13 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         editor.apply();
     }
 
+    /*
+        Function:   loadData
+        ---------------------------------------
+        Used to retrieve the object to the local android device.
+        Use a saveData function to call "notificationData" SharedPreference to overwrite.
+    */
     public void loadData( ) {
-
         SharedPreferences sharedPreferences = getSharedPreferences("notificationData", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(getString(R.string.notification_savedata), null);
@@ -365,8 +443,11 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    //used to set the notifications for future delay
-    //needs work to set date ** come back to for future problem**
+    /*
+        Function:   setNotification
+        ---------------------------------------
+        Setup a delayed notification by Date
+    */
     private void setNotification(boolean isNotification, boolean isRepeat, String strDate) {
         AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         Intent myIntent;

@@ -11,6 +11,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/*
+    Class:   enrolmentAdapter
+    ---------------------------------------
+    Adapter class to load list in to the Assignments Page
+
+    context:        Context taken from main activity calling this class
+    rowItems:       object list of data stored locally
+
+    TO DO: Join with other adapter functions to cater for different adapters
+*/
 public class enrolmentAdapter extends BaseAdapter {
 
     Context context;

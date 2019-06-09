@@ -10,7 +10,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+    Class:   sharedPreferences
+    ---------------------------------------
+    Class used to assist in storing objects in to local device.
+    Obsolete function - called within individual classes
+*/
 
 public class sharedPreferences extends AppCompatActivity {
 

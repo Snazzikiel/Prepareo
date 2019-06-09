@@ -30,8 +30,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Assignments extends AppCompatActivity implements AdapterView.OnItemClickListener {
+/*
+    Class:   Assignments
+    ---------------------------------------
+    Get list of assignments loaded to the assigned subject
 
+    rowItems:        List of items in primary list object
+    subjectCode:     Subject passed through intents
+*/
+public class Assignments extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final String TAG = "assignmentCheck";
     List<assignmentsData> rowItems = new ArrayList<assignmentsData>();
@@ -48,11 +55,16 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
     ViewGroup container;
     ListView myList;
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Set title with items passed
+        //Retrieve items passed in to a string.
         Intent thisIntent = getIntent();
         subjectCode = thisIntent.getStringExtra("subjectCode");
         String sItemPosition = thisIntent.getStringExtra("subjectPosition");
@@ -64,8 +76,9 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
 
         myList = (ListView) findViewById(R.id.assignments_main_list);
 
-        //Add two test Subjects
+        //Load saved data
         loadData();
+        //add fake data to reload list for user screen
         assignmentsData test = new assignmentsData("Assignment 1", "10%");
         createAssignment(test);
         deleteItem(rowItems.size()-1);
@@ -78,24 +91,21 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        /*myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                deleteItem(position);
-                Toast.makeText(getApplicationContext(), "Item Deleted",
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });*/
-
         registerForContextMenu(myList);
     }
 
+    /*
+        Function:   onItemClick
+        ---------------------------------------
+        Default function for action when item is pressed
+
+        parent:     Parent variable to include adapter view
+        view:       Current activity view
+        position:   Position of item pressed by user
+    */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-
         Toast.makeText(getApplicationContext(), "Hold item for menu",
                 Toast.LENGTH_SHORT).show();
 
@@ -105,6 +115,16 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         startActivityForResult(myIntent, 0);*/
     }
 
+    /*
+        Function:   popupMethod
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Used to fill out information
+        and save it in to the object for list creation.
+
+        assignItem:     (assignmentsData)Object Information retrieved from class.
+
+        TO DO: Input assignment data in to OWL file, create query and post data
+    */
     public void popupMethod(assignmentsData assignItem) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -167,6 +187,17 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         });
     }
 
+    /*
+        Function:   editItem
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Fill items with data that has been
+        previously entered. Re-save data with new items entered. USED TO EDIT ASSIGNMENTDATA OBJECTS
+
+        assignItem:     (assignmentData)Object Information retrieved from class
+        itemPosition:   integer of Item Position selected
+
+        TO DO: Write query to update/input data in to OWL file
+    */
     public void editItem(assignmentsData assignItem, final int itemPosition) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -232,7 +263,11 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         });
     }
 
-
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default function for back button
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         //Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
         //startActivityForResult(myIntent, 0);
@@ -240,6 +275,14 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         return true;
     }
 
+    /*
+        Function:   createAssignment
+        ---------------------------------------
+        Used to add an item to a list. Add new object in to local storage data
+
+        assignment1:    (assignmentsData)New object to be inserted in to list and inserted in to
+                        saved object.
+    */
     public void createAssignment(assignmentsData assignment1) {
 
         Log.i(TAG, "addAssignment");
@@ -267,6 +310,13 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         myList.setOnItemClickListener(this);
     }
 
+    /*
+        Function:   deleteItem
+        ---------------------------------------
+        Used to delete an item from the List. Deletes off local storage data also
+
+        iPosition:    Position of list item clicked
+    */
     public void deleteItem(int iPosition){
         Log.i(TAG, "deleteAssignment");
         rowItems.remove(iPosition);
@@ -287,6 +337,12 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         saveData();
     }
 
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the accountList object to the local android device.
+        Use a loadData function to call "assignmentData" SharedPreference to access.
+    */
     public void saveData() {
         Log.i(TAG, "saveSubject");
         SharedPreferences sharedPreferences = getSharedPreferences("assignmentData" + subjectCode, MODE_PRIVATE);
@@ -297,6 +353,12 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         editor.apply();
     }
 
+    /*
+        Function:   loadData
+        ---------------------------------------
+        Used to retrieve the loadSubjects object to the local android device.
+        Use a saveData function to call "assignmentData" SharedPreference to overwrite.
+    */
     public void loadData( ) {
         Log.i(TAG, "loadSubjects");
         SharedPreferences sharedPreferences = getSharedPreferences("assignmentData" + subjectCode, MODE_PRIVATE);
@@ -310,6 +372,11 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         }
     }
 
+    /*
+        Function:   onCreateContextMenu
+        ---------------------------------------
+        Create menu object when user holds down on a list item
+    */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -317,6 +384,13 @@ public class Assignments extends AppCompatActivity implements AdapterView.OnItem
         getMenuInflater().inflate(R.menu.subjects_menu, menu);
     }
 
+    /*
+        Function:   onContextItemSelected
+        ---------------------------------------
+        Call menu and action each option
+
+        MenuItem:       Menu taken from Menu in Res
+    */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();

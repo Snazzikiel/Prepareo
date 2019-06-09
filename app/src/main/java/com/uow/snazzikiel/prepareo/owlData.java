@@ -3,6 +3,11 @@ package com.uow.snazzikiel.prepareo;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+    Class:   owlData
+    ---------------------------------------
+    Used to store dates and activities taken from the OWL file
+*/
 public class owlData {
 
     private String userName;

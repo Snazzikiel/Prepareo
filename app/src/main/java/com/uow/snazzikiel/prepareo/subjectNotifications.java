@@ -68,8 +68,11 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
     EditText dateChoice;
     private DatePickerDialog.OnDateSetListener dateListener;
 
-
-
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +120,15 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         registerForContextMenu(myList);
     }
 
+    /*
+        Function:   onItemClick
+        ---------------------------------------
+        Default function for action when item is pressed
+
+        parent:     Parent variable to include adapter view
+        view:       Current activity view
+        position:   Position of item pressed by user
+    */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -124,6 +136,13 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         popupMethod(noteItem);
     }
 
+    /*
+        Function:   addNotificationItem
+        ---------------------------------------
+        Add a notification item to the list
+
+        iPosition:    Position of list item clicked
+    */
     public void addNotificationItem(notificationData note1){
 
         Log.i(TAG, "addNotification");
@@ -148,6 +167,16 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         myList.setOnItemClickListener(this);
     }
 
+    /*
+        Function:   popupMethod
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Used to fill out information
+        and save it in to the object for list creation.
+
+        noteItem:     (notificationData)Object Information retrieved from class.
+
+        TO DO: Input data in to OWL file, create query and post data
+    */
     public void popupMethod(notificationData noteItem){
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -233,6 +262,17 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         });
     }
 
+    /*
+        Function:   editItem
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Fill items with data that has been
+        previously entered. Re-save data with new items entered.
+
+        assignItem:     (notificationData)Object Information retrieved from class
+        itemPosition:   position of Item
+
+        TO DO: Write query to update/input data in to OWL file
+    */
     public void editItem(notificationData subjItem, final int itemPosition) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -316,6 +356,13 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         });
     }
 
+    /*
+        Function:   deleteNotificationItem
+        ---------------------------------------
+        Delete the notification item from the List
+
+        iPosition:    Position of list item clicked
+    */
     public void deleteNotificationItem(int iPosition){
         Log.i(TAG, "deleteNotification");
         rowItems.remove(iPosition);
@@ -335,12 +382,22 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         myList.setOnItemClickListener(this);
     }
 
-
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default function for back button
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
     }
 
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the accountList object to the local android device.
+        Use a loadData function to call "notificationData + <subjectCode>" SharedPreference to access.
+    */
     public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("notificationData" + subjectCode, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -351,6 +408,12 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         editor.apply();
     }
 
+    /*
+        Function:   loadData
+        ---------------------------------------
+        Used to retrieve the object to the local android device.
+        Use a saveData function to call "notificationData + <subjectCode>" SharedPreference to overwrite.
+    */
     public void loadData( ) {
 
         SharedPreferences sharedPreferences = getSharedPreferences("notificationData" + subjectCode, MODE_PRIVATE);
@@ -364,10 +427,11 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         }
     }
 
-
-
-
-
+    /*
+        Function:   onCreateContextMenu
+        ---------------------------------------
+        Create menu object when user holds down on a list item
+    */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -375,6 +439,13 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         getMenuInflater().inflate(R.menu.subjects_menu, menu);
     }
 
+    /*
+        Function:   onContextItemSelected
+        ---------------------------------------
+        Call menu and action each option
+
+        MenuItem:       Menu taken from Menu in Res
+    */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();

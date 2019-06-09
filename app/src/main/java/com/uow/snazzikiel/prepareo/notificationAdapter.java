@@ -19,6 +19,16 @@ import java.util.List;
 
 import static android.app.PendingIntent.FLAG_ONE_SHOT;
 
+/*
+    Class:   assignmentsAdapter
+    ---------------------------------------
+    Adapter class to load list in to the Assignments Page
+
+    context:        Context taken from main activity calling this class
+    rowItems:       object list of data stored locally
+
+    TO DO: Join with other adapter functions to cater for different adapters
+*/
 public class notificationAdapter extends BaseAdapter {
 
     Context context;
@@ -45,6 +55,15 @@ public class notificationAdapter extends BaseAdapter {
         ImageView noteArrow;
     }
 
+    /*
+        Function:   getView
+        ---------------------------------------
+        Get the list of all input fields on the current view
+
+        position:       Integer of item pressed
+        convertView:    current View of item
+        parent:         View of parent field
+    */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
@@ -73,7 +92,15 @@ public class notificationAdapter extends BaseAdapter {
     }
 
 
+    /*
+        Function:   AlarmNotificationReceiver
+        ---------------------------------------
+        Receiver established for push notifications. A Broadcast with date is to be setup
 
+        position:       Integer of item pressed
+        convertView:    current View of item
+        parent:         View of parent field
+    */
     public class AlarmNotificationReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

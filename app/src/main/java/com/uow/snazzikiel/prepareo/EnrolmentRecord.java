@@ -30,6 +30,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Class:   EnrolmentRecord
+    ---------------------------------------
+    Obsolete class - NOT USED
+*/
 public class EnrolmentRecord extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final String TAG = "enrolmentCheck";

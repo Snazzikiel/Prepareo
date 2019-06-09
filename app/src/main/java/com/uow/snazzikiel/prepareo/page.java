@@ -30,6 +30,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/*
+    Class: page
+    ---------------------------------------
+    Original Query page to speak to owlFile.
+    mostly obsolete - Main functions used to Dashboard page
+*/
 public class page extends AppCompatActivity
 {
     private static final String TAG = "owlCheck";
@@ -50,7 +56,11 @@ public class page extends AppCompatActivity
     HashMap<String,Long> hoursMap = new HashMap<String,Long>();
     List<owlData> owlList = new ArrayList<>();
 
-
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -157,78 +167,12 @@ public class page extends AppCompatActivity
         });
     }
 
-    public void getActivityList(){
-        String queryEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
-        String queryString = prefix +
-                "SELECT ?cat ?sub WHERE { " +
-                "?cat rdfs:subClassOf onto:Action . " +
-                "?sub rdfs:subClassOf ?cat " +
-                "}";
-        new queryEndpoint().execute(queryString, queryEndpoint, "cat", "sub");
-    }
-
-    protected class queryEndpoint extends AsyncTask<String, String, HashMap<String, ArrayList<String>>>
-    {
-        @Override
-        protected HashMap<String, ArrayList<String>> doInBackground(String... queryTargetVars)
-        {
-            menu = new HashMap<String,ArrayList<String>>();
-            Query sparqlQuery = sparqlQuery = QueryFactory.create(queryTargetVars[0]);
-            QueryExecution qexec = QueryExecutionFactory.sparqlService(queryTargetVars[1], sparqlQuery);
-
-            try
-            {
-                ResultSet results = qexec.execSelect();
-                String key = "";
-                ArrayList tmpList = new ArrayList<>();
-
-                for(;results.hasNext();)
-                {
-                    QuerySolution soln = results.nextSolution();
-                    RDFNode catNode = soln.get(queryTargetVars[2]);
-                    String cat = catNode.asNode().getLocalName();
-
-                    RDFNode subNode = soln.get(queryTargetVars[3]);
-                    String sub = subNode.asNode().getLocalName();
-
-                    if(key.equals(cat))
-                    {
-                        tmpList.add(sub);
-                    }
-                    else
-                    {
-                        if(key.equals(""))
-                        {
-                            key = cat;
-                            tmpList.add(sub);
-                        }
-                        else
-                        {
-                            menu.put(key, tmpList);
-                            tmpList = new ArrayList<>();
-                            key = cat;
-                            tmpList.add(sub);
-                            Log.i(TAG, sub);
-                        }
-                    }
-                }
-                menu.put(key, tmpList);
-            }
-            finally
-            {
-                qexec.close();
-            }
-            return menu;
-        }
-
-        @Override
-        protected void onPostExecute(HashMap <String, ArrayList<String>> menu)
-        {
-            Log.i(TAG, "saving to the owl file!!!");
-            saveOwl(menu);
-        }
-    }
-
+    /*
+        Class: queryEndpointQuota
+        ---------------------------------------
+        aSyncTask to query the OWL file. Set dates wanted to call, and get list of each activity
+        loaded between both dates
+    */
     protected class queryEndpointQuota extends AsyncTask<String, String, HashMap<String, Long>>
     {
         @Override
@@ -298,6 +242,11 @@ public class page extends AppCompatActivity
         }
     }
 
+    /*
+        Class: updateEndpoint
+        ---------------------------------------
+        aSyncTask to query the OWL file. Inserts new data to the OWL File
+    */
     protected class updateEndpoint extends AsyncTask<String, String, String>
     {
         @Override
@@ -317,6 +266,12 @@ public class page extends AppCompatActivity
         }
     }
 
+    /*
+        Function: createOWL_Objects
+        ---------------------------------------
+        Obsolete function - Used to fill owlData.owlInfo with data pulled from query.
+        Obsolete because this has been put in to the original call
+    */
     public void createOWL_Objects(){
 
         //obsolete function due to adding this line in the endpointquota
@@ -330,6 +285,14 @@ public class page extends AppCompatActivity
         }
     }
 
+    /*
+        Function: getUserActivities
+        ---------------------------------------
+        Start query to get activities from owlFile
+        firstDate:              Start date of query to be called
+        firstDateOfNextRange:   End date of query to be called
+        userName:               Username of person to query
+    */
     public void getUserActivities(String firstDate, String firstDateOfNextRange, String userName){
         //user = userBox.getText().toString();
         //firstDate = "2019-05-27T00:00:00";
@@ -353,6 +316,13 @@ public class page extends AppCompatActivity
         new queryEndpointQuota().execute(queryString, queryEndpoint, "type", "start", "end");
     }
 
+    /*
+        Function: updateActivityList
+        ---------------------------------------
+        Start query to insert activities to OWL File
+        name:           Start date of query to be called
+        user:           Username of person to query
+    */
     //public void getActivityList(String name, String num, String user){
     public void updateActivityList(String name, String user){
         String updateEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/update";
@@ -366,14 +336,6 @@ public class page extends AppCompatActivity
         new updateEndpoint().execute(updateString, updateEndpoint);
     }
 
-    public void saveOwl(HashMap <String, ArrayList<String>> menu) {
-        Log.i(TAG, "saveOwl");
-        SharedPreferences sharedPreferences = getSharedPreferences("aSyncData2", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(menu);
-        editor.putString("aSyncOwlData", json);
-        editor.apply();
-    }
+
 
 }

@@ -21,6 +21,11 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+/*
+    Class:   statistics
+    ---------------------------------------
+    Load up the statistics page
+*/
 public class statistics extends AppCompatActivity {
 
     private static final String TAG = "Statistics";
@@ -29,6 +34,11 @@ public class statistics extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
+    /*
+        Function: onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +59,11 @@ public class statistics extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
     }
 
+    /*
+        Function: setupViewPager
+        ---------------------------------------
+        Setup screen in to 3 fragments - Today, Week, Month
+    */
     private void setupViewPager(ViewPager viewPager) {
         statisticsTabAdapter adapter = new statisticsTabAdapter(getSupportFragmentManager());
         adapter.addFragment(new statisticsTabOne(), "TODAY");
@@ -57,6 +72,11 @@ public class statistics extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default required function to include a back button arrow on the top of the page
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
         startActivityForResult(myIntent, 0);

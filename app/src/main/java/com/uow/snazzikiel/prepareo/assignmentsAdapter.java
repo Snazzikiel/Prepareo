@@ -11,6 +11,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/*
+    Class:   assignmentsAdapter
+    ---------------------------------------
+    Adapter class to load list in to the Assignments Page
+
+    context:        Context taken from main activity calling this class
+    rowItems:       object list of data stored locally
+
+    TO DO: Join with other adapter functions to cater for different adapters
+*/
 public class assignmentsAdapter extends BaseAdapter {
 
     Context context;
@@ -38,6 +48,15 @@ public class assignmentsAdapter extends BaseAdapter {
         ImageView assignArrow;
     }
 
+    /*
+        Function:   getView
+        ---------------------------------------
+        Get the list of all input fields on the current view
+
+        position:       Integer of item pressed
+        convertView:    current View of item
+        parent:         View of parent field
+    */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;

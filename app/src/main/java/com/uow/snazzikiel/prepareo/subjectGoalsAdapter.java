@@ -13,6 +13,16 @@ import android.widget.Toast;
 
 import java.util.List;
 
+/*
+    Class:   subjectGoalsAdapter
+    ---------------------------------------
+    Adapter class to load list in to the subjectGoalsAdapter Page
+
+    context:        Context taken from main activity calling this class
+    rowItems:       object list of data stored locally
+
+    TO DO: Join with other adapter functions to cater for different adapters
+*/
 public class subjectGoalsAdapter extends BaseAdapter {
 
     Context context;
@@ -41,6 +51,15 @@ public class subjectGoalsAdapter extends BaseAdapter {
         CheckBox goalsChkBox;
     }
 
+    /*
+        Function:   getView
+        ---------------------------------------
+        Get the list of all input fields on the current view
+
+        position:       Integer of item pressed
+        convertView:    current View of item
+        parent:         View of parent field
+    */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;

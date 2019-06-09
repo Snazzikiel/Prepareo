@@ -5,11 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+/*
+    Class:   AssignmentInfo
+    ---------------------------------------
+    Display information of selected Assignment
+
+    subjectName:        Login Username entered on LoginPage
+    assignmentName:     password entered taken on LoginPage
+*/
 public class AssignmentInfo extends AppCompatActivity {
 
     String subjectName;
     String assignmentName;
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +39,11 @@ public class AssignmentInfo extends AppCompatActivity {
         setContentView(R.layout.activity_assignment_info);
     }
 
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default function for back button
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         //Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
         //startActivityForResult(myIntent, 0);

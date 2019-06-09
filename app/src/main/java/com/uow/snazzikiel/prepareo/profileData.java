@@ -2,6 +2,11 @@ package com.uow.snazzikiel.prepareo;
 
 import com.multilevelview.models.RecyclerViewItem;
 
+/*
+    Class:   profileData
+    ---------------------------------------
+    NOT USED - Not used because Profile dropdown list is not used
+*/
 public class profileData extends RecyclerViewItem {
 
     String text="";

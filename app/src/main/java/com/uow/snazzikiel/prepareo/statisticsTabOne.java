@@ -16,6 +16,12 @@ import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
 
+/*
+    Class:   statisticsTabOne
+    ---------------------------------------
+    Graphic Statistical Data is not used in this application.
+    TO DO: This is placed on the futures list.
+*/
 public class statisticsTabOne extends Fragment {
     private static final String TAG = "Tab1Fragment";
 

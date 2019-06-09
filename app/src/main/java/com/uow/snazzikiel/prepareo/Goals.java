@@ -33,10 +33,14 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+    Class:   Goals
+    ---------------------------------------
+    Main Goals class to load up when user presses Goals on dashboard
+*/
 public class Goals extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = "stateCheck";
+    private static final String TAG = "goalsMain";
     List<goalsData> rowItems = new ArrayList<goalsData>();
     String subjectCode = "";
 
@@ -53,6 +57,11 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
     private statisticsTabAdapter mGoals;
     private ViewPager mViewPager;
 
+    /*
+        Function: onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +79,13 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.goals_tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-
     }
 
-
+    /*
+        Function: onItemClick
+        ---------------------------------------
+        Default function for when item is pressed
+    */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -84,6 +95,11 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                 Toast.LENGTH_SHORT).show();
     }
 
+    /*
+        Function:   setupViewPager
+        ---------------------------------------
+        Function to split the screen in to two fragments - Personal and Academic
+    */
     private void setupViewPager(ViewPager viewPager) {
         statisticsTabAdapter adapter = new statisticsTabAdapter(getSupportFragmentManager());
         adapter.addFragment(new goalsTabOne(), getString(R.string.goals_tab1));
@@ -91,6 +107,16 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         viewPager.setAdapter(adapter);
     }
 
+    /*
+        Function:   popupMethod
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Used to fill out information
+        and save it in to the object for list creation.
+
+        assignItem:     (goalsData)Object Information retrieved from class.
+
+        TO DO: Input assignment data in to OWL file, create query and post data
+    */
     public void popupMethod(goalsData assignItem) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -147,6 +173,16 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         });
     }
 
+    /*
+        Function:   editItem
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Fill items with data that has been
+        previously entered. Re-save data with new items entered. USED TO EDIT ASSIGNMENTDATA OBJECTS
+
+        assignItem:     (goalsData)Object Information retrieved from class
+
+        TO DO: Write query to update/input data in to OWL file
+    */
     public void editItem(goalsData assignItem, final int iPosition) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -218,12 +254,25 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         });
     }
 
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default function for back button
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
         startActivityForResult(myIntent, 0);
         return true;
     }
 
+    /*
+        Function:   createItem
+        ---------------------------------------
+        Used to add an item to a list. Add new object in to local storage data
+
+        assignment1:    (assignmentsData)New object to be inserted in to list and inserted in to
+                        saved object.
+    */
     public void createItem(goalsData goals1) {
 
         Log.i(TAG, "addGoals");
@@ -251,6 +300,13 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         myList.setOnItemClickListener(this);
     }
 
+    /*
+        Function:   deleteItem
+        ---------------------------------------
+        Used to delete an item from the List. Deletes off local storage data also
+
+        iPosition:    Position of list item clicked
+    */
     public void deleteItem(int iPosition){
         Log.i(TAG, "deleteGoal");
         rowItems.remove(iPosition);
@@ -271,6 +327,12 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         saveData();
     }
 
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the accountList object to the local android device.
+        Use a loadData function to call "assignmentData" SharedPreference to access.
+    */
     public void saveData() {
         Log.i(TAG, "saveGoal");
         SharedPreferences sharedPreferences = getSharedPreferences("goalData"+ subjectCode, MODE_PRIVATE);
@@ -281,6 +343,12 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         editor.apply();
     }
 
+    /*
+        Function:   loadData
+        ---------------------------------------
+        Used to retrieve the loadSubjects object to the local android device.
+        Use a saveData function to call "assignmentData" SharedPreference to overwrite.
+    */
     public void loadData() {
         Log.i(TAG, "loadGoal");
         SharedPreferences sharedPreferences = getSharedPreferences("goalData"+ subjectCode, MODE_PRIVATE);
@@ -294,6 +362,11 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         }
     }
 
+    /*
+        Function:   onContextItemSelected
+        ---------------------------------------
+        Create menu object when user holds down on a list item
+    */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -301,6 +374,13 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         getMenuInflater().inflate(R.menu.goals_menu, menu);
     }
 
+    /*
+        Function:   onContextItemSelected
+        ---------------------------------------
+        Call menu and action each option
+
+        MenuItem:       Menu taken from Menu in Res
+    */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();

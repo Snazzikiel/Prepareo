@@ -12,6 +12,11 @@ import com.hp.hpl.jena.update.UpdateRequest;
 
 import java.util.concurrent.ExecutionException;
 
+/*
+    Class:   accountVerification
+    ---------------------------------------
+    Verification class used to check data against the OWL file when user is creating or logging in.
+*/
 public class accountVerification extends AppCompatActivity {
     private static final String TAG = "VerifyAccount";
     final String prefix ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
@@ -26,9 +31,15 @@ public class accountVerification extends AppCompatActivity {
     String userName;
     String pw1;
 
+    /*
+        Function:   verifyUser
+        ---------------------------------------
+        Login data taken from LoginPage, username and password, then the OWL file is queried to see
+        if that data exists and a boolean is then returned.
 
-
-
+        userName:   Login Username entered on LoginPage
+        pw1:        password entered taken on LoginPage
+    */
     public boolean verifyUser(String userName, String pw1) {
 
         this.userName = userName;
@@ -51,6 +62,18 @@ public class accountVerification extends AppCompatActivity {
         return check;
     }
 
+    /*
+        Function:   verifyCreateUser
+        ---------------------------------------
+        Account data taken from the create user page. This function creates the string to be queried against
+        the OWL file
+
+        fName:      first name
+        lName:      last name
+        userName:   username
+        bday:       Date of Birth of user
+        pw1:        Password entered
+    */
     public boolean verifyCreateUser(String fName, String lName, String userName, String bday, String pw1) {
         this.fName = fName;
         this.lName = lName;
@@ -77,12 +100,21 @@ public class accountVerification extends AppCompatActivity {
         return check;
     }
 
+    /*
+        Class: userCheck
+        ---------------------------------------
+        This class is an AsyncTask, which means it will run in the background whilst the application is
+        continuing to function. This class is used to query the OWL file to verify if a user exist, if a user
+        does not exist, it will insert the entered data to the OWL file to create the user account.
+    */
     protected class userCheck extends AsyncTask<String, String, Boolean>
     {
         @Override
         protected void onPreExecute() {
             //checkText.setText("!!!CHECKING USER!!!");
         }
+
+        //function to run the query utilising aSync - The main function of this class.
         @Override
         protected Boolean doInBackground(String... queryTargetVars) {
             Query sparqlQuery = QueryFactory.create(queryTargetVars[0]);
@@ -97,12 +129,13 @@ public class accountVerification extends AppCompatActivity {
             }
         }
 
+        //Result of query to be actioned - Insert the data to the OWL file is does not exist.
+        //Inserting the data will use another Async task class so two Async tasks will be running simultaneously.
         protected void onPostExecute(Boolean found)
         {
             if(found)
             {
-                //checkText.setText("YOU IN HERE ALREADY");
-                //userNameFound = true;
+                //checkText.setText("This account exists already");
             }
             else
             {
@@ -122,8 +155,18 @@ public class accountVerification extends AppCompatActivity {
         }
     }
 
+    /*
+        Class: userCheck
+        ---------------------------------------
+        This class is an AsyncTask, which means it will run in the background whilst the application is
+        continuing to function. This class is used to insert the data to the OWL file after checking if it has
+        checked if it exists or not.
+    */
     protected class updateEndpoint extends AsyncTask<String, String, String>
     {
+        /*
+            Primary function inside the aSync Task. Used to process the query
+        */
         @Override
         protected String doInBackground(String... updateAndTarget)
         {
@@ -133,6 +176,8 @@ public class accountVerification extends AppCompatActivity {
             //userNameFound = false;
             return "UPDATED";
         }
+
+        //Do something with the result
         @Override
         protected void onPostExecute(String success)
         {
@@ -142,6 +187,13 @@ public class accountVerification extends AppCompatActivity {
         }
     }
 
+
+    /*
+         Class: passCheck
+         ---------------------------------------
+         This class is an AsyncTask, which means it will run in the background whilst the application is
+         continuing to function. This class is used to ASK the query to verify the password
+     */
     protected class passCheck extends AsyncTask<String, String, Boolean>
     {
         @Override

@@ -1,5 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
+/*
+    Class:   subjectsData
+    ---------------------------------------
+    Used to store subject objects
+*/
 class subjectsData {
 
     String courseName;

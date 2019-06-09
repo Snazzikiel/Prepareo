@@ -2,6 +2,12 @@ package com.uow.snazzikiel.prepareo;
 
 import java.util.ArrayList;
 
+/*
+    Class:   calendarData
+    ---------------------------------------
+    Class to load Calendar Objects for calendar Data
+
+*/
 public class calendarData {
     public String date="";
     public String name="";

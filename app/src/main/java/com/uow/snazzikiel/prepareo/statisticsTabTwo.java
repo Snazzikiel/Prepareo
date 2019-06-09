@@ -24,7 +24,12 @@ import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ComboLineColumnChartView;
 
-
+/*
+    Class:   statisticsTabTwo
+    ---------------------------------------
+    Graphic Statistical Data is not used in this application.
+    TO DO: This is placed on the futures list.
+*/
 public class statisticsTabTwo extends Fragment {
     private static final String TAG = "Tab2Fragment";
 

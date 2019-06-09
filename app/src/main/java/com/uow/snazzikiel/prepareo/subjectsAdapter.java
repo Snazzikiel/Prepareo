@@ -11,6 +11,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/*
+    Class:   subjectsAdapter
+    ---------------------------------------
+    Adapter class to load list in to the subjectsAdapter Page
+
+    context:        Context taken from main activity calling this class
+    rowItems:       object list of data stored locally
+
+    TO DO: Join with other adapter functions to cater for different adapters
+*/
 public class subjectsAdapter extends BaseAdapter {
 
     Context context;
@@ -38,6 +48,15 @@ public class subjectsAdapter extends BaseAdapter {
         ImageView subjArrow;
     }
 
+    /*
+        Function:   getView
+        ---------------------------------------
+        Place item Inflater in to list. Each item is defined by the layout.
+
+        position:       Integer of item pressed
+        convertView:    current View of item
+        parent:         View of parent field
+    */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;

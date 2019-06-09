@@ -10,7 +10,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-
+/*
+    Class:   statisticsTabThree
+    ---------------------------------------
+    Graphic Statistical Data is not used in this application.
+    TO DO: This is placed on the futures list.
+*/
 public class statisticsTabThree extends Fragment {
     private static final String TAG = "Tab3Fragment";
 

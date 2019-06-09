@@ -1,5 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
+/*
+    Class:   enrolmentData
+    ---------------------------------------
+    Used to store thed ata of subjects enrolled in
+*/
 public class enrolmentData {
 
     private String bachelor;

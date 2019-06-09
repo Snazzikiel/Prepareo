@@ -31,10 +31,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Class:   Subjects
+    ---------------------------------------
+    Used to store goal objects
+*/
 public class Subjects extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 
-    private static final String TAG = "stateCheck";
+    private static final String TAG = "subjectCheck";
     List<subjectsData> rowItems = new ArrayList<subjectsData>();
     ArrayList<accountData> accountList;
 
@@ -49,6 +54,11 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
     ListView myList;
     TextView greeting;
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +98,15 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         registerForContextMenu(myList);
     }
 
+    /*
+        Function:   onItemClick
+        ---------------------------------------
+        Default function for action when item is pressed
+
+        parent:     Parent variable to include adapter view
+        view:       Current activity view
+        position:   Position of item pressed by user
+    */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -98,6 +117,16 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         startActivityForResult(myIntent, 0);
     }
 
+    /*
+        Function:   popupMethod
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Used to fill out information
+        and save it in to the object for list creation.
+
+        subjItem:     (subjectsData)Object Information retrieved from class.
+
+        TO DO: Input subject data in to OWL file, create query and post data
+    */
     public void popupMethod(subjectsData subjItem) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -161,6 +190,17 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         });
     }
 
+    /*
+        Function:   editItem
+        ---------------------------------------
+        Method to bring a pop up for user to enter data. Fill items with data that has been
+        previously entered. Re-save data with new items entered.
+
+        subjItem:     (subjectsData)Object Information retrieved from class
+        itemPosition:   integer of Item Position selected
+
+        TO DO: Write query to update/input data in to OWL file
+    */
     public void editItem(subjectsData subjItem, final int itemPosition) {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -227,6 +267,14 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         });
     }
 
+    /*
+        Function:   createSubject
+        ---------------------------------------
+        Used to add an item to a list. Add new object in to local storage data
+
+        subject1:    (subjectsData)New object to be inserted in to list and inserted in to
+                        saved object.
+    */
     public void createSubject(subjectsData subject1) {
 
         Log.i(TAG, "addSubject");
@@ -254,6 +302,13 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         saveData();
     }
 
+    /*
+        Function:   deleteItem
+        ---------------------------------------
+        Used to delete an item from the List. Deletes off local storage data also
+
+        iPosition:    Position of list item clicked
+    */
     public void deleteSubject(int iPosition){
         Log.i(TAG, "deleteSubject");
         rowItems.remove(iPosition);
@@ -280,6 +335,12 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         return true;
     }
 
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the accountList object to the local android device.
+        Use a loadData function to call "subjectsData" SharedPreference to access.
+    */
     public void saveData() {
         Log.i(TAG, "saveSubject");
         SharedPreferences sharedPreferences = getSharedPreferences("subjectsData", MODE_PRIVATE);
@@ -290,6 +351,12 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         editor.apply();
     }
 
+    /*
+        Function:   loadData
+        ---------------------------------------
+        Used to retrieve the loadSubjects object to the local android device.
+        Use a saveData function to call "subjectsData" SharedPreference to overwrite.
+    */
     public void loadData( ) {
         Log.i(TAG, "loadSubjects");
         SharedPreferences sharedPreferences = getSharedPreferences("subjectsData", MODE_PRIVATE);
@@ -303,6 +370,11 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         }
     }
 
+    /*
+        Function:   getProfile
+        ---------------------------------------
+        Get user account of user logged in
+    */
     public void getProfile( ) {
         SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -315,6 +387,11 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         }
     }
 
+    /*
+        Function:   onCreateContextMenu
+        ---------------------------------------
+        Create menu object when user holds down on a list item
+    */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -322,6 +399,13 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         getMenuInflater().inflate(R.menu.subjects_menu, menu);
     }
 
+    /*
+        Function:   onContextItemSelected
+        ---------------------------------------
+        Call menu and action each option
+
+        MenuItem:       Menu taken from Menu in Res
+    */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();

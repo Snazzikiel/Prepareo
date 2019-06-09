@@ -33,10 +33,20 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Class:   goalsData
+    ---------------------------------------
+    Used to store goal objects
+*/
 public class subjectGoals extends Goals {
 
-    private static final String TAG = "stateCheck";
+    private static final String TAG = "subjectGoalCheck";
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

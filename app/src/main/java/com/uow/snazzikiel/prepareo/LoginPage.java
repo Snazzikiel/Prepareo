@@ -23,41 +23,64 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/*
+    Class:   LoginPage
+    ---------------------------------------
+    Login to application - verify data from OWL File
+*/
 public class LoginPage extends AppCompatActivity {
 
+    private static final String TAG = "loginCheck"; //used to check logs on Login SCreen
 
-
-    private static final String TAG = "stateCheck";
-    Button btLogin, btFacebook, goRegister;
+    Button btLogin, goRegister;
     EditText txtLogin, txtPassword;
-    TextView tvHint;
-    int counter = 3;
     boolean verified = false;
 
-    List<accountData> accountList;
+    List<accountData> accountList; //store user logged in data
 
     String login;
     String pw1;
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
 
+        btLogin:        Login button
+        goRegister:     Registration Button
+        txtLogin:       Text field for Login
+        txtPassword:    Text field for Password
+        verified:       Result of asynctask OWL query
+        accountList:    List used to create and store user data after successful login
+
+        login:          String used to store txtLogin field
+        pw1:            String used to store txtPassword field
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //Create a log file in the directory if not already exists - maven requires a local log file
+        //(this log file will never be used by this program)
         Properties prop = new Properties();
         prop.setProperty("log4j.rootLogger", "WARN");
         PropertyConfigurator.configure(prop);
 
 
         super.onCreate(savedInstanceState);
+
+        //initialise the variables declaraed
         setContentView(R.layout.activity_login_page);
         btLogin = (Button)findViewById(R.id.login_btn_login);
         txtLogin = (EditText)findViewById(R.id.login_email);
         txtPassword = (EditText)findViewById(R.id.login_password);
         goRegister = (Button)findViewById(R.id.noAccount);
 
+        //create a few user account list
         accountList = new ArrayList<>();
-        //loadData();
+        //overwrite saved accountlist File with BLANK for fresh login details entered
+        saveData();
 
+        //Once login button is pressed - check login details
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,43 +88,10 @@ public class LoginPage extends AppCompatActivity {
                 login = txtLogin.getText().toString().trim();
                 pw1 = txtPassword.getText().toString().trim();
                 verifyData();
-                /*
-                if (login == ""){
-                    login = "user";
-                }
-
-                //add user session to memory
-                accountData acc = new accountData(login, login, login, login, "2019-03-22T00:00:00", pw1 );
-                accountList.add(acc);
-                saveData();
-
-                startActivity(new Intent(LoginPage.this, Dashboard.class));
-                Toast.makeText(getApplicationContext(),
-                        "Success!",Toast.LENGTH_SHORT).show();
-
-/*
-                ** UNLOCK THIS WHEN COMPLETE TO ADD TEST FOR CONTINUE BUTTON
-                if(txtLogin.getText().toString().equals("user") &&
-
-                        txtPassword.getText().toString().equals("user")) {
-                    startActivity(new Intent(LoginPage.this, Dashboard.class));
-                    Toast.makeText(getApplicationContext(),
-                            "Success!...",Toast.LENGTH_SHORT).show();
-
-                }else{
-                    Toast.makeText(getApplicationContext(),
-                            "Incorrect Credentials",Toast.LENGTH_SHORT).show();
-
-                    //counter--;
-                    //if (counter == 0) {
-                    //    btLogin.setEnabled(false);
-                    //}
-                }
-
-                */
             }
         });
 
+        //Go to create account registration page
         goRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View x) {
@@ -109,78 +99,50 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
-        Log.i(TAG, "onCreate");
+        Log.i(TAG, "Create-Complete");
     }
 
+    /*
+        Function:   verifyData
+        ---------------------------------------
+        Function used to verify the data input, Check for blanks and then query against the OWL file
+        using accountVerification class
+    */
     private void verifyData(){
+        //check if fields are empty
         if (TextUtils.isEmpty(login) || TextUtils.isEmpty(pw1)){
             Toast.makeText(getApplicationContext(), "Fields cannot be empty.",
                     Toast.LENGTH_SHORT).show();
         } else {
+            //Check OWL File for correct login data
             Toast.makeText(getApplicationContext(), "Verifying..", Toast.LENGTH_SHORT).show();
             accountVerification p = new accountVerification();
-            verified = p.verifyUser(login, pw1);
-            if (verified){
+            verified = p.verifyUser(login, pw1); //Checks the account verification class (Connects to OWL file)
 
+            if (verified){//correct login data entered
                 //add user session to memory
+                //only require username to be saved in session memory to look at OWL database. This is used to create
+                //a temporary account session
                 accountData acc = new accountData(login, login, login, login, "2019-03-22T00:00:00", pw1 );
                 accountList.add(acc);
-                saveData();
+                saveData();//save to session data
 
-                startActivity(new Intent(LoginPage.this, Dashboard.class));
                 Toast.makeText(getApplicationContext(),
                         "Success!",Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "Incorrect Data!", Toast.LENGTH_SHORT).show();
-                //}
+                startActivity(new Intent(LoginPage.this, Dashboard.class));
 
-                //Toast.makeText(getApplicationContext(), "12345", Toast.LENGTH_SHORT).show();
+            } else {//incorrect login data entered
+                Toast.makeText(getApplicationContext(), "Incorrect Data!", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart");
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(TAG, "onResume");
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause");
-    }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop");
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(TAG, "onRestart");
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy");
-    }
-
-
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the accountList object to the local android device.
+        Use a loadData function to call "createAccount" SharedPreference to access.
+    */
     public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -190,25 +152,42 @@ public class LoginPage extends AppCompatActivity {
         editor.apply();
     }
 
-    /* Retrieval not needed as database enquiry
-    public void loadData( ) {
-        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString(getString(R.string.account_savedata), null);
-        Type type = new TypeToken<ArrayList<accountData>>() {}.getType();
-        accountList = gson.fromJson(json, type);
-
-        if (accountList == null) {
-            accountList = new ArrayList<>();
-        }
-    }*/
-
+    //Temp testing functions - These are not required but left here for future use if needed
     @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume");
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop");
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy");
+    }
+        @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.i(TAG, "onSaveInstanceState");
     }
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);

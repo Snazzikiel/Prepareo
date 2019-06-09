@@ -1,5 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
+/*
+    Class:   accountData
+    ---------------------------------------
+    Used to store the data of the current account in to local data
+*/
 class accountData {
     private String firstName;
     private String userName;

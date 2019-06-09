@@ -19,10 +19,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Class:   subjectsOptions
+    ---------------------------------------
+    Used to store subjects objects
+*/
+
 public class subjectsOptions extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 
-    private static final String TAG = "stateCheck";
+    private static final String TAG = "subjectsOptions";
     List<subjectsData> rowItems = new ArrayList<subjectsData>();
     String subjectName;
     int itemPosition;
@@ -37,6 +43,11 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
     ViewGroup container;
     ListView myList;
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +80,15 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
 
     }
 
+    /*
+        Function:   onItemClick
+        ---------------------------------------
+        Default function for action when item is pressed
+
+        parent:     Parent variable to include adapter view
+        view:       Current activity view
+        position:   Position of item pressed by user
+    */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // Get the selected item text from ListView
@@ -103,6 +123,14 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
 
     }
 
+    /*
+        Function:   createSubject
+        ---------------------------------------
+        Used to add an item to a list. Add new object in to local storage data
+
+        subject1:    (subjectsData)New object to be inserted in to list and inserted in to
+                        saved object.
+    */
     public void createSubject(subjectsData subject1) {
 
         Log.i(TAG, "addSubject");
@@ -125,6 +153,11 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
         myList.setOnItemClickListener(this);
     }
 
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default function for back button
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent myIntent = new Intent(getApplicationContext(), Subjects.class);
         startActivityForResult(myIntent, 0);

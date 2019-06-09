@@ -1,8 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
-
+/*
+    Class:   notificationData
+    ---------------------------------------
+    Used to store notification objects
+*/
 class notificationData {
     private String name;
     private String frequency;

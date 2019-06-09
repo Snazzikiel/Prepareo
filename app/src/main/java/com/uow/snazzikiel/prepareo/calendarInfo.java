@@ -11,14 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    Class:   calendarInfo
+    ---------------------------------------
+    Adapter class to load list in to the calendar page.
+    Create calendar in GridView, take events from OWL file and circle them if activity
+    has been loaded.
+*/
 public class calendarInfo extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final String TAG = "calendarInfo";
 
@@ -29,6 +32,13 @@ public class calendarInfo extends AppCompatActivity implements AdapterView.OnIte
     List<owlData> dayActivities;
     ListView myList;
 
+    /*
+        Function: onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen.
+
+        Uses same layout as notification.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +50,8 @@ public class calendarInfo extends AppCompatActivity implements AdapterView.OnIte
 
         dayActivities = new ArrayList<owlData>();
         myList = (ListView) findViewById(R.id.main_list);//list for notifications
-        
 
-
-
+        //load activities in to list
         for(owlData tmp : owlData.owlInfo){
             String user = tmp.getUserName();
             String d = tmp.getDate();
@@ -57,7 +65,7 @@ public class calendarInfo extends AppCompatActivity implements AdapterView.OnIte
         }
 
         saveData();
-        addNote = (FloatingActionButton) findViewById(R.id.addNotification);//button for add notifications
+        addNote = (FloatingActionButton) findViewById(R.id.addNotification);
         addNote.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -68,6 +76,11 @@ public class calendarInfo extends AppCompatActivity implements AdapterView.OnIte
         });
     }
 
+    /*
+        Function: onItemClick
+        ---------------------------------------
+        Default function for when item is pressed
+    */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -75,6 +88,12 @@ public class calendarInfo extends AppCompatActivity implements AdapterView.OnIte
         //popupMethod(noteItem);
     }
 
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the activity list object to the local android device.
+        Use a loadData function to call "activityData" SharedPreference to access.
+    */
     public void saveData() {
         Log.i(TAG, "saveSubject");
         SharedPreferences sharedPreferences = getSharedPreferences("activityData", MODE_PRIVATE);
@@ -85,6 +104,11 @@ public class calendarInfo extends AppCompatActivity implements AdapterView.OnIte
         editor.apply();
     }
 
+    /*
+        Function:   createActivities
+        ---------------------------------------
+        Fills the activity list with activities loaded in owl data
+    */
     public void createActivities(owlData activity) {
 
         Log.i(TAG, "addActivities");
@@ -112,7 +136,11 @@ public class calendarInfo extends AppCompatActivity implements AdapterView.OnIte
         saveData();
     }
 
-
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default required function to include a back button arrow on the top of the page
+    */
     public boolean onOptionsItemSelected(MenuItem item) {
         //Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
         //startActivityForResult(myIntent, 0);

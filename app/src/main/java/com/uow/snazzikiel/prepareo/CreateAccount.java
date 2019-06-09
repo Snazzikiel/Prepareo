@@ -1,12 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
-import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,19 +20,16 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.update.UpdateExecutionFactory;
-import com.hp.hpl.jena.update.UpdateFactory;
-import com.hp.hpl.jena.update.UpdateProcessor;
-import com.hp.hpl.jena.update.UpdateRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/*
+    Class:   CreateAccount
+    ---------------------------------------
+    Create new user data
+*/
 public class CreateAccount extends AppCompatActivity {
     private static final String TAG = "CreateAccount";
     Button btRegister;
@@ -64,6 +59,32 @@ public class CreateAccount extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener mDateSet;
 
+    /*
+        Function:   onCreate
+        ---------------------------------------
+        Default function to create the context and instance for Android screen
+
+        btLogin:        Login button
+        btRegister:     Registration Button
+        tvFirstName:    Text field for First Name
+        tvLastName:     Text field for Last Name
+        tvUserName:     Text field for Username
+        tvBirthday:     Text field for Date of Birth
+        tvEmail:        Text field for Email
+        tvPassword:     Text field for Password
+        tvPassword2:    Text field for Password2
+
+        fName:          String for First Name TextView
+        lName:          String for Last name TextView
+        userName:       String for userName TextView
+        bday:           String for birthday TextView
+        email:          String for email TextView
+        pw1:            String field for Password
+        pw2:            String field for Password2
+
+        userNameFound:  Boolean return of OWL File
+        mDateSet:       DateSet picker fort Date of Birth field
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +102,7 @@ public class CreateAccount extends AppCompatActivity {
         tvPassword = (TextView)findViewById(R.id.create_Password);
         tvPassword2 = (TextView)findViewById(R.id.create_Password2);
 
-
+        //opens up a date selector when TextView for birthday is entered
         tvBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +121,7 @@ public class CreateAccount extends AppCompatActivity {
             }
         });
 
+        //Convert date selector input back to a string and place text in to tvBirthday
         mDateSet = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -129,8 +151,24 @@ public class CreateAccount extends AppCompatActivity {
 
     }
 
+
+    /*
+        Function:   verifyFields
+        ---------------------------------------
+        Function used to verify the data input, Check for blanks, if Password fields match
+        and then query against the OWL file using accountVerification class
+
+        fName:      First Name
+        lName:      Last Name
+        bday:       Date of Birth
+        userName:   username entered
+        email:      email address of user
+        pw1:        Password entry 1
+        pw2:        Password entry 2
+    */
     public void verifyFields(View v){
 
+        //check each field to see if there is blanks
         if (TextUtils.isEmpty(fName) || TextUtils.isEmpty(bday) || TextUtils.isEmpty(userName) ||
                 TextUtils.isEmpty(email) || TextUtils.isEmpty(lName) ||
                 TextUtils.isEmpty(pw1) || TextUtils.isEmpty(pw2)){
@@ -143,7 +181,10 @@ public class CreateAccount extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Verifying..!",
                     Toast.LENGTH_SHORT).show();
             accountVerification p = new accountVerification();
+
+            //Send query to OWL file to check if userName is found or not
             userNameFound = p.verifyCreateUser(fName, lName, userName, bday, pw1);
+
             if(userNameFound){
                 Toast.makeText(getApplicationContext(), "User name already exists.",
                         Toast.LENGTH_SHORT).show();
@@ -161,6 +202,11 @@ public class CreateAccount extends AppCompatActivity {
         }
     }
 
+    /*
+        Function:   onOptionsItemSelected
+        ---------------------------------------
+        Default required function to include a back button arrow on the top of the page
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
@@ -171,6 +217,13 @@ public class CreateAccount extends AppCompatActivity {
         return true;
     }
 
+
+    /*
+        Function:   saveData
+        ---------------------------------------
+        Used to store the accountList object to the local android device.
+        Use a loadData function to call "createAccount" SharedPreference to access.
+    */
     public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -180,6 +233,12 @@ public class CreateAccount extends AppCompatActivity {
         editor.apply();
     }
 
+    /*
+        Function:   loadData
+        ---------------------------------------
+        Used to retrieve the accountList object to the local android device.
+        Use a saveData function to call "createAccount" SharedPreference to overwrite.
+    */
     public void loadData( ) {
         SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
         Gson gson = new Gson();

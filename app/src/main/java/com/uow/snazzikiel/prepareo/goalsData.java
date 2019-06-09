@@ -1,5 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
+/*
+    Class:   goalsData
+    ---------------------------------------
+    Used to store goal objects
+*/
 class goalsData {
 
     String goalTitle;

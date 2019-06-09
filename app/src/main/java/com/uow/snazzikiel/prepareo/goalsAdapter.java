@@ -9,10 +9,19 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
+/*
+    Class:   goalsAdapter
+    ---------------------------------------
+    Adapter class to load list in to the goalsAdapter Page
+
+    context:        Context taken from main activity calling this class
+    rowItems:       object list of data stored locally
+
+    TO DO: Join with other adapter functions to cater for different adapters
+*/
 public class goalsAdapter extends BaseAdapter {
 
     Context context;

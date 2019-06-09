@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
@@ -23,9 +24,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+/*
+    Class:   time
+    ---------------------------------------
+    Used to load activities to OWL File
+*/
 public class time extends AppCompatActivity {
 
-    private static final String TAG = "owlCheck";
+    private static final String TAG = "owlTime";
     Button selectTime;
     Button sendUpdates;
     Switch switchTime;
@@ -60,10 +66,17 @@ public class time extends AppCompatActivity {
     String actionUpdates = prefix; //store all action updates
     String userUpdates = prefix; //store all user updates
 
+    /*
+        Class:   accountVerification
+        ---------------------------------------
+        Verification class used to check data against the OWL file when user is creating or logging in.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setTitle("Load Activities");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.time);
 
         loadOwl();
@@ -253,6 +266,13 @@ public class time extends AppCompatActivity {
         });
     }
 
+    /*
+        Class: updateEndpoint
+        ---------------------------------------
+        This class is an AsyncTask, which means it will run in the background whilst the application is
+        continuing to function. This class is used to query the OWL file to verify if a user exist, if a user
+        does not exist, it will insert the entered data to the OWL file to create the user account.
+    */
     protected class updateEndpoint extends AsyncTask<String, String, String>
     {
         @Override
@@ -275,6 +295,12 @@ public class time extends AppCompatActivity {
         }
     }
 
+    /*
+        Function:   loadOwl
+        ---------------------------------------
+        Used to retrieve the loadSubjects object to the local android device.
+        Use a saveData function to call "aSyncOwlData" SharedPreference to overwrite.
+    */
     public void loadOwl( ){
         SharedPreferences sharedPreferences = getSharedPreferences("aSyncData", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -291,6 +317,8 @@ public class time extends AppCompatActivity {
             owlItems.put("temp", tmp);
         }
     }
+
+
 
 
 }

@@ -19,6 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/*
+    Class:   Profile
+    ---------------------------------------
+    NOT USED CLASS - print OWL File in to a dropdown list
+*/
 public class Profile extends AppCompatActivity {
 
     @Override

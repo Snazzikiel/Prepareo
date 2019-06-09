@@ -21,6 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/*
+    Class:   profileAdapter
+    ---------------------------------------
+    NOT USED - Not used because Profile dropdown list is not used
+*/
 
 public class profileAdapter extends MultiLevelAdapter {
 
