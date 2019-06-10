@@ -1,5 +1,11 @@
 package com.uow.snazzikiel.prepareo;
 
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Alec
+ ***********************************************/
+
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -19,7 +25,7 @@ import java.util.List;
 
 import static android.app.PendingIntent.FLAG_ONE_SHOT;
 
-/*
+/**
     Class:   assignmentsAdapter
     ---------------------------------------
     Adapter class to load list in to the Assignments Page
@@ -55,7 +61,7 @@ public class notificationAdapter extends BaseAdapter {
         ImageView noteArrow;
     }
 
-    /*
+    /**
         Function:   getView
         ---------------------------------------
         Get the list of all input fields on the current view
@@ -92,7 +98,7 @@ public class notificationAdapter extends BaseAdapter {
     }
 
 
-    /*
+    /**
         Function:   AlarmNotificationReceiver
         ---------------------------------------
         Receiver established for push notifications. A Broadcast with date is to be setup

@@ -1,5 +1,8 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/*
+/**
     Class:   subjectsAdapter
     ---------------------------------------
     Adapter class to load list in to the subjectsAdapter Page
@@ -48,14 +51,14 @@ public class subjectsAdapter extends BaseAdapter {
         ImageView subjArrow;
     }
 
-    /*
+    /**
         Function:   getView
         ---------------------------------------
         Place item Inflater in to list. Each item is defined by the layout.
 
-        position:       Integer of item pressed
-        convertView:    current View of item
-        parent:         View of parent field
+        @param position:       Integer of item pressed
+        @param convertView:    current View of item
+        @param parent:         View of parent field
     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

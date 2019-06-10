@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David, Alec
+ * Assisted:		Lachlan, Connor, Adam
+ ***********************************************/
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,10 +36,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
     Class:   Subjects
     ---------------------------------------
-    Used to store goal objects
+    Used to store all subjects they are enrolled in
 */
 public class Subjects extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -54,7 +59,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
     ListView myList;
     TextView greeting;
 
-    /*
+    /**
         Function:   onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen
@@ -98,14 +103,14 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         registerForContextMenu(myList);
     }
 
-    /*
+    /**
         Function:   onItemClick
         ---------------------------------------
         Default function for action when item is pressed
 
-        parent:     Parent variable to include adapter view
-        view:       Current activity view
-        position:   Position of item pressed by user
+        @param parent:     Parent variable to include adapter view
+        @param view:       Current activity view
+        @param position:   Position of item pressed by user
     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -117,13 +122,13 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         startActivityForResult(myIntent, 0);
     }
 
-    /*
+    /**
         Function:   popupMethod
         ---------------------------------------
         Method to bring a pop up for user to enter data. Used to fill out information
         and save it in to the object for list creation.
 
-        subjItem:     (subjectsData)Object Information retrieved from class.
+        @param subjItem:     (subjectsData)Object Information retrieved from class.
 
         TO DO: Input subject data in to OWL file, create query and post data
     */
@@ -190,14 +195,14 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         });
     }
 
-    /*
+    /**
         Function:   editItem
         ---------------------------------------
         Method to bring a pop up for user to enter data. Fill items with data that has been
         previously entered. Re-save data with new items entered.
 
-        subjItem:     (subjectsData)Object Information retrieved from class
-        itemPosition:   integer of Item Position selected
+        @param subjItem:     (subjectsData)Object Information retrieved from class
+        @param itemPosition:   integer of Item Position selected
 
         TO DO: Write query to update/input data in to OWL file
     */
@@ -267,12 +272,12 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         });
     }
 
-    /*
+    /**
         Function:   createSubject
         ---------------------------------------
         Used to add an item to a list. Add new object in to local storage data
 
-        subject1:    (subjectsData)New object to be inserted in to list and inserted in to
+        @param subject1:    (subjectsData)New object to be inserted in to list and inserted in to
                         saved object.
     */
     public void createSubject(subjectsData subject1) {
@@ -302,12 +307,12 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         saveData();
     }
 
-    /*
+    /**
         Function:   deleteItem
         ---------------------------------------
         Used to delete an item from the List. Deletes off local storage data also
 
-        iPosition:    Position of list item clicked
+        @param iPosition:    Position of list item clicked
     */
     public void deleteSubject(int iPosition){
         Log.i(TAG, "deleteSubject");
@@ -335,7 +340,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         return true;
     }
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the accountList object to the local android device.
@@ -351,7 +356,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the loadSubjects object to the local android device.
@@ -370,7 +375,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         }
     }
 
-    /*
+    /**
         Function:   getProfile
         ---------------------------------------
         Get user account of user logged in
@@ -387,7 +392,7 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         }
     }
 
-    /*
+    /**
         Function:   onCreateContextMenu
         ---------------------------------------
         Create menu object when user holds down on a list item
@@ -399,12 +404,12 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
         getMenuInflater().inflate(R.menu.subjects_menu, menu);
     }
 
-    /*
+    /**
         Function:   onContextItemSelected
         ---------------------------------------
         Call menu and action each option
 
-        MenuItem:       Menu taken from Menu in Res
+        @param item:       Menu taken from Menu in Res
     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -422,6 +427,21 @@ public class Subjects extends AppCompatActivity implements AdapterView.OnItemCli
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    /**
+     Function:   loadAssignmentData
+     ---------------------------------------
+     Used to retrieve all subject assignments to calculate weighting as a total
+     Use a saveData function to call "assignmentData" SharedPreference to overwrite.
+     */
+    public void loadAssignmentData( String subjectCode ) {
+        Log.i(TAG, "loadSubjects");
+        SharedPreferences sharedPreferences = getSharedPreferences("assignmentData" + subjectCode, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString((getString(R.string.assignments_savedata) + subjectCode), null);
+        Type type = new TypeToken<ArrayList<assignmentsData>>() {}.getType();
+        rowItems = gson.fromJson(json, type);
     }
 
 }

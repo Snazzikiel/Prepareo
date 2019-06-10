@@ -1,5 +1,9 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David, Alec
+ * Assisted:		Lachlan, Connor, Adam
+ ***********************************************/
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,7 +23,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
     Class:   subjectsOptions
     ---------------------------------------
     Used to store subjects objects
@@ -43,7 +47,7 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
     ViewGroup container;
     ListView myList;
 
-    /*
+    /**
         Function:   onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen
@@ -80,7 +84,7 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
 
     }
 
-    /*
+    /**
         Function:   onItemClick
         ---------------------------------------
         Default function for action when item is pressed
@@ -123,12 +127,12 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
 
     }
 
-    /*
+    /**
         Function:   createSubject
         ---------------------------------------
         Used to add an item to a list. Add new object in to local storage data
 
-        subject1:    (subjectsData)New object to be inserted in to list and inserted in to
+        @param subject1:    (subjectsData)New object to be inserted in to list and inserted in to
                         saved object.
     */
     public void createSubject(subjectsData subject1) {
@@ -153,7 +157,7 @@ public class subjectsOptions extends AppCompatActivity implements AdapterView.On
         myList.setOnItemClickListener(this);
     }
 
-    /*
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default function for back button

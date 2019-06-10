@@ -1,4 +1,8 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Alec
+ ***********************************************/
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -7,7 +11,7 @@ import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 
 import java.util.Calendar;
-/*
+/**
     Never used
  */
 public class timepick extends DialogFragment {

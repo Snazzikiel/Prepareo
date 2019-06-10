@@ -1,4 +1,10 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Connor
+ * Assisted:		Alec
+ ***********************************************/
+
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -25,7 +31,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-/*
+/**
     Class:   CreateAccount
     ---------------------------------------
     Create new user data
@@ -59,7 +65,7 @@ public class CreateAccount extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener mDateSet;
 
-    /*
+    /**
         Function:   onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen
@@ -152,7 +158,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
 
-    /*
+    /**
         Function:   verifyFields
         ---------------------------------------
         Function used to verify the data input, Check for blanks, if Password fields match
@@ -202,7 +208,7 @@ public class CreateAccount extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default required function to include a back button arrow on the top of the page
@@ -218,7 +224,7 @@ public class CreateAccount extends AppCompatActivity {
     }
 
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the accountList object to the local android device.
@@ -233,7 +239,7 @@ public class CreateAccount extends AppCompatActivity {
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the accountList object to the local android device.

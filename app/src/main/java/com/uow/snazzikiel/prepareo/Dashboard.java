@@ -1,5 +1,11 @@
 package com.uow.snazzikiel.prepareo;
 
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Adam
+ * Assisted:		Connor, Lachlan
+ ***********************************************/
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -262,6 +268,16 @@ public class Dashboard extends AppCompatActivity {
 
                     RDFNode subNode = soln.get(queryTargetVars[3]);
                     String sub = subNode.asNode().getLocalName();
+
+                    //place Space before any uppercase letter in category or sub-cat
+                    Log.i(TAG, "This is the cat: " + cat);
+                    Log.i(TAG, "This is the sub: " + sub);
+                    cat = Character.toUpperCase(cat.charAt(0)) +
+                            cat.substring(1).replaceAll("(?<!_)(?=[A-Z])", " ");
+                    sub = Character.toUpperCase(sub.charAt(0)) +
+                            sub.substring(1).replaceAll("(?<!_)(?=[A-Z])", " ");
+                    Log.i(TAG, "This is the cat: " + cat);
+                    Log.i(TAG, "This is the sub: " + sub);
 
                     if(key.equals(cat))
                     {

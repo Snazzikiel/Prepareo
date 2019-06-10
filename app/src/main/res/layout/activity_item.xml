@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!--
+*********************************************
+* CSIT321 - Prepareo
+* Author/s:		David, Alec, Lachlan, Connor, Adam
+*********************************************
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="2dp" >
 
     <TextView
+        android:id="@+id/activityDate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityName"
+        android:layout_marginStart="17dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="-6dp"
+        android:layout_toEndOf="@+id/activityDate"
+        android:layout_toRightOf="@+id/activityDate"
+        android:paddingBottom="10dp"
+        android:text="Example Text"
+        android:textSize="14dp" />
+
+    <TextView
         android:id="@+id/activityDate"
-        android:layout_width="151dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/activityName"
         android:layout_marginLeft="9dp"
@@ -27,7 +47,7 @@
 
     <TextView
         android:id="@+id/activityName"
-        android:layout_width="151dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="9dp"
@@ -37,6 +57,20 @@
         android:text="Example Text"
         android:textSize="14dp" />
 
+    <TextView
+        android:id="@+id/activityDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/activityName"
+        android:layout_toRightOf="@+id/activityName"
+        android:paddingBottom="10dp"
+        android:text="(0)"
+        android:textSize="14dp" />
+
     <ImageView
         android:id="@+id/activity_arrow"
         android:layout_width="50dp"
@@ -44,11 +78,24 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="10dp"
         android:contentDescription="desc"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="19dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/activityDate"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/activityDate"
+        android:layout_toRightOf="@+id/activityDate"
+        android:gravity="center_horizontal"
+        android:text="-" />
 
 </RelativeLayout>

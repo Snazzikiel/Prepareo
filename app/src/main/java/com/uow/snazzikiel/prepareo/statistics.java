@@ -1,4 +1,8 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -43,7 +47,7 @@ public class statistics extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Statistics");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_statistics);
 
 

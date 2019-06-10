@@ -1,5 +1,8 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,7 +27,7 @@ import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ComboLineColumnChartView;
 
-/*
+/**
     Class:   statisticsTabTwo
     ---------------------------------------
     Graphic Statistical Data is not used in this application.

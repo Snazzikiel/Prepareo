@@ -1,6 +1,9 @@
 package com.uow.snazzikiel.prepareo;
-
-/*
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Connor
+ ***********************************************/
+/**
     Class:   subjectsData
     ---------------------------------------
     Used to store subject objects

@@ -1,6 +1,10 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 
-/*
+/**
     Class:   accountData
     ---------------------------------------
     Used to store the data of the current account in to local data

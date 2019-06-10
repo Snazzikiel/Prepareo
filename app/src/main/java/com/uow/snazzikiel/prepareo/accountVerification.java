@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Alec
+ * Assisted:		David
+ ***********************************************/
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +17,7 @@ import com.hp.hpl.jena.update.UpdateRequest;
 
 import java.util.concurrent.ExecutionException;
 
-/*
+/**
     Class:   accountVerification
     ---------------------------------------
     Verification class used to check data against the OWL file when user is creating or logging in.
@@ -31,7 +36,7 @@ public class accountVerification extends AppCompatActivity {
     String userName;
     String pw1;
 
-    /*
+    /**
         Function:   verifyUser
         ---------------------------------------
         Login data taken from LoginPage, username and password, then the OWL file is queried to see
@@ -62,17 +67,17 @@ public class accountVerification extends AppCompatActivity {
         return check;
     }
 
-    /*
+    /**
         Function:   verifyCreateUser
         ---------------------------------------
         Account data taken from the create user page. This function creates the string to be queried against
         the OWL file
 
-        fName:      first name
-        lName:      last name
-        userName:   username
-        bday:       Date of Birth of user
-        pw1:        Password entered
+        @param      fName       first name
+        @param      lName       last name
+        @param      userName    username
+        @param      bday        Date of Birth of user
+        @param      pw1         Password entered
     */
     public boolean verifyCreateUser(String fName, String lName, String userName, String bday, String pw1) {
         this.fName = fName;
@@ -100,7 +105,7 @@ public class accountVerification extends AppCompatActivity {
         return check;
     }
 
-    /*
+    /**
         Class: userCheck
         ---------------------------------------
         This class is an AsyncTask, which means it will run in the background whilst the application is
@@ -155,7 +160,7 @@ public class accountVerification extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
         Class: userCheck
         ---------------------------------------
         This class is an AsyncTask, which means it will run in the background whilst the application is
@@ -188,7 +193,7 @@ public class accountVerification extends AppCompatActivity {
     }
 
 
-    /*
+    /**
          Class: passCheck
          ---------------------------------------
          This class is an AsyncTask, which means it will run in the background whilst the application is

@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Alec
+ * Assisted:		Connor
+ ***********************************************/
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-/*
+/**
     Class:   LoginPage
     ---------------------------------------
     Login to application - verify data from OWL File
@@ -41,7 +46,7 @@ public class LoginPage extends AppCompatActivity {
     String login;
     String pw1;
 
-    /*
+    /**
         Function:   onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen
@@ -59,6 +64,7 @@ public class LoginPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        getProfile();
         //Create a log file in the directory if not already exists - maven requires a local log file
         //(this log file will never be used by this program)
         Properties prop = new Properties();
@@ -67,6 +73,15 @@ public class LoginPage extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
+        //Log.i(TAG, accountList.get(0).getUserName());
+
+        //If user has signed in already and there is login data - Use that and forward to dashboard
+        //if (accountList.size() > 0){
+
+            //Toast.makeText(getApplicationContext(), "Welcome back, " + accountList.get(0).getUserName(),
+             //       Toast.LENGTH_SHORT).show();
+            //startActivity(new Intent(LoginPage.this, Dashboard.class));
+        //}
 
         //initialise the variables declaraed
         setContentView(R.layout.activity_login_page);
@@ -102,7 +117,7 @@ public class LoginPage extends AppCompatActivity {
         Log.i(TAG, "Create-Complete");
     }
 
-    /*
+    /**
         Function:   verifyData
         ---------------------------------------
         Function used to verify the data input, Check for blanks and then query against the OWL file
@@ -137,11 +152,11 @@ public class LoginPage extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the accountList object to the local android device.
-        Use a loadData function to call "createAccount" SharedPreference to access.
+        Use a getProfile function to call "createAccount" SharedPreference to access.
     */
     public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
@@ -150,6 +165,22 @@ public class LoginPage extends AppCompatActivity {
         String json = gson.toJson(accountList);
         editor.putString(getString(R.string.account_savedata), json);
         editor.apply();
+    }
+
+    /**
+        Function:   getProfile
+        ---------------------------------------
+        Used to retrieve the accountData object to the local android device.
+        Use a saveData function to call "createAccount" SharedPreference to overwrite.
+    */
+    public void getProfile( ) {
+        SharedPreferences sharedPreferences = getSharedPreferences("createAccount", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(getString(R.string.account_savedata), null);
+        Type type = new TypeToken<ArrayList<accountData>>() {}.getType();
+        accountList = gson.fromJson(json, type);
+
+        Log.i(TAG, String.valueOf(accountList.size()));
     }
 
     //Temp testing functions - These are not required but left here for future use if needed

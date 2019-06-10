@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Lachlan
+ * Assisted:		David
+ ***********************************************/
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,7 +38,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
     Class:   Goals
     ---------------------------------------
     Main Goals class to load up when user presses Goals on dashboard
@@ -57,7 +62,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
     private statisticsTabAdapter mGoals;
     private ViewPager mViewPager;
 
-    /*
+    /**
         Function: onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen.
@@ -81,7 +86,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         tabLayout.setupWithViewPager(mViewPager);
     }
 
-    /*
+    /**
         Function: onItemClick
         ---------------------------------------
         Default function for when item is pressed
@@ -95,7 +100,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
                 Toast.LENGTH_SHORT).show();
     }
 
-    /*
+    /**
         Function:   setupViewPager
         ---------------------------------------
         Function to split the screen in to two fragments - Personal and Academic
@@ -107,7 +112,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         viewPager.setAdapter(adapter);
     }
 
-    /*
+    /**
         Function:   popupMethod
         ---------------------------------------
         Method to bring a pop up for user to enter data. Used to fill out information
@@ -173,7 +178,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         });
     }
 
-    /*
+    /**
         Function:   editItem
         ---------------------------------------
         Method to bring a pop up for user to enter data. Fill items with data that has been
@@ -254,7 +259,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         });
     }
 
-    /*
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default function for back button
@@ -265,7 +270,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         return true;
     }
 
-    /*
+    /**
         Function:   createItem
         ---------------------------------------
         Used to add an item to a list. Add new object in to local storage data
@@ -300,7 +305,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         myList.setOnItemClickListener(this);
     }
 
-    /*
+    /**
         Function:   deleteItem
         ---------------------------------------
         Used to delete an item from the List. Deletes off local storage data also
@@ -327,7 +332,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         saveData();
     }
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the accountList object to the local android device.
@@ -343,7 +348,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the loadSubjects object to the local android device.
@@ -362,7 +367,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         }
     }
 
-    /*
+    /**
         Function:   onContextItemSelected
         ---------------------------------------
         Create menu object when user holds down on a list item
@@ -374,7 +379,7 @@ public class Goals extends AppCompatActivity implements AdapterView.OnItemClickL
         getMenuInflater().inflate(R.menu.goals_menu, menu);
     }
 
-    /*
+    /**
         Function:   onContextItemSelected
         ---------------------------------------
         Call menu and action each option

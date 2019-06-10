@@ -1,4 +1,8 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,9 +14,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-/*
+/**
     Class:   statisticsTabThree
     ---------------------------------------
+     **NOT USED **
     Graphic Statistical Data is not used in this application.
     TO DO: This is placed on the futures list.
 */

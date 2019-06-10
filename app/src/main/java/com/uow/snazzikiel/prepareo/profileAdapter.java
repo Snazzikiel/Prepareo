@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Alec
+ ***********************************************/
 
 import android.content.Context;
 import android.graphics.Color;
@@ -21,10 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/*
+/**
     Class:   profileAdapter
-    ---------------------------------------
-    NOT USED - Not used because Profile dropdown list is not used
+   ---------------------------------------
+    ****NOT USED CLASS***
+    print OWL File in to a dropdown list
 */
 
 public class profileAdapter extends MultiLevelAdapter {

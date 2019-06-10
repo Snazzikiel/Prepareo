@@ -1,8 +1,15 @@
 package com.uow.snazzikiel.prepareo;
 
-/*
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
+
+/**
     Class:   enrolmentData
     ---------------------------------------
+    ***** NOT USED *****
+ *
     Used to store thed ata of subjects enrolled in
 */
 public class enrolmentData {

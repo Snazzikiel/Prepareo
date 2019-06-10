@@ -1,5 +1,8 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -44,9 +47,18 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+    Class:   notifications
+    ---------------------------------------
+    Class used to create, save and deploy notifications to users. This class has undergone a
+    major method change and overhaul. Due to lack of due, variables and functions may be miscorrectly
+    named or obsolete. Review functions carefully until further updated.
+
+    TO DO:  correct functions and update variable names
+ */
 
 public class notifications extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private static final String TAG = "notifications-";
+    private static final String TAG = "notificationMenu";
     //List<notificationData> rowItems = new ArrayList<notificationData>();
     ArrayList<notificationData> rowItems;// = new ArrayList<notificationData>();
     notificationData p;
@@ -64,7 +76,7 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
     int noteCount = 0;
 
-    /*
+    /**
         Function:   onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen
@@ -79,6 +91,7 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         myList = (ListView) findViewById(R.id.main_list);
 
         loadData();
+        //add fake data to reload list for user screen
         p = new notificationData(null, null, null, null, null);
         addNotificationItem(p);
         deleteNotificationItem(rowItems.size()-1);
@@ -87,16 +100,16 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         addNote.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                popupMethod(null);
+                popupMethod(0);
 
             }
         });
 
-        createNotificationChannel();
+
         registerForContextMenu(myList);
     }
 
-    /*
+    /**
         Function:   onItemClick
         ---------------------------------------
         Default function for action when item is pressed
@@ -112,81 +125,40 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         //popupMethod(noteItem);
     }
 
-    /*
+    /**
         Function:   popupMethod
         ---------------------------------------
+        **METHOD CHANGE**
+     *  Method is to forward to notificationForm to enter/alter data of notifications.
+     *  This will allow users to correctly enter date field rather than an incorrect pop-up text
+     *  Refer back to old github versions prior to 10-06-19.
+     *
+     * **OLD METHOD**
         Method to bring a pop up for user to enter data. Used to fill out information
         and save it in to the object for list creation.
 
-        assignItem:     (goalsData)Object Information retrieved from class.
+        //@param noteItem:     (notificationData)Object Information retrieved from class.
 
         TO DO: Input data in to OWL file, create query and post data
     */
-    public void popupMethod(notificationData noteItem){
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        conLayout = (ConstraintLayout) findViewById(R.id.notification_main_layout);
-
-        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.notification_popup, null);
-
-        popUp = new PopupWindow(container, (int)(width*0.80),(int)(height*0.80), true);
-        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int)(width*0.10), (int)(height*0.10));
-
-        container.setOnTouchListener(new View.OnTouchListener(){
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent){
-                popUp.dismiss();
-                return true;
-            }
-        });
-
-        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
-        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUp.dismiss();
-            }
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText etName = (EditText)container.findViewById(R.id.notification_Name);
-                EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
-                EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-                EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
-                EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
-
-                String name = etName.getText().toString().trim();
-                String freq = etFreq.getText().toString().trim();
-                String dateStart = etStart.getText().toString().trim();
-                String dateEnd = etEnd.getText().toString().trim();
-                String msg = etMsg.getText().toString().trim();
-
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(freq)){
-                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-
-                    notificationData newNote = new notificationData(name, freq, dateStart, dateEnd, msg);
-                    notifyUser("Notification! " + name, msg);
-                    addNotificationItem(newNote);
-                }
-                popUp.dismiss();
-            }
-        });
+    //public void popupMethod(notificationData noteItem){
+    public void popupMethod(int index){
+        Intent myIntent = new Intent(getApplicationContext(), notificationForm.class);
+        startActivityForResult(myIntent, 0);
     }
 
-    /*
+    /**
         Function:   editItem
         ---------------------------------------
-        Method to bring a pop up for user to enter data. Fill items with data that has been
+     **METHOD CHANGE**
+     *  Method is to forward to notificationForm to enter/alter data of notifications.
+     *  This will allow users to correctly enter date field rather than an incorrect pop-up text
+     *  Refer back to old github versions prior to 10-06-19.
+     *
+     * @param itemPosition postion of Item to edit
+     *
+     *
+     Method to bring a pop up for user to enter data. Fill items with data that has been
         previously entered. Re-save data with new items entered.
 
         assignItem:     (notificationData)Object Information retrieved from class
@@ -194,90 +166,13 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
         TO DO: Write query to update/input data in to OWL file
     */
-    public void editItem(notificationData subjItem, final int itemPosition) {
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        conLayout = (ConstraintLayout) findViewById(R.id.subjects_main_layout);
-
-        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.notification_popup, null);
-
-        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.45), true);
-        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.25));
-
-        container.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                popUp.dismiss();
-                return true;
-            }
-        });
-
-        EditText etName = (EditText)container.findViewById(R.id.notification_Name);
-        EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
-        EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-        EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
-        EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
-
-        etName.setText(subjItem.getName());
-        etFreq.setText(subjItem.getFrequency());
-        etStart.setText(subjItem.getStartDate());
-        etEnd.setText(subjItem.getEndDate());
-        etMsg.setText(subjItem.getPersonalMsg());
-
-        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
-        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUp.dismiss();
-            }
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                EditText etName = (EditText)container.findViewById(R.id.notification_Name);
-                EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
-                EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-                EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
-                EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
-
-                String name = etName.getText().toString().trim();
-                String freq = etFreq.getText().toString().trim();
-                String dateStart = etStart.getText().toString().trim();
-                String dateEnd = etEnd.getText().toString().trim();
-                String msg = etMsg.getText().toString().trim();
-
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dateStart) ||
-                        TextUtils.isEmpty(freq) || TextUtils.isEmpty(dateEnd) || TextUtils.isEmpty(msg)){
-                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    rowItems.get(itemPosition).setEndDate(dateEnd);
-                    rowItems.get(itemPosition).setName(name);
-                    rowItems.get(itemPosition).setFrequency(freq);
-                    rowItems.get(itemPosition).setPersonalMsg(msg);
-                    rowItems.get(itemPosition).setStartDate(dateStart);
-                    saveData();
-                    loadData();
-                    notificationData test = new notificationData("s", "s" , "s" +
-                            "s","s","s");
-                    addNotificationItem(test);
-                    deleteNotificationItem(rowItems.size()-1);
-
-                    setNotification(true,true, dateEnd);
-
-                }
-
-                popUp.dismiss();
-            }
-        });
+    //public void editItem(notificationData subjItem, final int itemPosition) {
+    public void editItem(final int itemPosition) {
+        Log.i(TAG, String.valueOf(itemPosition));
+        Log.i(TAG, rowItems.get(itemPosition).getName());
+        Intent myIntent = new Intent(getApplicationContext(), notificationForm.class);
+        myIntent.putExtra("notificationPos", itemPosition);
+        startActivityForResult(myIntent, 0);
     }
 
     /*
@@ -306,13 +201,13 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         myList.setOnItemClickListener(this);
     }
 
-    /*
-        Function:   addNotificationItem
-        ---------------------------------------
-        Add a notification item to the list
+    /**
+     Function:   addNotificationItem
+     ---------------------------------------
+     Add a notification item to the list
 
-        iPosition:    Position of list item clicked
-    */
+     @param note1    the object stored locally into from notificationData
+     */
     public void addNotificationItem(notificationData note1){
 
         Log.i(TAG, "addNotification");
@@ -337,7 +232,9 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         myList.setOnItemClickListener(this);
     }
 
-    /*
+
+
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default function for back button
@@ -348,44 +245,8 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         return true;
     }
 
-    /*
-        Function:   createNotificationChannel
-        ---------------------------------------
-        Create the notification channel to start up push notifications.
-        Each channel must have a different ID.
-        Main Function used to send push notification
-    */
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "name";
-            String description = "desc";
-            int importance = NotificationManager.IMPORTANCE_HIGH ;
-            NotificationChannel channel = new NotificationChannel("1234", name, importance);
-            channel.setDescription(description);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
-    /*
-        Function:   NotifyUser
-        ---------------------------------------
-        Used to create a notification once the notification channel has been used. Call the channelID created
-        and notification will appear with the details below.
-    */
-    public void notifyUser(String title, String message) {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "1234")
-                .setSmallIcon(R.drawable.heart)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-        notificationManager.notify(0, mBuilder.build());
-    }
-
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the accountList object to the local android device.
@@ -400,7 +261,7 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the object to the local android device.
@@ -418,6 +279,11 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
+    /**
+     Function:   onCreateContextMenu
+     ---------------------------------------
+     Allow user to hold down on item to bring up small popup menu box
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -425,6 +291,11 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         getMenuInflater().inflate(R.menu.subjects_menu, menu);
     }
 
+    /**
+     Function:   onContextItemSelected
+     ---------------------------------------
+     Action whichever item is selected on the pop-up menu onCreateContextMenu created.
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -432,7 +303,8 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
 
         switch (item.getItemId()) {
             case R.id.subjects_changeDetails:
-                popupMethod(rowItems.get(index));
+                //popupMethod(rowItems.get(index));
+                editItem(index);
                 return true;
             case R.id.subjects_deleteSubject:
                 deleteNotificationItem(index);
@@ -443,32 +315,7 @@ public class notifications extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
-    /*
-        Function:   setNotification
-        ---------------------------------------
-        Setup a delayed notification by Date
-    */
-    private void setNotification(boolean isNotification, boolean isRepeat, String strDate) {
-        AlarmManager manager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        Intent myIntent;
-        PendingIntent pendingIntent;
 
-        //Change date entered to ints
-        //Date df = new SimpleDateFormat("dd/MM/yyyy").parse(strDate);
-        Calendar calendar= Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,15);
-        calendar.set(Calendar.MINUTE,20);
-
-
-        myIntent = new Intent(notifications.this,notificationAdapter.AlarmNotificationReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this,0,myIntent,0);
-
-
-        if(!isRepeat)
-            manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000,pendingIntent);
-        else
-            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
-    }
 
 
 

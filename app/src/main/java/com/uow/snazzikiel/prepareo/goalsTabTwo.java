@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Lachlan, Connor
+ ***********************************************/
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -35,7 +40,7 @@ import com.google.gson.reflect.TypeToken;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/*
+/**
     Class:   goalsTabTwo
     ---------------------------------------
     Tab2 of Goals - Academic goals loaded by user
@@ -56,7 +61,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
     ViewGroup container;
     ListView myList;
 
-    /*
+    /**
         Function:   onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen. Tab 2 to be created "ACADEMIC"
@@ -107,14 +112,14 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         return view;
     }
 
-    /*
+    /**
         Function:   onItemClick
         ---------------------------------------
         Default function for action when item is pressed
 
-        parent:     Parent variable to include adapter view
-        view:       Current activity view
-        position:   Position of item pressed by user
+        @param parent:     Parent variable to include adapter view
+        @param view:       Current activity view
+        @param position:   Position of item pressed by user
     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -123,7 +128,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         editItem(rowItems.get(position), view);
     }
 
-    /*
+    /**
         Function:   editItem
         ---------------------------------------
         Method to bring a pop up for user to enter data. Fill items with data that has been
@@ -199,7 +204,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         });
     }
 
-    /*
+    /**
         Function:   popupMethod
         ---------------------------------------
         Method to bring a pop up for user to enter data. Used to fill out information
@@ -278,7 +283,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         });
     }
 
-    /*
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default function for back button
@@ -289,7 +294,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         return true;
     }
 
-    /*
+    /**
         Function:   createItem
         ---------------------------------------
         Used to add an item to a list. Add new object in to local storage data
@@ -324,7 +329,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         myList.setOnItemClickListener(this);
     }
 
-    /*
+    /**
         Function:   deleteItem
         ---------------------------------------
         Used to delete an item from the List. Deletes off local storage data also
@@ -351,7 +356,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         saveData();
     }
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the accountList object to the local android device.
@@ -367,7 +372,7 @@ public class goalsTabTwo extends Fragment implements AdapterView.OnItemClickList
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the object to the local android device.

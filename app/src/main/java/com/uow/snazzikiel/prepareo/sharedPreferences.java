@@ -1,5 +1,8 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +13,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
     Class:   sharedPreferences
     ---------------------------------------
+    ***Obsolete Class - called within individual classes***
+ *  Changed due to adding calls in to local classes
     Class used to assist in storing objects in to local device.
-    Obsolete function - called within individual classes
+
 */
 
 public class sharedPreferences extends AppCompatActivity {

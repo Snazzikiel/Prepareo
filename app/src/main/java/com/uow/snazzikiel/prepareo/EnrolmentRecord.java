@@ -1,5 +1,10 @@
 package com.uow.snazzikiel.prepareo;
 
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
@@ -30,7 +35,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
     Class:   EnrolmentRecord
     ---------------------------------------
     Obsolete class - NOT USED

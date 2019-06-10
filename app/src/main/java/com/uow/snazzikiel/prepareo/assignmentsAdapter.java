@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Adam
+ ***********************************************/
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/*
+/**
     Class:   assignmentsAdapter
     ---------------------------------------
     Adapter class to load list in to the Assignments Page
@@ -48,7 +53,7 @@ public class assignmentsAdapter extends BaseAdapter {
         ImageView assignArrow;
     }
 
-    /*
+    /**
         Function:   getView
         ---------------------------------------
         Get the list of all input fields on the current view

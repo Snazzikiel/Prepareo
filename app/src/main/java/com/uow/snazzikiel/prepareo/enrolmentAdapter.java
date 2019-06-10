@@ -1,4 +1,8 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,9 +15,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/*
+/**
     Class:   enrolmentAdapter
     ---------------------------------------
+    ***** CLASS/FUNCTIONS NOT USED ******
+ *
     Adapter class to load list in to the Assignments Page
 
     context:        Context taken from main activity calling this class

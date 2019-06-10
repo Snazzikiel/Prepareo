@@ -1,8 +1,12 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Alec
+ * Assisted:		David
+ ***********************************************/
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,10 +26,12 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-/*
+/**
     Class:   CalendarSelect
     ---------------------------------------
-    Actioned when a date is selected in the Calendar
+    Adapter class to load list in to the calendar page.
+    Create calendar in GridView, take events from OWL file and circle them if activity
+    has been loaded.
 */
 public class CalendarSelect extends AppCompatActivity {
     private static final String TAG = "calendarSelect";
@@ -39,9 +45,7 @@ public class CalendarSelect extends AppCompatActivity {
 
     List<owlData> allActivities;
 
-    //HashMap<String,Long> hoursMap = new HashMap<String,Long>();
-
-    /*
+    /**
         Function: onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen.
@@ -72,11 +76,12 @@ public class CalendarSelect extends AppCompatActivity {
         tvMonth.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
 
 
+        //put restriction on how far back user can go in date calendar
         ImageButton back = (ImageButton) findViewById(R.id.ib_prev);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (month.get(GregorianCalendar.MONTH) == 4&&month.get(GregorianCalendar.YEAR)==2017) {
+                if (month.get(GregorianCalendar.MONTH) == 4&&month.get(GregorianCalendar.YEAR)==2000) {
                     //cal_month.set((cal_month.get(GregorianCalendar.YEAR) - 1), cal_month.getActualMaximum(GregorianCalendar.MONTH), 1);
                     Toast.makeText(CalendarSelect.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
                 }
@@ -87,11 +92,12 @@ public class CalendarSelect extends AppCompatActivity {
             }
         });
 
+        //put restriction on how far forward a user can go in date calendar
         ImageButton next = (ImageButton) findViewById(R.id.Ib_next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (month.get(GregorianCalendar.MONTH) == 5&&month.get(GregorianCalendar.YEAR)==2018) {
+                if (month.get(GregorianCalendar.MONTH) == 5&&month.get(GregorianCalendar.YEAR)==2025) {
                     //cal_month.set((cal_month.get(GregorianCalendar.YEAR) + 1), cal_month.getActualMinimum(GregorianCalendar.MONTH), 1);
                     Toast.makeText(CalendarSelect.this, "Event Detail is available for current session only.", Toast.LENGTH_SHORT).show();
                 }
@@ -120,17 +126,18 @@ public class CalendarSelect extends AppCompatActivity {
         });
     }
 
-    /*
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default required function to include a back button arrow on the top of the page
     */
     public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
+        Intent myIntent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivityForResult(myIntent, 0);
         return true;
     }
 
-    /*
+    /**
         Function:   setNextMonth
         ---------------------------------------
         Get name/number of next month
@@ -144,7 +151,7 @@ public class CalendarSelect extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
         Function:   setLastMonth
         ---------------------------------------
         get last month
@@ -157,7 +164,7 @@ public class CalendarSelect extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
         Function:   clearCalendar
         ---------------------------------------
         Clears the calendar and all information loaded on interface
@@ -168,7 +175,7 @@ public class CalendarSelect extends AppCompatActivity {
         tvMonth.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
     }
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the activity list object to the local android device.
@@ -184,7 +191,7 @@ public class CalendarSelect extends AppCompatActivity {
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the calItems object to the local android device.
@@ -204,7 +211,7 @@ public class CalendarSelect extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
         Function:   getProfile
         ---------------------------------------
         Used to retrieve the loadSubjects object to the local android device.

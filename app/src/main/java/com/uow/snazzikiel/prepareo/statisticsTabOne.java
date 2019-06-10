@@ -1,4 +1,8 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ ***********************************************/
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,9 +20,10 @@ import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
 
-/*
+/**
     Class:   statisticsTabOne
     ---------------------------------------
+     **NOT USED **
     Graphic Statistical Data is not used in this application.
     TO DO: This is placed on the futures list.
 */

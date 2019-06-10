@@ -1,5 +1,9 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David, Alec
+ * Assisted:		Lachlan, Connor, Adam
+ ***********************************************/
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;

@@ -1,4 +1,10 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Alec
+ ***********************************************/
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,7 +32,7 @@ import java.util.Locale;
 
 import static com.uow.snazzikiel.prepareo.Dashboard.getWeekStartDate;
 
-/*
+/**
     Class:   calendarAdapter
     ---------------------------------------
     Adapter class to load list in to the calendar Page.
@@ -76,7 +82,7 @@ class calendarAdapter extends BaseAdapter {
 
     }
 
-    /*
+    /**
         Function:   getCount
         ---------------------------------------
         returns size of day array
@@ -85,7 +91,7 @@ class calendarAdapter extends BaseAdapter {
         return day.size();
     }
 
-    /*
+    /**
         Function:   getItem
         ---------------------------------------
         returns item on selected position
@@ -98,7 +104,7 @@ class calendarAdapter extends BaseAdapter {
         return 0;
     }
 
-    /*
+    /**
         Function:   getView
         ---------------------------------------
         Create the calendar view, day by day. Get dates from current month and color
@@ -130,7 +136,8 @@ class calendarAdapter extends BaseAdapter {
 
 
         if (day.get(position).equals(todayDate)) {
-            v.setBackgroundColor(Color.WHITE);
+            v.setBackgroundResource(R.drawable.bg_star);
+            dayView.setTextColor(context.getResources().getColor(R.color.colorWhiteSmoke));
         } else {
             v.setBackgroundColor(Color.WHITE);
         }
@@ -148,10 +155,12 @@ class calendarAdapter extends BaseAdapter {
 
         setEventView(v, position,dayView);
 
+
+
         return v;
     }
 
-    /*
+    /**
         Function:   activityView
         ---------------------------------------
         same as getView by different Context items
@@ -202,7 +211,7 @@ class calendarAdapter extends BaseAdapter {
         return v;
     }
 
-    /*
+    /**
         Function:   getMaxP
         ---------------------------------------
         Get the dates of the previous month for start of calendar
@@ -222,17 +231,18 @@ class calendarAdapter extends BaseAdapter {
         return maxPrevMonth;
     }
 
-    /*
+    /**
         Function:   setEventView
         ---------------------------------------
         Look through activity list and circle each date that has a loaded activity in RED
 
         v:          Current view of device
-        iPosition:  position of item in grid list
+        iPosition:  Date position of item in grid list
         txt:        txtView displaying the text of the date in the view
     */
     public void setEventView(View v,int iPosition,TextView txt){
         int len=calendarData.calData.size();
+
         Log.i(TAG, day.get(iPosition));
         Log.i(TAG, String.valueOf(len));
         for (int i = 0; i < len; i++) {
@@ -254,11 +264,12 @@ class calendarAdapter extends BaseAdapter {
                         txt.setTextColor(Color.parseColor("#696969"));
                     }
                 }
+
             }
         }
     }
 
-    /*
+    /**
         Function:   refreshCal
         ---------------------------------------
         Refresh all Calendar information each month is selected
@@ -284,7 +295,7 @@ class calendarAdapter extends BaseAdapter {
         }
     }
 
-    /*
+    /**
         Function:   getFirstMonday
         ---------------------------------------
         Get the first monday of the current month
@@ -297,7 +308,7 @@ class calendarAdapter extends BaseAdapter {
         return mondayDate + "T00:00:00";
     }
 
-    /*
+    /**
         Function:   getNextMonday
         ---------------------------------------
         get the next monday of the next month
@@ -314,24 +325,7 @@ class calendarAdapter extends BaseAdapter {
         return nextMonday + "T00:00:00";
     }
 
-    /*
-        Function:   getNextDay
-        ---------------------------------------
-        Get the date for the next day
-    */
-    public String getNextDay(){
-        Calendar calendar = Calendar.getInstance();
-        while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-            calendar.add(Calendar.DATE, 1);
-        }
-        calendar.add(Calendar.DATE, -1);
-
-        Date tmpDate = calendar.getTime();
-        String nextMonday = String.valueOf(android.text.format.DateFormat.format("yyyy-MM-dd", tmpDate));
-        return nextMonday + "T00:00:00";
-    }
-
-    /*
+    /**
         Function:   getFirstDay
         ---------------------------------------
         Get the first day of the month
@@ -347,7 +341,7 @@ class calendarAdapter extends BaseAdapter {
         return firstDay;
     }
 
-    /*
+    /**
         Function:   getFirstDayYear
         ---------------------------------------
         Get the first day of the year
@@ -363,7 +357,7 @@ class calendarAdapter extends BaseAdapter {
         return firstDay;
     }
 
-    /*
+    /**
         Function:   getLastDay
         ---------------------------------------
         Get the last day of the year

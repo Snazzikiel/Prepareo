@@ -13,10 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".calendarInfo" android:windowSoftInputMode="adjustNothing"></activity>
-        <activity android:name=".AssignmentInfo" android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".EnrolmentRecord" android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".CalendarSelect" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".notificationForm">
+
+        </activity>
+        <activity
+            android:name=".calendarInfo"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".AssignmentInfo"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".EnrolmentRecord"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".CalendarSelect"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".statistics"
             android:label="@string/title_activity_statistics"
@@ -54,12 +65,13 @@
         <activity
             android:name=".LoginPage"
             android:theme="@style/AppTheme.NoActionbar"
-            android:windowSoftInputMode="adjustNothing" >
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".time" />
 

@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Lachlan
+ * Assisted:		David
+ ***********************************************/
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +17,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/*
+/**
     Class:   goalsAdapter
     ---------------------------------------
     Adapter class to load list in to the goalsAdapter Page

@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Alec
+ ***********************************************/
 
 import com.multilevelview.models.RecyclerViewItem;
 

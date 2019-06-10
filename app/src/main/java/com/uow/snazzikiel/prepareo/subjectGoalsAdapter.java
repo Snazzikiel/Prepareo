@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David, Alec
+ * Assisted:		Lachlan, Connor, Adam
+ ***********************************************/
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-/*
+/**
     Class:   subjectGoalsAdapter
     ---------------------------------------
     Adapter class to load list in to the subjectGoalsAdapter Page
@@ -51,14 +56,14 @@ public class subjectGoalsAdapter extends BaseAdapter {
         CheckBox goalsChkBox;
     }
 
-    /*
+    /**
         Function:   getView
         ---------------------------------------
         Get the list of all input fields on the current view
 
-        position:       Integer of item pressed
-        convertView:    current View of item
-        parent:         View of parent field
+        @param position:       Integer of item pressed
+        @param convertView:    current View of item
+        @param parent:         View of parent field
     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

@@ -1,6 +1,9 @@
 package com.uow.snazzikiel.prepareo;
-
-/*
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Lachlan
+ ***********************************************/
+/**
     Class:   goalsData
     ---------------------------------------
     Used to store goal objects

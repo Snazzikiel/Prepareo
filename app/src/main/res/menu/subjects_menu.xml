@@ -1,17 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Subjects">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context=".Subjects">
 
-    <item
-        android:id="@+id/subjects_changeDetails"
-        android:orderInCategory="100"
-        android:title="Change Details"
-        app:showAsAction="never" />
+<item
+    android:id="@+id/subjects_changeDetails"
+    android:orderInCategory="100"
+    android:title="Change Details"
+    app:showAsAction="never" />
 
-    <item
-        android:id="@+id/subjects_deleteSubject"
-        android:orderInCategory="100"
-        android:title="Delete Item"
-        app:showAsAction="never" />
+<item
+    android:id="@+id/subjects_deleteSubject"
+    android:orderInCategory="100"
+    android:title="Delete Item"
+    app:showAsAction="never" />
 </menu>

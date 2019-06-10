@@ -1,5 +1,9 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Alec
+ ***********************************************/
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/*
+/**
     Class:   Profile
     ---------------------------------------
-    NOT USED CLASS - print OWL File in to a dropdown list
+    ****NOT USED CLASS***
+    print OWL File in to a dropdown list
 */
 public class Profile extends AppCompatActivity {
 

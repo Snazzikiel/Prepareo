@@ -1,5 +1,9 @@
 package com.uow.snazzikiel.prepareo;
-
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David
+ * Assisted:		Lachlan, Connor
+ ***********************************************/
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -46,7 +50,7 @@ import java.util.List;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
-/*
+/**
     Class:   goalsTabOne
     ---------------------------------------
     Tab1 of Goals - Personal goals loaded by user
@@ -117,14 +121,14 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         return view;
     }
 
-    /*
+    /**
         Function:   onItemClick
         ---------------------------------------
         Default function for action when item is pressed
 
-        parent:     Parent variable to include adapter view
-        view:       Current activity view
-        position:   Position of item pressed by user
+        @param parent:     Parent variable to include adapter view
+        @param view:       Current activity view
+        @param position:   Position of item pressed by user
     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -133,13 +137,13 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
             editItem(rowItems.get(position), view);
     }
 
-    /*
+    /**
         Function:   editItem
         ---------------------------------------
         Method to bring a pop up for user to enter data. Fill items with data that has been
         previously entered. Re-save data with new items entered.
 
-        assignItem:     (goalsData)Object Information retrieved from class
+        @param assignItem:     (goalsData)Object Information retrieved from class
 
         TO DO: Write query to update/input data in to OWL file
     */
@@ -209,7 +213,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         });
     }
 
-    /*
+    /**
         Function:   popupMethod
         ---------------------------------------
         Method to bring a pop up for user to enter data. Used to fill out information
@@ -288,7 +292,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         });
     }
 
-    /*
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default function for back button
@@ -299,12 +303,12 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         return true;
     }
 
-    /*
+    /**
         Function:   createItem
         ---------------------------------------
         Used to add an item to a list. Add new object in to local storage data
 
-        goals1:    (goalsData)New object to be inserted in to list and inserted in to
+        @param goals1:    (goalsData)New object to be inserted in to list and inserted in to
                         saved object.
     */
     public void createItem(goalsData goals1) {
@@ -334,7 +338,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         myList.setOnItemClickListener(this);
     }
 
-    /*
+    /**
         Function:   deleteItem
         ---------------------------------------
         Used to delete an item from the List. Deletes off local storage data also
@@ -361,7 +365,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         saveData();
     }
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the object to the local android device.
@@ -377,7 +381,7 @@ public class goalsTabOne extends Fragment implements AdapterView.OnItemClickList
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the object to the local android device.

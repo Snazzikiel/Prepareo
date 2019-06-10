@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">CSCI321 - Prepareo</string>
+    <string name="app_name">Prepareo</string>
     <string name="title_activity_login">Sign in</string>
     <string name="logo_description">Prepareo Logo</string>
 
 
     <!-- Strings related to LoginPage -->
     <string name="login_button_login">Continue</string>
-    <string name="login_prompt_email">Email</string>
+    <string name="login_prompt_email">Username</string>
     <string name="login_prompt_password">Password</string>
     <string name="login_password_hint">Password</string>
     <string name="login_error_invalid_email">This email address is invalid</string>
@@ -41,7 +41,7 @@
 
     <!-- Strings related to Notification -->
     <string name="notification_name">Notification Name</string>
-    <string name="notification_frequency">Notification Frequency</string>
+    <string name="notification_frequency">Notification Time</string>
     <string name="notification_startDate">Start Date</string>
     <string name="notification_endDate">End Date</string>
     <string name="notification_msg">Notification Message</string>

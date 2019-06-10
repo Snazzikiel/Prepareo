@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		David, Alec
+ * Assisted:		Lachlan, Connor, Adam
+ ***********************************************/
 
 import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
@@ -33,6 +38,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
@@ -46,7 +52,13 @@ import java.util.Locale;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-
+/**
+ Class:   subjectNotifications
+ ---------------------------------------
+    Subject notification screen. Use all same facilities as Notifications main page just subcategorise.
+    Method overhaul - many declared variables are not named correctly or used properly.
+    TO DO: Check variables and rename accordingly
+ */
 public class subjectNotifications extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final String TAG = "subjNotifications-";
 
@@ -68,7 +80,7 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
     EditText dateChoice;
     private DatePickerDialog.OnDateSetListener dateListener;
 
-    /*
+    /**
         Function:   onCreate
         ---------------------------------------
         Default function to create the context and instance for Android screen
@@ -100,49 +112,88 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         addNote.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                popupMethod(null);
+                popupMethod(0);
 
             }
         });
-
-        /*myList.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                deleteNotificationItem(position);
-                Toast.makeText(getApplicationContext(), "Item Deleted",
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });*/
 
 
         registerForContextMenu(myList);
     }
 
-    /*
+    /**
         Function:   onItemClick
         ---------------------------------------
         Default function for action when item is pressed
 
-        parent:     Parent variable to include adapter view
-        view:       Current activity view
-        position:   Position of item pressed by user
+        @param parent:     Parent variable to include adapter view
+        @param view:       Current activity view
+        @param position:   Position of item pressed by user
     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        notificationData noteItem = (notificationData) parent.getItemAtPosition(position);
-        popupMethod(noteItem);
+
     }
 
-    /*
-        Function:   addNotificationItem
-        ---------------------------------------
-        Add a notification item to the list
 
-        iPosition:    Position of list item clicked
+    /**
+        Function:   popupMethod
+        ---------------------------------------
+     **METHOD CHANGE**
+     *  Method is to forward to notificationForm to enter/alter data of notifications.
+     *  This will allow users to correctly enter date field rather than an incorrect pop-up text
+     *  Refer back to old github versions prior to 10-06-19.
+     *
+     * **OLD METHOD**
+        Method to bring a pop up for user to enter data. Used to fill out information
+        and save it in to the object for list creation.
+
+        noteItem:     (notificationData)Object Information retrieved from class.
+
+        TO DO: Input data in to OWL file, create query and post data
     */
+    //public void popupMethod(notificationData noteItem){
+    public void popupMethod(int index){
+        Intent myIntent = new Intent(getApplicationContext(), notificationForm.class);
+        myIntent.putExtra("subjectCode", subjectCode);
+        myIntent.putExtra("subjectData", index);
+        startActivityForResult(myIntent, 0);
+    }
+
+    /**
+        Function:   editItem
+        ---------------------------------------
+     **METHOD CHANGE**
+     *  Method is to forward to notificationForm to enter/alter data of notifications.
+     *  This will allow users to correctly enter date field rather than an incorrect pop-up text
+     *  Refer back to old github versions prior to 10-06-19.
+     *
+     * **OLD METHOD**
+        Method to bring a pop up for user to enter data. Fill items with data that has been
+        previously entered. Re-save data with new items entered.
+
+        assignItem:     (notificationData)Object Information retrieved from class
+        itemPosition:   position of Item
+
+        TO DO: Write query to update/input data in to OWL file
+    */
+    //public void editItem(notificationData subjItem, final int itemPosition) {
+    public void editItem(final int itemPosition) {
+        Intent myIntent = new Intent(getApplicationContext(), notificationForm.class);
+        myIntent.putExtra("notificationPos", itemPosition);
+        myIntent.putExtra("subjectCode", subjectCode);
+        myIntent.putExtra("subjectData", itemPosition);
+        startActivityForResult(myIntent, 0);
+    }
+
+    /**
+     Function:   addNotificationItem
+     ---------------------------------------
+     Add a notification item to the list
+
+     @param note1    the object stored locally into from notificationData
+     */
     public void addNotificationItem(notificationData note1){
 
         Log.i(TAG, "addNotification");
@@ -167,196 +218,7 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         myList.setOnItemClickListener(this);
     }
 
-    /*
-        Function:   popupMethod
-        ---------------------------------------
-        Method to bring a pop up for user to enter data. Used to fill out information
-        and save it in to the object for list creation.
-
-        noteItem:     (notificationData)Object Information retrieved from class.
-
-        TO DO: Input data in to OWL file, create query and post data
-    */
-    public void popupMethod(notificationData noteItem){
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        conLayout = (ConstraintLayout) findViewById(R.id.notification_main_layout);
-
-        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.notification_popup, null);
-
-        popUp = new PopupWindow(container, (int)(width*0.80),(int)(height*0.80), true);
-        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int)(width*0.10), (int)(height*0.10));
-
-        container.setOnTouchListener(new View.OnTouchListener(){
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent){
-                popUp.dismiss();
-                return true;
-            }
-        });
-
-        //Make date selector
-        EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-        etStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String dateToday = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
-                int year = Integer.parseInt(dateToday);
-                dateToday = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
-                int month = Integer.parseInt(dateToday);
-                dateToday = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
-                int day = Integer.parseInt(dateToday);
-
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        subjectNotifications.this,
-                        android.R.style.Widget_Holo_ActionBar_Solid,
-                        dateListener,
-                        year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
-        });
-
-
-        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
-        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUp.dismiss();
-            }
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText etName = (EditText)container.findViewById(R.id.notification_Name);
-                EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
-                EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-                EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
-                EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
-
-                String name = etName.getText().toString().trim();
-                String freq = etFreq.getText().toString().trim();
-                String dateStart = etStart.getText().toString().trim();
-                String dateEnd = etEnd.getText().toString().trim();
-                String msg = etMsg.getText().toString().trim();
-
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dateStart) ||
-                        TextUtils.isEmpty(freq) || TextUtils.isEmpty(dateEnd) || TextUtils.isEmpty(msg)){
-                            Toast.makeText(getApplicationContext(), "Unable to add blanks",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-
-                    notificationData newNote = new notificationData(name, freq, dateStart, dateEnd, msg);
-                    addNotificationItem(newNote);
-                }
-                popUp.dismiss();
-            }
-        });
-    }
-
-    /*
-        Function:   editItem
-        ---------------------------------------
-        Method to bring a pop up for user to enter data. Fill items with data that has been
-        previously entered. Re-save data with new items entered.
-
-        assignItem:     (notificationData)Object Information retrieved from class
-        itemPosition:   position of Item
-
-        TO DO: Write query to update/input data in to OWL file
-    */
-    public void editItem(notificationData subjItem, final int itemPosition) {
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        conLayout = (ConstraintLayout) findViewById(R.id.notification_main_layout);
-
-        layoutInf = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        container = (ViewGroup) layoutInf.inflate(R.layout.notification_popup, null);
-
-        popUp = new PopupWindow(container, (int) (width * 0.80), (int) (height * 0.85), true);
-        popUp.showAtLocation(conLayout, Gravity.NO_GRAVITY, (int) (width * 0.10), (int) (height * 0.25));
-
-        container.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                popUp.dismiss();
-                return true;
-            }
-        });
-
-        EditText etName = (EditText)container.findViewById(R.id.notification_Name);
-        EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
-        EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-        EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
-        EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
-
-        etName.setText(subjItem.getName());
-        etFreq.setText(subjItem.getFrequency());
-        etStart.setText(subjItem.getStartDate());
-        etEnd.setText(subjItem.getEndDate());
-        etMsg.setText(subjItem.getPersonalMsg());
-
-        btnClose = (Button) container.findViewById(R.id.subjects_btn_close);
-        btnSave = (Button) container.findViewById(R.id.subjects_btn_save);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popUp.dismiss();
-            }
-        });
-        Log.i(TAG, "4");
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                EditText etName = (EditText)container.findViewById(R.id.notification_Name);
-                EditText etFreq = (EditText)container.findViewById(R.id.notification_frequency);
-                EditText etStart = (EditText)container.findViewById(R.id.notification_startDate);
-                EditText etEnd = (EditText)container.findViewById(R.id.notification_endDate);
-                EditText etMsg = (EditText)container.findViewById(R.id.notification_msg);
-
-                String name = etName.getText().toString().trim();
-                String freq = etFreq.getText().toString().trim();
-                String dateStart = etStart.getText().toString().trim();
-                String dateEnd = etEnd.getText().toString().trim();
-                String msg = etMsg.getText().toString().trim();
-
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(dateStart) ||
-                        TextUtils.isEmpty(freq) || TextUtils.isEmpty(dateEnd) || TextUtils.isEmpty(msg)){
-                    Toast.makeText(getApplicationContext(), "Unable to add blanks",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    rowItems.get(itemPosition).setEndDate(dateEnd);
-                    rowItems.get(itemPosition).setName(name);
-                    rowItems.get(itemPosition).setFrequency(freq);
-                    rowItems.get(itemPosition).setPersonalMsg(msg);
-                    rowItems.get(itemPosition).setStartDate(dateStart);
-                    saveData();
-                    loadData();
-                    notificationData test = new notificationData("s", "s" , "s" +
-                            "s","s","s");
-                    addNotificationItem(test);
-                    deleteNotificationItem(rowItems.size()-1);
-                }
-
-                popUp.dismiss();
-            }
-        });
-    }
-
-    /*
+    /**
         Function:   deleteNotificationItem
         ---------------------------------------
         Delete the notification item from the List
@@ -382,7 +244,7 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         myList.setOnItemClickListener(this);
     }
 
-    /*
+    /**
         Function:   onOptionsItemSelected
         ---------------------------------------
         Default function for back button
@@ -392,7 +254,7 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         return true;
     }
 
-    /*
+    /**
         Function:   saveData
         ---------------------------------------
         Used to store the accountList object to the local android device.
@@ -408,7 +270,7 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         editor.apply();
     }
 
-    /*
+    /**
         Function:   loadData
         ---------------------------------------
         Used to retrieve the object to the local android device.
@@ -427,7 +289,7 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         }
     }
 
-    /*
+    /**
         Function:   onCreateContextMenu
         ---------------------------------------
         Create menu object when user holds down on a list item
@@ -439,10 +301,10 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
         getMenuInflater().inflate(R.menu.subjects_menu, menu);
     }
 
-    /*
+    /**
         Function:   onContextItemSelected
         ---------------------------------------
-        Call menu and action each option
+     Action whichever item is selected on the pop-up menu onCreateContextMenu created.
 
         MenuItem:       Menu taken from Menu in Res
     */
@@ -453,7 +315,8 @@ public class subjectNotifications extends AppCompatActivity implements AdapterVi
 
         switch (item.getItemId()) {
             case R.id.subjects_changeDetails:
-                editItem(rowItems.get(index), index);
+                //editItem(rowItems.get(index), index);
+                editItem(index);
                 Toast.makeText(this, rowItems.get(index).getName(), Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.subjects_deleteSubject:

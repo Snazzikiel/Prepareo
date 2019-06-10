@@ -1,4 +1,9 @@
 package com.uow.snazzikiel.prepareo;
+/**********************************************
+ * CSIT321 - Prepareo
+ * Author/s:		Alec
+ * Assisted:		David
+ ***********************************************/
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -30,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/*
+/**
     Class: page
     ---------------------------------------
     Original Query page to speak to owlFile.
@@ -167,7 +172,7 @@ public class page extends AppCompatActivity
         });
     }
 
-    /*
+    /**
         Class: queryEndpointQuota
         ---------------------------------------
         aSyncTask to query the OWL file. Set dates wanted to call, and get list of each activity
@@ -208,19 +213,23 @@ public class page extends AppCompatActivity
                     long milSec = parsedEnd.getTime() - parsedStart.getTime();
                     long min = TimeUnit.MILLISECONDS.toMinutes(milSec);
 
-
-                    owlData.owlInfo.add(new owlData(user, dateTime, type, min));
+                    //primary line to add information of activities to owlData Class local storage
+                    //Put a space in the TYPE before loading in to OWL Class
+                    String tmpType = Character.toUpperCase(type.charAt(0)) +
+                            type.substring(1).replaceAll("(?<!_)(?=[A-Z])", " ");
+                    owlData.owlInfo.add(new owlData(user, dateTime, startHours, endHours, type, min));
+                    Log.i(TAG, user + ".." + dateTime + ".." +  startHours + ".." +  endHours + ".." +  tmpType + ".." +  min);
 
                     if(hoursMap.containsKey(type))
                     {
 
-                        hoursMap.put(type, (min + hoursMap.get(type)));
+                        hoursMap.put(tmpType, (min + hoursMap.get(tmpType)));
                     }
                     else
                     {
-                        hoursMap.put(type, (min));
+                        hoursMap.put(tmpType, (min));
                     }
-                    Log.i(TAG, type);
+                    Log.i(TAG, tmpType);
                     Log.i(TAG, startHours+ "   " + endHours);
                     Log.i(TAG, String.valueOf(min));
                     Log.i(TAG, hoursMap.values().toString());
@@ -242,7 +251,7 @@ public class page extends AppCompatActivity
         }
     }
 
-    /*
+    /**
         Class: updateEndpoint
         ---------------------------------------
         aSyncTask to query the OWL file. Inserts new data to the OWL File
@@ -266,14 +275,15 @@ public class page extends AppCompatActivity
         }
     }
 
-    /*
+    /**
         Function: createOWL_Objects
         ---------------------------------------
         Obsolete function - Used to fill owlData.owlInfo with data pulled from query.
-        Obsolete because this has been put in to the original call
+        This function is not required to filter the HashMap as we now store the owlData in to the
+        local storage owlData Class each time it is requested.
     */
     public void createOWL_Objects(){
-
+        /*
         //obsolete function due to adding this line in the endpointquota
         Log.i(TAG, "Owl created.");
         //owlData.owlInfo = new ArrayList<owlData>();
@@ -283,15 +293,16 @@ public class page extends AppCompatActivity
             Log.i(TAG, key + ": " + Long.toString(i));
             //owlData.owlInfo.add(new owlData(user, key, i));
         }
+        */
     }
 
-    /*
+    /**
         Function: getUserActivities
         ---------------------------------------
         Start query to get activities from owlFile
-        firstDate:              Start date of query to be called
-        firstDateOfNextRange:   End date of query to be called
-        userName:               Username of person to query
+        @param firstDate:              Start date of query to be called
+        @param firstDateOfNextRange:   End date of query to be called
+        @param userName:               Username of person to query
     */
     public void getUserActivities(String firstDate, String firstDateOfNextRange, String userName){
         //user = userBox.getText().toString();
@@ -316,12 +327,12 @@ public class page extends AppCompatActivity
         new queryEndpointQuota().execute(queryString, queryEndpoint, "type", "start", "end");
     }
 
-    /*
+    /**
         Function: updateActivityList
         ---------------------------------------
         Start query to insert activities to OWL File
-        name:           Start date of query to be called
-        user:           Username of person to query
+        @param name:           Start date of query to be called
+        @param user:           Username of person to query
     */
     //public void getActivityList(String name, String num, String user){
     public void updateActivityList(String name, String user){
@@ -336,6 +347,50 @@ public class page extends AppCompatActivity
         new updateEndpoint().execute(updateString, updateEndpoint);
     }
 
+    /**
+     * Function:    deleteActivityFromList
+     * ---------------------------------------
+     * Used to delete activity
+     *
+     * @param   userName    The username of person to be delete activity from
+     * @param   activityInfo        The name of activity to be deleted
+     * @return  void
+     */
+    public void deleteActivityFromList(String userName, String activityInfo){
+        this.user = userName;
+        //firstDate = "2019-05-27T00:00:00"; can use 2 different dates for current day hours
+        //firstDateOfNextRange = "2019-05-28T00:00:00";
+        String deleteEndpoint = "http://220.158.191.18:8080/fuseki/student-ontology/query";
+        String deleteString = prefix +
+                "DELETE WHERE { ?" + user +
+                " onto:hasAction onto:" + activityInfo +
+                ". onto:" + activityInfo + " ?p ?v}";
+        new deleteEndpoint().execute(deleteString, deleteEndpoint);
+    }
+
+    /**
+     Class: deleteEndpoint
+     ---------------------------------------
+     aSyncTask to query the OWL file. Deletes activity from the OWL File
+     */
+    protected class deleteEndpoint extends AsyncTask<String, String, String>
+    {
+        @Override
+        protected String doInBackground(String... deleteAndTarget)
+        {
+
+            UpdateRequest update = UpdateFactory.create(deleteAndTarget[0]);
+            UpdateProcessor uexec = UpdateExecutionFactory.createRemote(update, deleteAndTarget[1]);
+            uexec.execute();
+            return "delete";
+        }
+
+        @Override
+        protected void onPostExecute(String success)
+        {
+            //txt2.append(success + " ");
+        }
+    }
 
 
 }
