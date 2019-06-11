@@ -77,6 +77,10 @@ public class AssignmentInfo extends AppCompatActivity {
 
         if (thisIntent.hasExtra("subjectPos")) {
             index = thisIntent.getIntExtra("subjectPos", 0);
+            etAssignmentName.setText(rowItems.get(index).getAssignmentName());
+            etAssignmentMark.setText(rowItems.get(index).getAssignmentMark());
+            etAssignmentWeight.setText(rowItems.get(index).getAssignmentWeight());
+            tvAssignmentDueDate.setText(rowItems.get(index).getAssignmentDueDate());
 
             sAssName = thisIntent.getStringExtra("assignmentName");
             setTitle(subjectCode + " (" + sAssName + ")");

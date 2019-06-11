@@ -108,6 +108,7 @@ public class notificationAdapter extends BaseAdapter {
         parent:         View of parent field
     */
     public class AlarmNotificationReceiver extends BroadcastReceiver {
+
         @Override
         public void onReceive(Context context, Intent intent) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
@@ -133,7 +134,5 @@ public class notificationAdapter extends BaseAdapter {
             notificationManager.notify(1,builder.build());
         }
     }
-
-
 
 }

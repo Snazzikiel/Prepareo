@@ -399,6 +399,7 @@ public class notificationForm extends AppCompatActivity implements TimePickerDia
             manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000,pendingIntent);
         else
             manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,pendingIntent);
+
     }
 
 

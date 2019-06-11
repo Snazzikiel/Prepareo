@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-/*
+/**
     Class:   statistics
     ---------------------------------------
     Load up the statistics page
@@ -47,7 +47,7 @@ public class statistics extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Statistics");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); will cause an error - not sure why
         setContentView(R.layout.activity_statistics);
 
 

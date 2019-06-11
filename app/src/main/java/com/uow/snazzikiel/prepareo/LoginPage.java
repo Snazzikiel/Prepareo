@@ -64,7 +64,7 @@ public class LoginPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        getProfile();
+        //getProfile();
         //Create a log file in the directory if not already exists - maven requires a local log file
         //(this log file will never be used by this program)
         Properties prop = new Properties();
